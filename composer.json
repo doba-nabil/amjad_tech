@@ -13,6 +13,7 @@
         "filament/spatie-laravel-translatable-plugin": "^3.2",
         "laravel/framework": "^13.8",
         "laravel/tinker": "^3.0",
+        "mcamara/laravel-localization": "^2.4",
         "spatie/laravel-medialibrary": "^11.23",
         "spatie/laravel-sitemap": "^8.2",
         "spatie/laravel-sluggable": "^4.0",

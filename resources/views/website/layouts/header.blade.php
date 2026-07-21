@@ -1,79 +1,69 @@
 <header class="header-area position_top">
         <div class="site-logo">
             <div class="logo">
-                <a href="index.html"><img src="{{ asset('assets/') }}/img/logo.svg" alt="image"></a>
+                <a href="{{ route('home') }}"><img src="{{ isset($settings->logo) ? Storage::url($settings->logo) : asset("assets/img/logo.svg") }}" alt="logo" style='filter: brightness(0) invert(1);'></a>
             </div>
         </div>
         <div class="main-menu">
             <nav class="main-nav">
                 <div class="mobile-menu-logo">
-                    <a href="index.html"><img src="{{ asset('assets/') }}/img/logo-dark.svg" alt=""></a>
+                    <a href="{{ route('home') }}"><img src="{{ isset($settings->logo) ? Storage::url($settings->logo) : asset('assets/img/logo-dark.svg') }}" alt="logo"></a>
                     <div class="remove">
                         <i class="bi bi-plus-lg"></i>
                     </div>
                 </div>
                 <ul>
-                    <li class="has-child active">
-                        <a href="index.html">Home</a>
-                        <i class="bi bi-chevron-down"></i>
-                        <ul class="sub-menu">
-                            <li><a href="index.html">Home 01</a></li>
-                            <li><a href="index2.html">Home 02</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li>
-                        <a href="service.html">Service</a>
-                        <i class="bi bi-chevron-down"></i>
-                        <ul class="sub-menu">
-                            <li><a href="service.html">Service</a></li>
-                            <li><a href="service-details.html">Service Details</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="project.html">Project</a>
-                        <i class="bi bi-chevron-down"></i>
-                        <ul class="sub-menu">
-                            <li><a href="project.html">Project</a></li>
-                            <li><a href="project-details.html">Project Details</a></li>
-                        </ul>
-                    </li>
-                    <li class="has-child">
-                        <a href="blog.html">Blog</a>
-                        <i class="bi bi-chevron-down"></i>
-                        <ul class="sub-menu">
-                            <li><a href="blog.html">Blog</a></li>
-                            <li><a href="blog-standard.html">Blog standard</a></li>
-                            <li><a href="blog-details.html">Blog Details</a></li>
-                        </ul>
-                    </li>
-                    <li class="has-child">
-                        <a href="#">Pages</a>
-                        <i class="bi bi-chevron-down"></i>
-                        <ul class="sub-menu">
-                            <li><a href="team.html">Team</a></li>
-                            <li><a href="pricing.html">Pricing</a></li>
-                            <li><a href="faq.html">FAQs</a></li>
-                            <li><a href="error.html">Error 404</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="contact.html">Contact Us</a></li>
+                    @if(isset($settings->header_links) && is_array($settings->header_links) && count($settings->header_links) > 0)
+                        @foreach($settings->header_links as $link)
+                            @if(isset($link['is_dropdown']) && $link['is_dropdown'])
+                                <li class="has-child {{ request()->is(ltrim($link['url'], '/').'*') ? 'active' : '' }}">
+                                    <a href="{{ $link['url'] == '#' ? 'javascript:void(0)' : url($link['url']) }}">{{ app()->getLocale() == 'ar' ? ($link['label_ar'] ?? $link['label_en']) : ($link['label_en'] ?? $link['label_ar']) }}</a>
+                                    <i class="bi bi-chevron-down"></i>
+                                    @if(isset($link['children']) && is_array($link['children']))
+                                        <ul class="sub-menu">
+                                            @foreach($link['children'] as $child)
+                                                <li><a href="{{ url($child['url']) }}">{{ app()->getLocale() == 'ar' ? ($child['label_ar'] ?? $child['label_en']) : ($child['label_en'] ?? $child['label_ar']) }}</a></li>
+                                            @endforeach
+                                        </ul>
+                                    @endif
+                                </li>
+                            @else
+                                <li class="{{ request()->is(ltrim($link['url'], '/').'*') ? 'active' : '' }}">
+                                    <a href="{{ url($link['url']) }}">{{ app()->getLocale() == 'ar' ? ($link['label_ar'] ?? $link['label_en']) : ($link['label_en'] ?? $link['label_ar']) }}</a>
+                                </li>
+                            @endif
+                        @endforeach
+                    @else
+                        <!-- Default Fallback if no links are set -->
+                        <li class="{{ request()->routeIs('home') ? 'active' : '' }}"><a href="{{ route('home') }}">{{ app()->getLocale() == 'ar' ? 'الرئيسية' : 'Home' }}</a></li>
+                        <li class="{{ request()->routeIs('projects') ? 'active' : '' }}"><a href="{{ route('projects') }}">{{ app()->getLocale() == 'ar' ? 'المشاريع' : 'Projects' }}</a></li>
+                        <li class="{{ request()->routeIs('blogs') ? 'active' : '' }}"><a href="{{ route('blogs') }}">{{ app()->getLocale() == 'ar' ? 'المقالات' : 'Blogs' }}</a></li>
+                        <li class="{{ request()->routeIs('pricing') ? 'active' : '' }}"><a href="{{ route('pricing') }}">{{ app()->getLocale() == 'ar' ? 'الباقات' : 'Pricing' }}</a></li>
+                        <li class="{{ request()->routeIs('contact') ? 'active' : '' }}"><a href="{{ route('contact') }}">{{ app()->getLocale() == 'ar' ? 'تواصل معنا' : 'Contact Us' }}</a></li>
+                    @endif
                 </ul>
                 <div class="get-qoute d-flex justify-content-center d-lg-none d-block pt-50">
                     <div class="cmn-btn">
                         <div class="line-1"></div>
                         <div class="line-2"></div>
-                        <a href="contact.html">Get A Quote</a>
+                        <a href="{{ route('contact') }}">{{ app()->getLocale() == 'ar' ? 'اطلب تسعيرة' : 'Get A Quote' }}</a>
                     </div>
                 </div>
             </nav>
         </div>
-        <div class="nav-right">
+        <div class="nav-right" style="display: flex; align-items: center; gap: 15px;">
+            <div class="lang-switch">
+                @if(app()->getLocale() == 'ar')
+                    <a href="{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getLocalizedURL('en', null, [], true) }}" style="color: #fff; font-weight: bold; padding: 5px 10px; border: 1px solid rgba(255,255,255,0.3); border-radius: 5px;">EN</a>
+                @else
+                    <a href="{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getLocalizedURL('ar', null, [], true) }}" style="color: #fff; font-weight: bold; padding: 5px 10px; border: 1px solid rgba(255,255,255,0.3); border-radius: 5px;">AR</a>
+                @endif
+            </div>
             <div class="get-qoute">
                 <div class="cmn-btn">
                     <div class="line-1"></div>
                     <div class="line-2"></div>
-                    <a href="contact.html">Get A Quote</a>
+                    <a href="{{ route('contact') }}">{{ app()->getLocale() == 'ar' ? 'اطلب تسعيرة' : 'Get A Quote' }}</a>
                 </div>
             </div>
             <div class="mobile-menu">
@@ -84,5 +74,4 @@
                 </a>
             </div>
         </div>
-        
     </header>

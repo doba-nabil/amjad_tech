@@ -54,63 +54,41 @@
         <!-- End hero-area section -->
 
         <!-- Start services-area section -->
-        <section class="services-area sec-mar">
+        @if($settings->show_services_section && $services->isNotEmpty())
+<section class="services-area sec-mar">
             <div class="container">
                 <div class="title-wrap wow animate fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
                     <div class="sec-title">
-                        <span>Our Solutions</span>
-                        <h2>Services</h2>
-                        <p>Curabitur sed facilisis erat. Vestibulum pharetra eros eget fringilla porttitor. on Duis a orci nunc. Suspendisse ac convallis sapien, quis commodo libero.</p>
+                        <span>{{ $settings->home_services_title ?? "Our Solutions" }}</span>
+                        <h2>{{ $settings->home_services_subtitle ?? "Services" }}</h2>
+                        <p>{{ $settings->home_services_text ?? "Curabitur sed facilisis erat. Vestibulum pharetra eros eget fringilla porttitor." }}</p>
                     </div>
                 </div>
                 <div class="swiper services-slider">
                     <div class="swiper-wrapper">
+@foreach($services as $service)
                         <div class="swiper-slide wow animate fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
                             <div class="single-service">
-                                <span>01</span>
+                                <span>{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
                                 <div class="icon">
-                                    <img src="{{ asset('assets/') }}/img/icons/service-icon-1.png" alt="">
+                                    <img src="{{ isset($service->image) ? Storage::url($service->image) : asset('assets/img/icons/service-icon-1.png') }}" alt="">
                                 </div>
-                                <h4>Web Design</h4>
-                                <p>Integer purus odio, placerat nec rhoncu in, ullamcorper nec dolor.</p>
+                                <h4>{{ $service->title }}</h4>
+                                <p>{{ Str::limit(strip_tags($service->content), 80) }}</p>
                                 <div class="read-btn">
-                                    <a href="service-details.html">Read More</a>
+                                    <a href="{{ route('contact') }}"><i class="bi bi-arrow-right"></i></a>
                                 </div>
                             </div>
                         </div>
-                        <div class="swiper-slide wow animate fadeInUp" data-wow-delay="400ms" data-wow-duration="1500ms">
-                            <div class="single-service">
-                                <span>02</span>
-                                <div class="icon">
-                                    <img src="{{ asset('assets/') }}/img/icons/service-icon-2.png" alt="">
-                                </div>
-                                <h4>UI/UX Design</h4>
-                                <p>Integer purus odio, placerat nec rhoncu in, ullamcorper nec dolor.</p>
-                                <div class="read-btn">
-                                    <a href="service-details.html">Read More</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide wow animate fadeInUp" data-wow-delay="600ms" data-wow-duration="1500ms">
-                            <div class="single-service">
-                                <span>03</span>
-                                <div class="icon">
-                                    <img src="{{ asset('assets/') }}/img/icons/service-icon-3.png" alt="">
-                                </div>
-                                <h4>Software Development</h4>
-                                <p>Integer purus odio, placerat nec rhoncu in, ullamcorper nec dolor.</p>
-                                <div class="read-btn">
-                                    <a href="service-details.html">Read More</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-pagination d-md-none d-md-block"></div>
+@endforeach
+</div>
+<div class="swiper-pagination d-md-none d-md-block"></div>
                 </div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
             </div>
         </section>
+@endif
         <!-- End services-area section -->
 
         <!-- Start about-area section -->
@@ -215,13 +193,14 @@
         <!-- End features-area section -->
 
         <!-- Start project-area section -->
-        <section class="project-area sec-mar">
+        @if($settings->show_projects_section && $projects->isNotEmpty())
+<section class="project-area sec-mar">
             <div class="container">
                 <div class="title-wrap">
                     <div class="sec-title">
-                        <span>Case Study</span>
-                        <h2>Project</h2>
-                        <p>Curabitur sed facilisis erat. Vestibulum pharetra eros eget fringilla porttitor. on Duis a orci nunc. Suspendisse ac convallis sapien, quis commodo libero.</p>
+                        <span>{{ $settings->home_projects_title ?? "Project" }}</span>
+                        <h2>{{ $settings->home_projects_subtitle ?? "Look at my work" }}</h2>
+                        <p>{{ $settings->home_projects_text ?? "Curabitur sed facilisis erat. Vestibulum pharetra eros eget fringilla porttitor." }}</p>
                     </div>
                 </div>
                 <div class="row">
@@ -311,6 +290,7 @@
                 </div>
             </div>
         </section>
+@endif
         <!-- End project-area section -->
 
         <!-- Start our-partner section -->
@@ -516,213 +496,22 @@
         <!-- End priceing-plan section -->
 
         <!-- Start testimonial-area section -->
-        <section class="testimonial-area">
-            <div class="container-fluid p-0">
-                <div class="title-wrap">
-                    <div class="sec-title white">
-                        <span>Testimonial</span>
-                        <h2>Client Say About Us</h2>
-                        <p>Curabitur sed facilisis erat. Vestibulum pharetra eros eget fringilla porttitor. on Duis a orci nunc. Suspendisse ac convallis sapien, quis commodo libero.</p>
-                    </div>
-                </div>
-                <div class="swiper testimonial-slider">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <div class="single-testimonial">
-                                <div class="quote">
-                                    <i class="fas fa-quote-right"></i>
-                                </div>
-                                <h5>Martha Maldonado</h5>
-                                <span>Executive Chairman</span>
-                                <div class="stars">
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                </div>
-                                <p>Integer purus odio, placerat nec rhoncus in, ullamcorper nec dolor. ani aptent taciti sociosqu ad litora torquent per conubia nostra, per sonic himenaeos. Praesent nec neque at dolor venenatis consectetur europ Donec lacinia placerat felis non aliquam.</p>
-                                <div class="reviewer">
-                                    <img src="{{ asset('assets/') }}/img/reivewer.jpg" alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="single-testimonial">
-                                <div class="quote">
-                                    <i class="fas fa-quote-right"></i>
-                                </div>
-                                <h5>Jesmin Korac</h5>
-                                <span>Director</span>
-                                <div class="stars">
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                </div>
-                                <p>Integer purus odio, placerat nec rhoncus in, ullamcorper nec dolor. ani aptent taciti sociosqu ad litora torquent per conubia nostra, per sonic himenaeos. Praesent nec neque at dolor venenatis consectetur europ Donec lacinia placerat felis non aliquam.</p>
-                                <div class="reviewer">
-                                    <img src="{{ asset('assets/') }}/img/reivewer-1.jpg" alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="single-testimonial">
-                                <div class="quote">
-                                    <i class="fas fa-quote-right"></i>
-                                </div>
-                                <h5>Martha Maldonado</h5>
-                                <span>Executive Chairman</span>
-                                <div class="stars">
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                </div>
-                                <p>Integer purus odio, placerat nec rhoncus in, ullamcorper nec dolor. ani aptent taciti sociosqu ad litora torquent per conubia nostra, per sonic himenaeos. Praesent nec neque at dolor venenatis consectetur europ Donec lacinia placerat felis non aliquam.</p>
-                                <div class="reviewer">
-                                    <img src="{{ asset('assets/') }}/img/reivewer.jpg" alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="single-testimonial">
-                                <div class="quote">
-                                    <i class="fas fa-quote-right"></i>
-                                </div>
-                                <h5>Jesmin korac</h5>
-                                <span>Director</span>
-                                <div class="stars">
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                </div>
-                                <p>Integer purus odio, placerat nec rhoncus in, ullamcorper nec dolor. ani aptent taciti sociosqu ad litora torquent per conubia nostra, per sonic himenaeos. Praesent nec neque at dolor venenatis consectetur europ Donec lacinia placerat felis non aliquam.</p>
-                                <div class="reviewer">
-                                    <img src="{{ asset('assets/') }}/img/reivewer-1.jpg" alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="single-testimonial">
-                                <div class="quote">
-                                    <i class="fas fa-quote-right"></i>
-                                </div>
-                                <h5>Martha Maldonado</h5>
-                                <span>Executive Chairman</span>
-                                <div class="stars">
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                </div>
-                                <p>Integer purus odio, placerat nec rhoncus in, ullamcorper nec dolor. ani aptent taciti sociosqu ad litora torquent per conubia nostra, per sonic himenaeos. Praesent nec neque at dolor venenatis consectetur europ Donec lacinia placerat felis non aliquam.</p>
-                                <div class="reviewer">
-                                    <img src="{{ asset('assets/') }}/img/reivewer.jpg" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-pagination d-md-none d-md-block"></div>
-                </div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-            </div>
-        </section>
+        
         <!-- End testimonial-area section -->
 
         <!-- Start our-team section -->
-        <section class="our-team sec-mar">
-            <div class="container">
-                <div class="title-wrap  wow animate fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
-                    <div class="sec-title">
-                        <span>Our Team</span>
-                        <h2>Meet Our Team</h2>
-                        <p>Curabitur sed facilisis erat. Vestibulum pharetra eros eget fringilla porttitor. on Duis a orci nunc. Suspendisse ac convallis sapien, quis commodo libero.</p>
-                    </div>
-                </div>
-                <div class="swiper team-slider">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide wow animate fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
-                            <div class="single-team">
-                                <div class="member-img">
-                                    <img src="{{ asset('assets/') }}/img/team/team-1.jpg" alt="">
-                                    <svg width="185" height="299" viewBox="0 0 167 269" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M4.25412 0.814453C1.68125 2.62384 0 5.61553 0 8.99991V269H167C167 269 47 269 66.5 112.171C75.5581 39.3209 20.2679 8.22409 4.25412 0.814453Z" fill="#191A1C" />
-                                    </svg>
-                                    <ul class="team-social">
-                                        <li><a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a></li>
-                                        <li><a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a></li>
-                                        <li><a href="https://www.twitter.com/"><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href="https://www.whatsapp.com/"><i class="fab fa-whatsapp"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="team-inner">
-                                    <h4>Thoren Okendhild</h4>
-                                    <span>Executive Chairman</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide wow animate fadeInUp" data-wow-delay="400ms" data-wow-duration="1500ms">
-                            <div class="single-team">
-                                <div class="member-img">
-                                    <img src="{{ asset('assets/') }}/img/team/team-2.jpg" alt="">
-                                    <svg width="185" height="299" viewBox="0 0 167 269" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M4.25412 0.814453C1.68125 2.62384 0 5.61553 0 8.99991V269H167C167 269 47 269 66.5 112.171C75.5581 39.3209 20.2679 8.22409 4.25412 0.814453Z" fill="#191A1C" />
-                                    </svg>
-                                    <ul class="team-social">
-                                        <li><a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a></li>
-                                        <li><a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a></li>
-                                        <li><a href="https://www.twitter.com/"><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href="https://www.whatsapp.com/"><i class="fab fa-whatsapp"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="team-inner">
-                                    <h4>Lincoln Anthony</h4>
-                                    <span>Software Engeenier</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide wow animate fadeInUp" data-wow-delay="600ms" data-wow-duration="1500ms">
-                            <div class="single-team">
-                                <div class="member-img">
-                                    <img src="{{ asset('assets/') }}/img/team/team-3.jpg" alt="">
-                                    <svg width="185" height="299" viewBox="0 0 167 269" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M4.25412 0.814453C1.68125 2.62384 0 5.61553 0 8.99991V269H167C167 269 47 269 66.5 112.171C75.5581 39.3209 20.2679 8.22409 4.25412 0.814453Z" fill="#191A1C" />
-                                    </svg>
-                                    <ul class="team-social">
-                                        <li><a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a></li>
-                                        <li><a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a></li>
-                                        <li><a href="https://www.twitter.com/"><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href="https://www.whatsapp.com/"><i class="fab fa-whatsapp"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="team-inner">
-                                    <h4>Adrian Eodri</h4>
-                                    <span>UI/UX Designer</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-pagination"></div>
-                </div>
-            </div>
-        </section>
+        
         <!-- End our-team section -->
 
         <!-- Start blog-area section -->
-        <section class="blog-area">
+        @if($settings->show_blogs_section && $blogs->isNotEmpty())
+<section class="blog-area">
             <div class="container">
                 <div class="title-wrap -6 wow animate fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
                     <div class="sec-title">
-                        <span>All Blog</span>
-                        <h2>Latest Post</h2>
-                        <p>Curabitur sed facilisis erat. Vestibulum pharetra eros eget fringilla porttitor. on Duis a orci nunc. Suspendisse ac convallis sapien, quis commodo libero.</p>
+                        <span>{{ $settings->home_blog_title ?? "All Blog" }}</span>
+                        <h2>{{ $settings->home_blog_subtitle ?? "Latest Post" }}</h2>
+                        <p>{{ $settings->home_blog_text ?? "Curabitur sed facilisis erat. Vestibulum pharetra eros eget fringilla porttitor." }}</p>
                     </div>
                 </div>
                 <div class="row gy-4">
@@ -780,6 +569,7 @@
                 </div>
             </div>
         </section>
+@endif
         <!-- End blog-area section -->
 
         <!-- Start subscribe-newsletter section -->

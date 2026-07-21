@@ -9,16 +9,21 @@ use App\Models\Service;
 use App\Models\Package;
 use App\Http\Controllers\WebsiteController;
 
-// Frontend Routes
-Route::get('/', [WebsiteController::class, 'index'])->name('home');
-Route::get('/projects', [WebsiteController::class, 'projects'])->name('projects');
-Route::get('/projects/{slug}', [WebsiteController::class, 'projectDetails'])->name('project.details');
-Route::get('/blogs', [WebsiteController::class, 'blogs'])->name('blogs');
-Route::get('/blogs/{slug}', [WebsiteController::class, 'blogDetails'])->name('blog.details');
-Route::get('/pricing', [WebsiteController::class, 'pricing'])->name('pricing');
-Route::get('/contact', [WebsiteController::class, 'contact'])->name('contact');
-Route::post('/contact', [WebsiteController::class, 'submitContact'])->name('contact.submit');
-Route::get('/p/{slug}', [WebsiteController::class, 'page'])->name('page');
+Route::group([
+    'prefix' => \Mcamara\LaravelLocalization\Facades\LaravelLocalization::setLocale(),
+    'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+], function() {
+    // Frontend Routes
+    Route::get('/', [WebsiteController::class, 'index'])->name('home');
+    Route::get('/projects', [WebsiteController::class, 'projects'])->name('projects');
+    Route::get('/projects/{slug}', [WebsiteController::class, 'projectDetails'])->name('project.details');
+    Route::get('/blogs', [WebsiteController::class, 'blogs'])->name('blogs');
+    Route::get('/blogs/{slug}', [WebsiteController::class, 'blogDetails'])->name('blog.details');
+    Route::get('/pricing', [WebsiteController::class, 'pricing'])->name('pricing');
+    Route::get('/contact', [WebsiteController::class, 'contact'])->name('contact');
+    Route::post('/contact', [WebsiteController::class, 'submitContact'])->name('contact.submit');
+    Route::get('/p/{slug}', [WebsiteController::class, 'page'])->name('page');
+});
 
 // Sitemap Generation
 Route::get('/sitemap.xml', function () {

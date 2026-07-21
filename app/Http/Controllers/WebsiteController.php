@@ -15,12 +15,6 @@ use Illuminate\Support\Facades\View;
 
 class WebsiteController extends Controller
 {
-    public function __construct()
-    {
-        $settings = Setting::first();
-        View::share('settings', $settings);
-    }
-
     public function index()
     {
         $services = Service::latest()->take(6)->get();

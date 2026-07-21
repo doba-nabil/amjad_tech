@@ -14,11 +14,26 @@ class Setting extends Model
         'site_name',
         'meta_title',
         'meta_description',
-        'address'
+        'address',
+        'home_blog_title',
+        'home_blog_subtitle',
+        'home_blog_text',
+        'home_services_title',
+        'home_services_subtitle',
+        'home_services_text',
+        'home_projects_title',
+        'home_projects_subtitle',
+        'home_projects_text',
+        'footer_text',
     ];
 
     protected $casts = [
+        'social_media' => 'array',
         'phone_numbers' => 'array',
-        'social_media' => 'array'
+        'header_links' => 'array',
+        'footer_links' => 'array',
+        'show_services_section' => 'boolean',
+        'show_projects_section' => 'boolean',
+        'show_blogs_section' => 'boolean',
     ];
 }

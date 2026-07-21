@@ -5,53 +5,70 @@
                         <div class="col-md-3 col-lg-3 col-xl-3">
                             <div class="footer-widget">
                                 <div class="footer-logo">
-                                    <a href="index.html"><img src="{{ asset('assets/') }}/img/logo.svg" alt=""></a>
+                                    <a href="{{ route('home') }}"><img src="{{ isset($settings->footer_logo) ? Storage::url($settings->footer_logo) : (isset($settings->logo) ? Storage::url($settings->logo) : asset("assets/img/logo.svg")) }}" alt="logo" style="filter: brightness(0) invert(1);"></a>
                                 </div>
-                                <p>Integer purus odio, placerat nec ande rhoncus in, ullamcorper nec dolor. on aptent taciti sociosqu.</p>
-                                <ul class="social-media-icons">
-                                    <li><a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li><a href="https://www.twitter.com/"><i class="fab fa-twitter"></i></a></li>
-                                    <li><a href="https://www.pinterest.com/"><i class="fab fa-pinterest-p"></i></a></li>
-                                    <li><a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a></li>
+                                <p>{{ $settings->footer_text ?? '' }}</p>
+                                                                <ul class="social-media-icons">
+                                    @if(isset($settings->social_media) && is_array($settings->social_media))
+                                        @foreach($settings->social_media as $platform => $url)
+                                            <li><a href="{{ $url }}"><i class="fab fa-{{ strtolower($platform) }}"></i></a></li>
+                                        @endforeach
+                                    @endif
                                 </ul>
                             </div>
                         </div>
                         <div class="col-md-3 col-lg-3 col-xl-3">
                             <div class="footer-widget">
-                                <h4>Our Services</h4>
+                                <h4>{{ __('dashboard.column_1') ?? 'Our Services' }}</h4>
                                 <ul class="footer-menu">
-                                    <li><a href="service-details.html">Strategy &amp; Research</a></li>
-                                    <li><a href="service-details.html">Web Development</a></li>
-                                    <li><a href="service-details.html">Web Solution</a></li>
-                                    <li><a href="service-details.html">Digital Merketing</a></li>
-                                    <li><a href="service-details.html">App Design</a></li>
-                                    <li><a href="service-details.html">App Development</a></li>
+                                    @php $col1 = collect($settings->footer_links ?? [])->where('column', '1'); @endphp
+                                    @if($col1->count() > 0)
+                                        @foreach($col1 as $link)
+                                            <li><a href="{{ url($link['url']) }}">{{ app()->getLocale() == 'ar' ? ($link['label_ar'] ?? $link['label_en']) : ($link['label_en'] ?? $link['label_ar']) }}</a></li>
+                                        @endforeach
+                                    @else
+                                        <li><a href="service-details.html">Strategy &amp; Research</a></li>
+                                        <li><a href="service-details.html">Web Development</a></li>
+                                        <li><a href="service-details.html">Web Solution</a></li>
+                                        <li><a href="service-details.html">Digital Merketing</a></li>
+                                        <li><a href="service-details.html">App Design</a></li>
+                                        <li><a href="service-details.html">App Development</a></li>
+                                    @endif
                                 </ul>
                             </div>
                         </div>
                         <div class="col-md-3 col-lg-3 col-xl-3">
                             <div class="footer-widget">
-                                <h4>Quick Links</h4>
+                                <h4>{{ __('dashboard.column_2') ?? 'Quick Links' }}</h4>
                                 <ul class="footer-menu">
-                                    <li><a href="about.html">About Us</a></li>
-                                    <li><a href="services.html">Services</a></li>
-                                    <li><a href="project.html">Project</a></li>
-                                    <li><a href="blog.html">Blog</a></li>
-                                    <li><a href="contact.html">Career</a></li>
-                                    <li><a href="services.html">Pricing Plan</a></li>
+                                    @php $col2 = collect($settings->footer_links ?? [])->where('column', '2'); @endphp
+                                    @if($col2->count() > 0)
+                                        @foreach($col2 as $link)
+                                            <li><a href="{{ url($link['url']) }}">{{ app()->getLocale() == 'ar' ? ($link['label_ar'] ?? $link['label_en']) : ($link['label_en'] ?? $link['label_ar']) }}</a></li>
+                                        @endforeach
+                                    @else
+                                        <li><a href="#">{{ __('dashboard.about_us') ?? 'About Us' }}</a></li>
+                                        <li><a href="#">{{ __('dashboard.services') ?? 'Services' }}</a></li>
+                                        <li><a href="{{ route('projects') }}">{{ __('dashboard.projects') ?? 'Projects' }}</a></li>
+                                        <li><a href="{{ route('blogs') }}">{{ __('dashboard.blogs') ?? 'Blogs' }}</a></li>
+                                        <li><a href="{{ route('pricing') }}">{{ __('dashboard.pricing') ?? 'Pricing Plan' }}</a></li>
+                                    @endif
                                 </ul>
                             </div>
                         </div>
                         <div class="col-md-3 col-lg-3 col-xl-3">
                             <div class="footer-widget">
-                                <h4>Contacts</h4>
+                                                                <h4>{{ __('dashboard.contact') ?? 'Contacts' }}</h4>
                                 <div class="number">
                                     <div class="num-icon">
                                         <i class="fas fa-phone-alt"></i>
                                     </div>
                                     <div class="phone">
-                                        <a href="tel:05661111985">+880 566 1111 985</a>
-                                        <a href="tel:06571111576">+880 657 1111 576</a>
+                                        @if(isset($settings->phone_numbers) && is_array($settings->phone_numbers))
+                                            @foreach($settings->phone_numbers as $phone)
+                                                <a href="tel:{{ $phone['phone'] ?? '' }}">{{ $phone['phone'] ?? '' }}</a>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="office-mail">
@@ -59,25 +76,23 @@
                                         <i class="far fa-envelope"></i>
                                     </div>
                                     <div class="email">
-                                        <a href="tell:info@example.com">info@example.com</a>
-                                        <a href="tell:info@support.com">info@support.com</a>
+                                        <a href="mailto:{{ $settings->email ?? '' }}">{{ $settings->email ?? '' }}</a>
                                     </div>
                                 </div>
                                 <div class="address">
                                     <div class="address-icon">
                                         <i class="fas fa-map-marker-alt"></i>
                                     </div>
-                                    <p>168/170, Avenue 01, Mirpur DOHS, Bangladesh</p>
+                                    <p>{{ $settings->address ?? '' }}</p>
                                 </div>
                             </div>
-                        </div>
                     </div>
                 </div>
                 <div class="footer-bottom">
                     <div class="row align-items-center">
                         <div class="col-12 col-md-4 col-lg-4 col-xl-5">
                             <div class="copy-txt">
-                                <span>Copyright 2022 <b>Crea soft</b> | Design By <a href="#">Egens Theme</a></span>
+                                <span>Copyright {{ date('Y') }} <b>{{ $settings->site_name ?? 'Crea soft' }}</b> | Developed By {{ $settings->site_name ?? 'Crea soft' }}</span>
                             </div>
                         </div>
                         <div class="col-12 col-md-8 col-lg-8 col-xl-7">
