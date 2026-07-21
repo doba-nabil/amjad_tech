@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="{{ asset('assets/') }}/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icon CSS -->
+    <link href="{{ asset('assets/') }}/css/bootstrap-icons.css" rel="stylesheet">
+    <!-- Fontawesome all CSS -->
+    <link href="{{ asset('assets/') }}/css/all.min.css" rel="stylesheet">
+    <!-- Fontawesome CSS -->
+    <link href="{{ asset('assets/') }}/css/fontawesome.min.css" rel="stylesheet">
+    <!-- Swiper slider CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/') }}/css/swiper-bundle.min.css">
+    <!-- Magnific-popup CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/') }}/css/magnific-popup.css">
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/') }}/css/animate.min.css">
+    <!--  Style CSS  -->
+    <link rel="stylesheet" href="{{ asset('assets/') }}/css/style.css">
+        <!-- Title & SEO Meta -->
+    <title>@yield('title', $settings->meta_title ?? $settings->site_name ?? 'Creasoft')</title>
+    <meta name="description" content="@yield('meta_description', $settings->meta_description ?? '')">
+    <meta name="keywords" content="@yield('meta_keywords', '')">
+
+    <!-- Open Graph (Social Media) -->
+    <meta property="og:title" content="@yield('title', $settings->meta_title ?? $settings->site_name ?? 'Creasoft')">
+    <meta property="og:description" content="@yield('meta_description', $settings->meta_description ?? '')">
+    <meta property="og:image" content="@yield('meta_image', isset($settings->logo) ? Storage::url($settings->logo) : asset('assets/img/logo.svg'))">
+    <meta property="og:type" content="website">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ isset($settings->favicon) ? Storage::url($settings->favicon) : asset('favicon.ico') }}">
+</head>
+
+<body>
+    <!-- Preloader Start -->
+    <div class="preloader">
+        <div class="loader">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    <!-- Preloader End -->
+    <!-- Start header section -->
+    
+@include('website.layouts.header')
+
+<main class="creasoft-wrap">
+@yield('content')
+</main>
+
+@include('website.layouts.footer')
+
+
+        <!-- End footer section -->
+
+    </main>
+    <!-- End creasoft-wrap section -->
+
+
+    <!--cursor design-->
+    <div class="cursor"></div>
+    <!--cursor design-->
+
+    <!--  Main jQuery  -->
+    <script src="{{ asset('assets/') }}/js/jquery-3.6.0.min.js"></script>
+    <!-- Popper and Bootstrap JS -->
+    <script src="{{ asset('assets/') }}/js/popper.min.js"></script>
+    <script src="{{ asset('assets/') }}/js/bootstrap.min.js"></script>
+    <!-- Swiper slider JS -->
+    <script src="{{ asset('assets/') }}/js/swiper-bundle.min.js"></script>
+    <!-- Waypoints JS -->
+    <script src="{{ asset('assets/') }}/js/waypoints.min.js"></script>
+    <!-- Counterup JS -->
+    <script src="{{ asset('assets/') }}/js/jquery.counterup.min.js"></script>
+    <!-- Isotope  JS -->
+    <script src="{{ asset('assets/') }}/js/isotope.pkgd.min.js"></script>
+    <!-- Magnific-popup  JS -->
+    <script src="{{ asset('assets/') }}/js/jquery.magnific-popup.min.js"></script>
+    <!-- Wow JS -->
+    <script src="{{ asset('assets/') }}/js/wow.min.js"></script>
+    <!-- Custom JS -->
+    <script src="{{ asset('assets/') }}/js/custom.js"></script>
+
+</body>
+
+</html>

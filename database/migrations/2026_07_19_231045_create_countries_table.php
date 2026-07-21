@@ -8,17 +8,17 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('package_prices', function (Blueprint $table) {
+        Schema::create('countries', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('package_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('country_id')->constrained()->cascadeOnDelete();
-            $table->decimal('price', 10, 2);
+            $table->json('name');
+            $table->string('currency_code')->default('KWD');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('package_prices');
+        Schema::dropIfExists('countries');
     }
 };

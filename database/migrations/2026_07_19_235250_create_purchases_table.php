@@ -8,17 +8,20 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('package_prices', function (Blueprint $table) {
+        Schema::create('purchases', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('phone');
             $table->foreignId('package_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('country_id')->constrained()->cascadeOnDelete();
-            $table->decimal('price', 10, 2);
+            $table->date('purchase_date');
+            $table->date('expiration_date')->nullable();
+            $table->string('status')->default('active'); // active, expired, cancelled
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('package_prices');
+        Schema::dropIfExists('purchases');
     }
 };
