@@ -19,7 +19,7 @@
                         </div>
                         <div class="col-md-3 col-lg-3 col-xl-3">
                             <div class="footer-widget">
-                                <h4>{{ __('dashboard.column_1') ?? 'Our Services' }}</h4>
+                                <h4>{{ app()->getLocale() == 'ar' ? ($settings->footer_column_1_title ?? __('dashboard.column_1')) : ($settings->footer_column_1_title ?? __('dashboard.column_1')) }}</h4>
                                 <ul class="footer-menu">
                                     @php $col1 = collect($settings->footer_links ?? [])->where('column', '1'); @endphp
                                     @if($col1->count() > 0)
@@ -39,7 +39,7 @@
                         </div>
                         <div class="col-md-3 col-lg-3 col-xl-3">
                             <div class="footer-widget">
-                                <h4>{{ __('dashboard.column_2') ?? 'Quick Links' }}</h4>
+                                <h4>{{ app()->getLocale() == 'ar' ? ($settings->footer_column_2_title ?? __('dashboard.column_2')) : ($settings->footer_column_2_title ?? __('dashboard.column_2')) }}</h4>
                                 <ul class="footer-menu">
                                     @php $col2 = collect($settings->footer_links ?? [])->where('column', '2'); @endphp
                                     @if($col2->count() > 0)

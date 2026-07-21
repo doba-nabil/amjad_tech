@@ -14,18 +14,33 @@
         <!-- End line animation section -->
 
         <!-- Start hero-area section -->
-        <section class="hero-area">
-            <div class="ken-burns-slideshow">
-                <img src="{{ asset('assets/') }}/img/hero-banner.jpg" alt="image">
-            </div>
-            <div class="verticale-social">
+        <section class="hero-area" style="position: relative; height: 100vh; overflow: hidden; display: flex; align-items: center; background: #000 !important;">
+            @if($settings->home_video_file || $settings->home_video_url)
+                <video autoplay loop muted playsinline style="position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%; width: auto; height: auto; z-index: 1; transform: translate(-50%, -50%); object-fit: cover;">
+                    <source src="{{ $settings->home_video_file ? Storage::url($settings->home_video_file) : $settings->home_video_url }}" type="video/mp4">
+                </video>
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); z-index: 2;"></div>
+            @else
+                <div class="ken-burns-slideshow" style="z-index: 1;">
+                    <img src="{{ asset('assets/') }}/img/hero-banner.jpg" alt="image">
+                </div>
+            @endif
+            @if($settings->show_hero_social ?? true)
+            <div class="verticale-social" style="position: relative; z-index: 3;">
                 <ul class="vertical-media">
-                    <li><a href="https://www.facebook.com/">Facebook</a></li>
-                    <li><a href="https://www.instagram.com/">Instagram</a></li>
-                    <li><a href="https://www.linkedin.com/">Linkedin</a></li>
+                    @if(isset($settings->social_media) && is_array($settings->social_media) && count($settings->social_media) > 0)
+                        @foreach($settings->social_media as $platform => $url)
+                            <li><a href="{{ $url }}">{{ ucfirst($platform) }}</a></li>
+                        @endforeach
+                    @else
+                        <li><a href="https://www.facebook.com/">Facebook</a></li>
+                        <li><a href="https://www.instagram.com/">Instagram</a></li>
+                        <li><a href="https://www.linkedin.com/">Linkedin</a></li>
+                    @endif
                 </ul>
             </div>
-            <div class="hero-wrapper">
+            @endif
+            <div class="hero-wrapper" style="display: none;">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-6">
@@ -92,17 +107,17 @@
         <!-- End services-area section -->
 
         <!-- Start about-area section -->
-        <section class="about-area sec-mar-bottom">
+        @if($settings->show_about_section)
+        <section class="about-area sec-mar-bottom" style="margin-top: 20px;">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 or-2 wow animate fadeIn" data-wow-delay="200ms" data-wow-duration="1500ms">
                         <div class="sec-title layout2">
-                            <span>Get To Know</span>
-                            <h2>About Us</h2>
+                            <span>{{ $settings->home_about_title ?? "Get To Know" }}</span>
+                            <h2>{{ $settings->home_about_subtitle ?? "About Us" }}</h2>
                         </div>
                         <div class="about-left">
-                            <h3>We do design, code & develop Software finally launch.</h3>
-                            <p>Integer purus odio, placerat nec rhoncus in, ullamcorper nec dolor. Class onlin aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos only himenaeos. Praesent nec neque at dolor venenatis consectetur eu quis ex. the Donec lacinia placerat felis non aliquam.</p>
+                            <h3>{{ $settings->home_about_text ?? "We do design, code & develop Software finally launch." }}</h3>
                             <div class="company-since">
                                 <div class="company-logo">
                                     <img src="{{ asset('assets/') }}/img/logo-dark.svg" alt="">
@@ -115,21 +130,14 @@
                     <div class="col-lg-6 or-1 wow animate fadeIn" data-wow-delay="200ms" data-wow-duration="1500ms">
                         <div class="about-right">
                             <div class="banner-1">
-                                <img src="{{ asset('assets/') }}/img/about-baner-1.jpg" alt="">
-                            </div>
-                            <div class="banner-2">
-                                <img src="{{ asset('assets/') }}/img/about-baner-2.jpg" alt="">
-                                <div class="banner2-inner">
-                                    <div class="play">
-                                        <a class="video-popup" href="http://www.youtube.com/watch?v=0O2aH4XLbto"><i class="fas fa-play"></i></a>
-                                    </div>
-                                </div>
+                                <img src="{{ isset($settings->home_about_image) ? Storage::url($settings->home_about_image) : asset('assets/img/about-baner-1.jpg') }}" alt="">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+        @endif
         <!-- End about-area section -->
 
         <!-- Start features-area section -->
@@ -215,78 +223,20 @@
                     </div>
                 </div>
                 <div class="row g-4 project-items">
+                    @foreach($projects as $project)
                     <div class="col-md-6 col-lg-4 single-item graphic ui">
                         <div class="item-img">
-                            <a href="project.html"><img src="{{ asset('assets/') }}/img/project/project-1.jpg" alt=""></a>
+                            <a href="{{ url('/project/' . $project->id) }}"><img src="{{ isset($project->main_image) ? Storage::url($project->main_image) : asset('assets/img/project/project-1.jpg') }}" alt=""></a>
                         </div>
                         <div class="item-inner-cnt">
-                            <span>Software</span>
-                            <h4>Desktop Mockup</h4>
+                            <span>{{ $project->category->name ?? 'Project' }}</span>
+                            <h4>{{ $project->name }}</h4>
                             <div class="view-btn">
-                                <a href="project-details.html">view details</a>
+                                <a href="{{ url('/project/' . $project->id) }}">view details</a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-4 single-item developing web">
-                        <div class="item-img">
-                            <a href="project.html"><img src="{{ asset('assets/') }}/img/project/project-2.jpg" alt=""></a>
-                        </div>
-                        <div class="item-inner-cnt">
-                            <span>Template</span>
-                            <h4>Creative Agency</h4>
-                            <div class="view-btn">
-                                <a href="project-details.html">view details</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4 single-item developing">
-                        <div class="item-img">
-                            <a href="project.html"><img src="{{ asset('assets/') }}/img/project/project-3.jpg" alt=""></a>
-                        </div>
-                        <div class="item-inner-cnt">
-                            <span>App</span>
-                            <h4>Mobile Crypto Wallet</h4>
-                            <div class="view-btn">
-                                <a href="project-details.html">view details</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4 single-item graphic">
-                        <div class="item-img">
-                            <a href="project.html"><img src="{{ asset('assets/') }}/img/project/project-4.jpg" alt=""></a>
-                        </div>
-                        <div class="item-inner-cnt">
-                            <span>UI Kit</span>
-                            <h4>E-Shop Ecommerce</h4>
-                            <div class="view-btn">
-                                <a href="project-details.html">view details</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4 single-item ui">
-                        <div class="item-img">
-                            <a href="project.html"><img src="{{ asset('assets/') }}/img/project/project-5.jpg" alt=""></a>
-                        </div>
-                        <div class="item-inner-cnt">
-                            <span>Graphic</span>
-                            <h4>Art Deco Cocktails</h4>
-                            <div class="view-btn">
-                                <a href="project-details.html">view details</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4 single-item web">
-                        <div class="item-img">
-                            <a href="project.html"><img src="{{ asset('assets/') }}/img/project/project-6.jpg" alt=""></a>
-                        </div>
-                        <div class="item-inner-cnt">
-                            <span>3D Design</span>
-                            <h4>Low poly Base mesh</h4>
-                            <div class="view-btn">
-                                <a href="project-details.html">view details</a>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </section>
@@ -344,155 +294,45 @@
         <!-- End our-partner section -->
 
         <!-- Start priceing-plan section -->
+        @if($settings->show_packages_section && $packages->isNotEmpty())
         <section class="priceing-plan sec-mar">
             <div class="container">
                 <div class="title-wrap">
                     <div class="sec-title">
-                        <span>Getting Start</span>
-                        <h2>Pricing Plan</h2>
-                        <p>Curabitur sed facilisis erat. Vestibulum pharetra eros eget fringilla porttitor. on Duis a orci nunc. Suspendisse ac convallis sapien, quis commodo libero.</p>
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-12 col-md-8 col-lg-6">
-                        <div class="price-table-tab">
-                            <ul class="nav nav-pills" id="pills-tab" role="tablist">
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Pay Monthly</button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Pay Yearly</button>
-                                </li>
-                            </ul>
-                        </div>
+                        <span>{{ $settings->home_packages_title ?? "Getting Start" }}</span>
+                        <h2>{{ $settings->home_packages_subtitle ?? "Pricing Plan" }}</h2>
+                        <p>{{ $settings->home_packages_text ?? "Curabitur sed facilisis erat. Vestibulum pharetra eros eget fringilla porttitor." }}</p>
                     </div>
                 </div>
                 <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane fade active show" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                         <div class="row g-4">
-                            <div class="col-md-6 col-lg-4 wow animate fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
+                            @foreach($packages as $package)
+                            <div class="col-md-6 col-lg-4 wow animate fadeInUp" data-wow-delay="{{ 200 * $loop->iteration }}ms" data-wow-duration="1500ms">
                                 <div class="price-box">
-                                    <h3>Small Business</h3>
-                                    <span>Single Business</span>
-                                    <strong>$15.99<sub>/Per Month</sub></strong>
+                                    <h3>{{ $package->name }}</h3>
+                                    <span>{{ $package->sub_name ?? 'Package' }}</span>
+                                    <strong>{{ $package->prices->first()?->price ?? 0 }}<sub>/Per Month</sub></strong>
                                     <ul class="item-list">
-                                        <li><i class="bi bi-check"></i>10 Pages Responsive Website</li>
-                                        <li><i class="bi bi-check"></i>5PPC Campaigns</li>
-                                        <li><i class="bi bi-check"></i>10 SEO Keyword</li>
-                                        <li><i class="bi bi-check"></i>5 Facebook Camplaigns</li>
-                                        <li><i class="bi bi-check"></i>2 Video Camplaigns</li>
+                                        @foreach($package->features ?? [] as $feature)
+                                        <li><i class="bi bi-check"></i>{{ $feature }}</li>
+                                        @endforeach
                                     </ul>
                                     <div class="price-btn">
                                         <div class="line-1"></div>
                                         <div class="line-2"></div>
-                                        <a href="contact.html">Pay Now</a>
+                                        <a href="{{ route('contact') }}">Pay Now</a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-lg-4 wow animate fadeInUp" data-wow-delay="400ms" data-wow-duration="1500ms">
-                                <div class="price-box">
-                                    <h3>Professional</h3>
-                                    <span>Small team</span>
-                                    <strong>$99.99<sub>/Per Month</sub></strong>
-                                    <ul class="item-list">
-                                        <li><i class="bi bi-check"></i>10 Pages Responsive Website</li>
-                                        <li><i class="bi bi-check"></i>5PPC Campaigns</li>
-                                        <li><i class="bi bi-check"></i>10 SEO Keyword</li>
-                                        <li><i class="bi bi-check"></i>5 Facebook Camplaigns</li>
-                                        <li><i class="bi bi-check"></i>2 Video Camplaigns</li>
-                                    </ul>
-                                    <div class="price-btn">
-                                        <div class="line-1"></div>
-                                        <div class="line-2"></div>
-                                        <a href="contact.html">Pay Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4 wow animate fadeInUp" data-wow-delay="600ms" data-wow-duration="1500ms">
-                                <div class="price-box">
-                                    <h3>Enterprice</h3>
-                                    <span>Large Team</span>
-                                    <strong>$120.99<sub>/Per Month</sub></strong>
-                                    <ul class="item-list">
-                                        <li><i class="bi bi-check"></i>10 Pages Responsive Website</li>
-                                        <li><i class="bi bi-check"></i>5PPC Campaigns</li>
-                                        <li><i class="bi bi-check"></i>10 SEO Keyword</li>
-                                        <li><i class="bi bi-check"></i>5 Facebook Camplaigns</li>
-                                        <li><i class="bi bi-check"></i>2 Video Camplaigns</li>
-                                    </ul>
-                                    <div class="price-btn">
-                                        <div class="line-1"></div>
-                                        <div class="line-2"></div>
-                                        <a href="contact.html">Pay Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                        <div class="row g-4">
-                            <div class="col-md-6 col-lg-4 wow animate fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
-                                <div class="price-box">
-                                    <h3>Small Business</h3>
-                                    <span>Single Business</span>
-                                    <strong>$35.99<sub>/Per Year</sub></strong>
-                                    <ul class="item-list">
-                                        <li><i class="bi bi-check"></i>10 Pages Responsive Website</li>
-                                        <li><i class="bi bi-check"></i>5PPC Campaigns</li>
-                                        <li><i class="bi bi-check"></i>10 SEO Keyword</li>
-                                        <li><i class="bi bi-check"></i>5 Facebook Camplaigns</li>
-                                        <li><i class="bi bi-check"></i>2 Video Camplaigns</li>
-                                    </ul>
-                                    <div class="price-btn">
-                                        <div class="line-1"></div>
-                                        <div class="line-2"></div>
-                                        <a href="contact.html">Pay Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4 wow animate fadeInUp" data-wow-delay="400ms" data-wow-duration="1500ms">
-                                <div class="price-box">
-                                    <h3>Professional</h3>
-                                    <span>Small team</span>
-                                    <strong>$199.99<sub>/Per Year</sub></strong>
-                                    <ul class="item-list">
-                                        <li><i class="bi bi-check"></i>10 Pages Responsive Website</li>
-                                        <li><i class="bi bi-check"></i>5PPC Campaigns</li>
-                                        <li><i class="bi bi-check"></i>10 SEO Keyword</li>
-                                        <li><i class="bi bi-check"></i>5 Facebook Camplaigns</li>
-                                        <li><i class="bi bi-check"></i>2 Video Camplaigns</li>
-                                    </ul>
-                                    <div class="price-btn">
-                                        <div class="line-1"></div>
-                                        <div class="line-2"></div>
-                                        <a href="contact.html">Pay Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4 wow animate fadeInUp" data-wow-delay="600ms" data-wow-duration="1500ms">
-                                <div class="price-box">
-                                    <h3>Enterprice</h3>
-                                    <span>Large Team</span>
-                                    <strong>$220.99<sub>/Per Year</sub></strong>
-                                    <ul class="item-list">
-                                        <li><i class="bi bi-check"></i>10 Pages Responsive Website</li>
-                                        <li><i class="bi bi-check"></i>5PPC Campaigns</li>
-                                        <li><i class="bi bi-check"></i>10 SEO Keyword</li>
-                                        <li><i class="bi bi-check"></i>5 Facebook Camplaigns</li>
-                                        <li><i class="bi bi-check"></i>2 Video Camplaigns</li>
-                                    </ul>
-                                    <div class="price-btn">
-                                        <div class="line-1"></div>
-                                        <div class="line-2"></div>
-                                        <a href="contact.html">Pay Now</a>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+        @endif
+
         <!-- End priceing-plan section -->
 
         <!-- Start testimonial-area section -->
@@ -515,57 +355,25 @@
                     </div>
                 </div>
                 <div class="row gy-4">
-                    <div class="col-md-6 col-lg-4 wow animate fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
+                    @foreach($blogs as $blog)
+                    <div class="col-md-6 col-lg-4 wow animate fadeInUp" data-wow-delay="{{ 200 * $loop->iteration }}ms" data-wow-duration="1500ms">
                         <div class="single-blog">
                             <div class="blog-thumb">
-                                <a href="blog-details.html"><img src="{{ asset('assets/') }}/img/blog/blog-1.jpg" alt=""></a>
+                                <a href="{{ url('/blog/' . $blog->slug) }}"><img src="{{ isset($blog->image) ? Storage::url($blog->image) : asset('assets/img/blog/blog-1.jpg') }}" alt=""></a>
                                 <div class="tag">
-                                    <a href="project.html">UI/UX</a>
+                                    <a href="#">{{ $blog->category->name ?? 'Blog' }}</a>
                                 </div>
                             </div>
                             <div class="blog-inner">
                                 <div class="author-date">
-                                    <a href="#">By, Admin</a>
-                                    <a href="#">22.02.2022</a>
+                                    <a href="#">By, {{ $blog->author_name ?? 'Admin' }}</a>
+                                    <a href="#">{{ $blog->published_at ? $blog->published_at->format('d.m.Y') : $blog->created_at->format('d.m.Y') }}</a>
                                 </div>
-                                <h4><a href="blog-details.html">Quisque malesuada sapien and Donec sed nunc.</a></h4>
+                                <h4><a href="{{ url('/blog/' . $blog->slug) }}">{{ $blog->main_title }}</a></h4>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-4 wow animate fadeInUp" data-wow-delay="400ms" data-wow-duration="1500ms">
-                        <div class="single-blog">
-                            <div class="blog-thumb">
-                                <a href="blog-details.html"><img src="{{ asset('assets/') }}/img/blog/blog-2.jpg" alt=""></a>
-                                <div class="tag">
-                                    <a href="project.html">Software</a>
-                                </div>
-                            </div>
-                            <div class="blog-inner">
-                                <div class="author-date">
-                                    <a href="#">By, Admin</a>
-                                    <a href="#">22.02.2022</a>
-                                </div>
-                                <h4><a href="blog-details.html">Suspendisse pretium magna qu nisl egestas porttitor.</a></h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4 wow animated fadeInUp" data-wow-delay="600ms" data-wow-duration="1500ms">
-                        <div class="single-blog">
-                            <div class="blog-thumb">
-                                <a href="blog-details.html"><img src="{{ asset('assets/') }}/img/blog/blog-3.jpg" alt=""></a>
-                                <div class="tag">
-                                    <a href="project.html">Dashbord</a>
-                                </div>
-                            </div>
-                            <div class="blog-inner">
-                                <div class="author-date">
-                                    <a href="#">By, Admin</a>
-                                    <a href="#">22.02.2022</a>
-                                </div>
-                                <h4><a href="blog-details.html">In a augue sit amet erat Suspel eleifend suscipit issen.</a></h4>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </section>

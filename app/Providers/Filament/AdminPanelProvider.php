@@ -30,7 +30,22 @@ class AdminPanelProvider extends PanelProvider
             ->login()
             ->sidebarCollapsibleOnDesktop()
             ->font('Cairo')
-            ->brandName('Tech Company')
+            ->brandName(function () {
+                try {
+                    return \App\Models\Setting::first()?->site_name ?? config('app.name');
+                } catch (\Exception $e) {
+                    return config('app.name');
+                }
+            })
+            ->brandLogo(fn () => view('filament.logo'))
+            ->favicon(function () {
+                try {
+                    $settings = \App\Models\Setting::first();
+                    return $settings?->favicon ? asset(\Illuminate\Support\Facades\Storage::url($settings->favicon)) : null;
+                } catch (\Exception $e) {
+                    return null;
+                }
+            })
             ->colors([
                 'primary' => Color::Indigo,
                 'danger' => Color::Rose,

@@ -172,4 +172,6 @@ return [
     'footer_column' => 'Display Column',
     'column_1' => 'Column 1 (Services)',
     'column_2' => 'Column 2 (Quick Links)',
+    'about_us' => 'About Us',
+    'pricing' => 'Pricing',
 ];

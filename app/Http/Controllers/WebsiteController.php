@@ -20,7 +20,8 @@ class WebsiteController extends Controller
         $services = Service::latest()->take(6)->get();
         $projects = Project::latest()->take(6)->get();
         $blogs = Blog::latest()->take(3)->get();
-        return view('website.index', compact('services', 'projects', 'blogs'));
+        $packages = Package::with('prices.country')->latest()->take(3)->get();
+        return view('website.index', compact('services', 'projects', 'blogs', 'packages'));
     }
 
     public function projects()

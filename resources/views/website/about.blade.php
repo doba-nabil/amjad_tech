@@ -81,7 +81,7 @@ We treat every project as a partnership, delivering personalized solutions that 
         <!-- End why-choose section -->
 
         <!-- Start about-area section -->
-        <section class="about-area sec-mar-bottom wow animate slideInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
+        <section class="about-area sec-mar-bottom wow animate slideInUp" data-wow-delay="200ms" data-wow-duration="1500ms" style="margin-top: 20px;">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 or-2">

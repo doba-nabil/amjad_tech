@@ -25,6 +25,14 @@ class Setting extends Model
         'home_projects_subtitle',
         'home_projects_text',
         'footer_text',
+        'footer_column_1_title',
+        'footer_column_2_title',
+        'home_about_title',
+        'home_about_subtitle',
+        'home_about_text',
+        'home_packages_title',
+        'home_packages_subtitle',
+        'home_packages_text',
     ];
 
     protected $casts = [
@@ -35,5 +43,8 @@ class Setting extends Model
         'show_services_section' => 'boolean',
         'show_projects_section' => 'boolean',
         'show_blogs_section' => 'boolean',
+        'show_hero_social' => 'boolean',
+        'show_about_section' => 'boolean',
+        'show_packages_section' => 'boolean',
     ];
 }

@@ -150,7 +150,7 @@ video {
   width: 100%;
   height: 100%;
   z-index: 99999;
-  background: #000;
+  background: #f1f1f1;
   top: 0;
   left: 0;
   display: -webkit-box;
@@ -348,8 +348,8 @@ video {
   position: absolute;
   -webkit-animation: scroll1 15s ease-out infinite;
           animation: scroll1 15s ease-out infinite;
-  background-image: -webkit-gradient(linear, left bottom, left top, from(#000000), to(transparent));
-  background-image: linear-gradient(0deg, #000000, transparent);
+  background-image: -webkit-gradient(linear, left bottom, left top, from(#f1f1f1), to(transparent));
+  background-image: linear-gradient(0deg, #f1f1f1, transparent);
 }
 
 .line_item {
@@ -378,15 +378,15 @@ video {
 .line_item:nth-child(odd):before {
   -webkit-animation: scroll2 15s ease-out infinite;
           animation: scroll2 15s ease-out infinite;
-  background-image: -webkit-gradient(linear, left bottom, left top, from(transparent), to(#000000));
-  background-image: linear-gradient(0deg, transparent, #000000);
+  background-image: -webkit-gradient(linear, left bottom, left top, from(transparent), to(#f1f1f1));
+  background-image: linear-gradient(0deg, transparent, #f1f1f1);
 }
 
 .line_item:nth-child(even):before {
   -webkit-animation: scroll1 15s ease-out infinite;
           animation: scroll1 15s ease-out infinite;
-  background-image: -webkit-gradient(linear, left bottom, left top, from(#000000), to(transparent));
-  background-image: linear-gradient(0deg, #000000, transparent);
+  background-image: -webkit-gradient(linear, left bottom, left top, from(#f1f1f1), to(transparent));
+  background-image: linear-gradient(0deg, #f1f1f1, transparent);
 }
 
 @-webkit-keyframes scroll1 {
@@ -647,7 +647,7 @@ video {
 .cmn-btn a {
   position: relative;
   display: inline-block;
-  background-color: #000000;
+  background-color: #212529;
   border-radius: 5px;
   min-width: 170px;
   font-weight: 700;
@@ -655,7 +655,7 @@ video {
   text-align: center;
   color: #FFFFFF;
   padding: 15px 30px;
-  border: 1px solid #000000;
+  border: 1px solid #212529;
   overflow: hidden;
   z-index: 1;
   -webkit-transition: all 0.8s ease-out 0s;
@@ -689,7 +689,7 @@ video {
 }
 
 .cmn-btn a:hover {
-  color: #000;
+  color: #ffffff;
 }
 
 .cmn-btn a:hover:after {
@@ -752,12 +752,12 @@ video {
 }
 
 .cmn-btn:hover .line-1:before {
-  border: 1px solid #000;
+  border: 1px solid #f1f1f1;
   opacity: 0.5;
 }
 
 .cmn-btn:hover .line-1:after {
-  border: 1px solid #000;
+  border: 1px solid #f1f1f1;
   opacity: 0.5;
 }
 
@@ -835,7 +835,7 @@ video {
     padding: 10px 0;
     display: block;
     font-weight: 500;
-    color: #000;
+    color: #f1f1f1;
     text-transform: capitalize;
   }
   header .main-nav ul li ul.sub-menu {
@@ -871,7 +871,7 @@ video {
     top: 8px;
     right: 10px;
     font-size: 16px;
-    color: #000;
+    color: #f1f1f1;
   }
   .mobile-menu {
     position: relative;
@@ -1089,7 +1089,7 @@ header {
   position: relative;
   display: block;
   padding: 12px 20px;
-  color: #000;
+  color: #f1f1f1;
   font-weight: 400;
   text-transform: capitalize;
   font-size: 16px;
@@ -1456,9 +1456,7 @@ header {
 .verticale-social {
   position: absolute;
   left: -50px;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
+  top: 0;
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1399px) {
@@ -1683,7 +1681,7 @@ header {
   top: 30px;
   font-weight: 700;
   font-size: 50px;
-  -webkit-text-stroke: 2px #000;
+  -webkit-text-stroke: 2px #f1f1f1;
   -webkit-text-fill-color: transparent;
   opacity: 0.07;
   line-height: 1;
@@ -1757,7 +1755,7 @@ header {
 }
 
 .single-service:hover {
-  background-color: #0D0D0F;
+  background-color: #5555557d;
 }
 
 .single-service:hover span {
@@ -2059,9 +2057,9 @@ header {
 }
 
 .single-feature {
-  background-color: #0D0D0F;
+  background-color: #5555557d;
   -webkit-box-shadow: inset 0px 0px 10px rgba(6, 6, 6, 0.15);
-          box-shadow: inset 0px 0px 10px rgba(6, 6, 6, 0.15);
+  box-shadow: inset 0px 0px 10px rgba(6, 6, 6, 0.15);
   border-radius: 10px;
   padding: 50px 30px;
   -webkit-transform: skewY(-5deg);
@@ -2183,7 +2181,7 @@ header {
 }
 
 .single-item .item-inner-cnt {
-  background-color: #0F0F11;
+  background-color: #f8f9fa;
   border-radius: 5px;
   padding: 20px;
   width: 90%;
@@ -2291,7 +2289,7 @@ header {
   display: inline-block;
   height: 40px;
   width: 40px;
-  background-color: #0D0D0F;
+  background-color: #5555557d;
   border-radius: 50%;
   line-height: 40px;
   text-align: center;
@@ -2301,7 +2299,7 @@ header {
 
 .our-partner .sec-title .swiper-button-next-c:hover,
 .our-partner .sec-title .swiper-button-prev-c:hover {
-  color: #000;
+  color: #f1f1f1;
   background-color: #fe6102;
 }
 
@@ -2310,7 +2308,7 @@ header {
 }
 
 .single-partner {
-  background-color: #0D0D0F;
+  background-color: #5555557d;
   border: 1px solid #111c4d;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -2501,7 +2499,7 @@ header {
 }
 
 .price-box:hover .price-btn a {
-  color: #000;
+  color: #f1f1f1;
   background-color: #fe6102;
 }
 
@@ -2636,7 +2634,7 @@ header {
 
 .testimonial-area .swiper-button-next:hover:after,
 .testimonial-area .swiper-button-prev:hover:after {
-  color: #000;
+  color: #f1f1f1;
   border: none;
   background-color: #fe6102;
 }
@@ -2659,7 +2657,7 @@ header {
 
 .single-testimonial {
   position: relative;
-  background-color: #0D0D0F;
+  background-color: #5555557d;
   -webkit-box-shadow: inset 0px 0px 10px rgba(6, 6, 6, 0.15);
           box-shadow: inset 0px 0px 10px rgba(6, 6, 6, 0.15);
   border-radius: 10px;
@@ -3121,7 +3119,7 @@ header {
   position: relative;
   padding: 60px 80px;
   border-radius: 10px;
-  background-color: #1A191D;
+  background-color: #e9ecef;
   background-image: url(../img/subscribe-bg.png);
   background-size: cover;
   background-position: center center;
@@ -3182,7 +3180,7 @@ header {
 .subscribe-form form input {
   height: 60px;
   width: 100%;
-  background-color: #0F0F11;
+  background-color: #f8f9fa;
   border-radius: 10px;
   border: none;
   padding: 0 20px;
@@ -3207,7 +3205,7 @@ header {
   right: 5px;
   height: 50px;
   top: 5px;
-  color: #000;
+  color: #f1f1f1;
   font-size: 16px;
   font-weight: 600;
   text-transform: uppercase;
@@ -3617,7 +3615,7 @@ footer.error {
 .creasoft-wrap.layout2 {
   background-image: url(../img/black-concrete-textured.png);
   background-repeat: repeat;
-  background-color: #000000;
+  background-color: #f1f1f1;
 }
 
 .services-area.layout2 .swiper-button-next::after,
@@ -3667,7 +3665,7 @@ footer.error {
 }
 
 .company-since.layout2 {
-  background: #0D0D0F;
+  background: #5555557d;
   -webkit-box-shadow: inset 0px 0px 10px rgba(6, 6, 6, 0.15);
           box-shadow: inset 0px 0px 10px rgba(6, 6, 6, 0.15);
   border-radius: 20px;
@@ -3682,8 +3680,8 @@ footer.error {
 }
 
 .about-right.layout2 .banner-2 {
-  border-left: 10px solid #000;
-  border-top: 10px solid #000;
+  border-left: 10px solid #f1f1f1;
+  border-top: 10px solid #f1f1f1;
 }
 
 @media (max-width: 767px) {
@@ -3695,7 +3693,7 @@ footer.error {
 .isotope-menu.layout2 li.active {
   position: relative;
   color: #fff;
-  background-color: #0D0D0F;
+  background-color: #5555557d;
 }
 
 .isotope-menu.layout2 li.active:before {
@@ -3739,7 +3737,7 @@ footer.error {
 }
 
 .price-box.layout2 {
-  background-color: #0D0D0F;
+  background-color: #5555557d;
   -webkit-box-shadow: inset 0px 0px 10px rgba(6, 6, 6, 0.15);
           box-shadow: inset 0px 0px 10px rgba(6, 6, 6, 0.15);
   border-radius: 10px;
@@ -4141,7 +4139,7 @@ footer.error {
 
 .questions-form form input[type="submit"]:hover,
 .questions-form form textarea[type="submit"]:hover {
-  color: #000;
+  color: #f1f1f1;
   background-color: transparent;
   border: 2px solid #fe6102;
 }

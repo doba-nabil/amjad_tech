@@ -64,15 +64,15 @@ class GeneralSettings extends Page implements HasForms
                                     Forms\Components\Textarea::make('footer_text.ar')->label(__('dashboard.arabic')),
                                     Forms\Components\Textarea::make('footer_text.en')->label(__('dashboard.english')),
                                 ])->columns(2),
-                                Forms\Components\Section::make('Logos & Banners')->schema([
+                                Forms\Components\Section::make(__('dashboard.logos_and_banners'))->schema([
                                     Forms\Components\FileUpload::make('logo')->label(__('dashboard.logo'))->image()->directory('settings')->preserveFilenames(),
                                     Forms\Components\FileUpload::make('footer_logo')->label(__('dashboard.footer_logo'))->image()->directory('settings')->preserveFilenames(),
                                     Forms\Components\FileUpload::make('blogs_banner')->label(__('dashboard.blogs_banner') ?? 'Blogs Banner')->image()->directory('settings/banners'),
                                     Forms\Components\FileUpload::make('projects_banner')->label(__('dashboard.projects_banner') ?? 'Projects Banner')->image()->directory('settings/banners'),
                                 ])->columns(2),
-                                Forms\Components\Section::make('Contact & Address')->schema([
-                                    Forms\Components\Textarea::make('address.ar')->label('Address (AR)'),
-                                    Forms\Components\Textarea::make('address.en')->label('Address (EN)'),
+                                Forms\Components\Section::make(__('dashboard.contact_and_address'))->schema([
+                                    Forms\Components\Textarea::make('address.ar')->label(__('dashboard.address_ar')),
+                                    Forms\Components\Textarea::make('address.en')->label(__('dashboard.address_en')),
                                     Forms\Components\Repeater::make('phone_numbers')->label(__('dashboard.phone_numbers'))->schema([ Forms\Components\TextInput::make('phone')->label(__('dashboard.phone'))->required() ])->columnSpanFull(),
                                     Forms\Components\KeyValue::make('social_media')->label(__('dashboard.social_media'))->keyLabel(__('dashboard.platform'))->valueLabel(__('dashboard.url'))->columnSpanFull(),
                                 ])->columns(2),
@@ -86,6 +86,9 @@ class GeneralSettings extends Page implements HasForms
                                         Forms\Components\Toggle::make('show_services_section')->label(__('dashboard.show_services_section'))->default(true),
                                         Forms\Components\Toggle::make('show_projects_section')->label(__('dashboard.show_projects_section'))->default(true),
                                         Forms\Components\Toggle::make('show_blogs_section')->label(__('dashboard.show_blogs_section'))->default(true),
+                                        Forms\Components\Toggle::make('show_about_section')->label(__('dashboard.show_about_section'))->default(true),
+                                        Forms\Components\Toggle::make('show_packages_section')->label(__('dashboard.show_packages_section'))->default(true),
+                                        Forms\Components\Toggle::make('show_hero_social')->label(__('dashboard.show_hero_social'))->default(true),
                                     ])->columns(3),
                                 Forms\Components\Section::make(__('dashboard.home_video_section_title') ?? 'Home Video')
                                     ->schema([
@@ -94,35 +97,56 @@ class GeneralSettings extends Page implements HasForms
                                     ])->columns(2),
                                 Forms\Components\Section::make(__('dashboard.home_services_texts_ar'))
                                     ->schema([
-                                        Forms\Components\TextInput::make('home_services_title.ar')->label('Title (AR)'),
-                                        Forms\Components\TextInput::make('home_services_title.en')->label('Title (EN)'),
-                                        Forms\Components\TextInput::make('home_services_subtitle.ar')->label('Subtitle (AR)'),
-                                        Forms\Components\TextInput::make('home_services_subtitle.en')->label('Subtitle (EN)'),
-                                        Forms\Components\Textarea::make('home_services_text.ar')->label('Text (AR)'),
-                                        Forms\Components\Textarea::make('home_services_text.en')->label('Text (EN)'),
+                                        Forms\Components\TextInput::make('home_services_title.ar')->label(__('dashboard.title_ar')),
+                                        Forms\Components\TextInput::make('home_services_title.en')->label(__('dashboard.title_en')),
+                                        Forms\Components\TextInput::make('home_services_subtitle.ar')->label(__('dashboard.sub_title_ar')),
+                                        Forms\Components\TextInput::make('home_services_subtitle.en')->label(__('dashboard.sub_title_en')),
+                                        Forms\Components\Textarea::make('home_services_text.ar')->label(__('dashboard.text_ar')),
+                                        Forms\Components\Textarea::make('home_services_text.en')->label(__('dashboard.text_en')),
                                     ])->columns(2),
                                 Forms\Components\Section::make(__('dashboard.home_projects_texts_ar'))
                                     ->schema([
-                                        Forms\Components\TextInput::make('home_projects_title.ar')->label('Title (AR)'),
-                                        Forms\Components\TextInput::make('home_projects_title.en')->label('Title (EN)'),
-                                        Forms\Components\TextInput::make('home_projects_subtitle.ar')->label('Subtitle (AR)'),
-                                        Forms\Components\TextInput::make('home_projects_subtitle.en')->label('Subtitle (EN)'),
-                                        Forms\Components\Textarea::make('home_projects_text.ar')->label('Text (AR)'),
-                                        Forms\Components\Textarea::make('home_projects_text.en')->label('Text (EN)'),
+                                        Forms\Components\TextInput::make('home_projects_title.ar')->label(__('dashboard.title_ar')),
+                                        Forms\Components\TextInput::make('home_projects_title.en')->label(__('dashboard.title_en')),
+                                        Forms\Components\TextInput::make('home_projects_subtitle.ar')->label(__('dashboard.sub_title_ar')),
+                                        Forms\Components\TextInput::make('home_projects_subtitle.en')->label(__('dashboard.sub_title_en')),
+                                        Forms\Components\Textarea::make('home_projects_text.ar')->label(__('dashboard.text_ar')),
+                                        Forms\Components\Textarea::make('home_projects_text.en')->label(__('dashboard.text_en')),
+                                    ])->columns(2),
+                                Forms\Components\Section::make(__('dashboard.home_about_texts_ar') ?? 'About Section Texts')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('home_about_title.ar')->label(__('dashboard.title_ar')),
+                                        Forms\Components\TextInput::make('home_about_title.en')->label(__('dashboard.title_en')),
+                                        Forms\Components\TextInput::make('home_about_subtitle.ar')->label(__('dashboard.sub_title_ar')),
+                                        Forms\Components\TextInput::make('home_about_subtitle.en')->label(__('dashboard.sub_title_en')),
+                                        Forms\Components\Textarea::make('home_about_text.ar')->label(__('dashboard.text_ar')),
+                                        Forms\Components\Textarea::make('home_about_text.en')->label(__('dashboard.text_en')),
+                                        Forms\Components\FileUpload::make('home_about_image')->label(__('dashboard.about_image') ?? 'About Image')->directory('settings')->columnSpanFull(),
+                                    ])->columns(2),
+                                Forms\Components\Section::make(__('dashboard.home_packages_texts_ar') ?? 'Packages Section Texts')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('home_packages_title.ar')->label(__('dashboard.title_ar')),
+                                        Forms\Components\TextInput::make('home_packages_title.en')->label(__('dashboard.title_en')),
+                                        Forms\Components\TextInput::make('home_packages_subtitle.ar')->label(__('dashboard.sub_title_ar')),
+                                        Forms\Components\TextInput::make('home_packages_subtitle.en')->label(__('dashboard.sub_title_en')),
+                                        Forms\Components\Textarea::make('home_packages_text.ar')->label(__('dashboard.text_ar')),
+                                        Forms\Components\Textarea::make('home_packages_text.en')->label(__('dashboard.text_en')),
                                     ])->columns(2),
                                 Forms\Components\Section::make(__('dashboard.home_blog_texts_ar'))
                                     ->schema([
-                                        Forms\Components\TextInput::make('home_blog_title.ar')->label('Title (AR)'),
-                                        Forms\Components\TextInput::make('home_blog_title.en')->label('Title (EN)'),
-                                        Forms\Components\TextInput::make('home_blog_subtitle.ar')->label('Subtitle (AR)'),
-                                        Forms\Components\TextInput::make('home_blog_subtitle.en')->label('Subtitle (EN)'),
-                                        Forms\Components\Textarea::make('home_blog_text.ar')->label('Text (AR)'),
-                                        Forms\Components\Textarea::make('home_blog_text.en')->label('Text (EN)'),
+                                        Forms\Components\TextInput::make('home_blog_title.ar')->label(__('dashboard.title_ar')),
+                                        Forms\Components\TextInput::make('home_blog_title.en')->label(__('dashboard.title_en')),
+                                        Forms\Components\TextInput::make('home_blog_subtitle.ar')->label(__('dashboard.sub_title_ar')),
+                                        Forms\Components\TextInput::make('home_blog_subtitle.en')->label(__('dashboard.sub_title_en')),
+                                        Forms\Components\Textarea::make('home_blog_text.ar')->label(__('dashboard.text_ar')),
+                                        Forms\Components\Textarea::make('home_blog_text.en')->label(__('dashboard.text_en')),
                                     ])->columns(2),
                             ]),
 
                         Forms\Components\Tabs\Tab::make(__('dashboard.navigation_menus') ?? 'Navigation Menus')
                             ->schema([
+                                Forms\Components\TextInput::make('footer_column_1_title')->label(__('dashboard.footer_column_1_title'))->placeholder('e.g. Our Services')->columnSpan(1),
+                                Forms\Components\TextInput::make('footer_column_2_title')->label(__('dashboard.footer_column_2_title'))->placeholder('e.g. Quick Links')->columnSpan(1),
                                 Forms\Components\Repeater::make('header_links')
                                     ->label(__('dashboard.header_links'))
                                     ->addActionLabel(__('dashboard.add_to_header'))
@@ -167,7 +191,7 @@ class GeneralSettings extends Page implements HasForms
         $setting->save();
 
         Notification::make()
-            ->title('Saved successfully')
+            ->title(__('dashboard.saved_successfully') ?? 'Saved successfully')
             ->success()
             ->send();
     }
