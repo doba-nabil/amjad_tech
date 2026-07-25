@@ -34,40 +34,27 @@
                     <div class="col-lg-4">
                         <div class="sidebar-widget">
                             <div class="widget-search">
-                                <form action="{{ route('blogs') }}" method="get">
-                                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Search Here">
+                                <form action="{{ route('blogs') }}" method="GET">
+                                    <input type="text" name="search" value="{{ request('search') }}" placeholder="{{ __('dashboard.search_here') ?? 'Search Here' }}">
                                     <button type="submit"><i class="bi bi-search"></i></button>
                                 </form>
                             </div>
                         </div>
                         <div class="sidebar-widget">
-                            <h4>Category</h4>
+                            <h4>{{ __('dashboard.category') ?? 'Category' }}</h4>
                             <ul class="category">
                                 @foreach($blogCategories as $cat)
                                     <li><a href="{{ route('category.blogs', $cat->slug) }}">{{ $cat->name }}<i class="bi bi-arrow-right"></i></a></li>
                                 @endforeach
                             </ul>
                         </div>
-                        <div class="sidebar-widget">
-                            <h4>Newest Post</h4>
-                            @foreach($recentBlogs as $recentBlog)
-                            <div class="recent-post">
-                                <div class="recent-thumb">
-                                    <a href="{{ route('blog.details', $recentBlog->slug) }}"><img src="{{ isset($recentBlog->image) ? Storage::url($recentBlog->image) : asset('assets/img/blog/blog-tiny-1.jpg') }}" alt="{{ $recentBlog->main_title }}"></a>
-                                </div>
-                                <div class="recent-post-cnt">
-                                    <span>{{ $recentBlog->published_at ? $recentBlog->published_at->format('d.m.Y') : $recentBlog->created_at->format('d.m.Y') }}</span>
-                                    <h5><a href="{{ route('blog.details', $recentBlog->slug) }}">{{ $recentBlog->main_title }}</a></h5>
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
+
                         @php
                             $all_tags = \App\Models\Tag::all();
                         @endphp
                         @if($all_tags->count() > 0)
                         <div class="sidebar-widget">
-                            <h4>Tag</h4>
+                            <h4>{{ __('dashboard.tags') ?? 'Tag' }}</h4>
                             <ul class="tag-list">
                                 @foreach($all_tags as $tag)
                                 <li><a href="{{ route('blogs', ['tag' => $tag->slug]) }}">{{ $tag->name }}</a></li>

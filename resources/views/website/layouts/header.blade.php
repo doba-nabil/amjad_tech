@@ -15,31 +15,44 @@
                 <ul>
                     @if(isset($settings->header_links) && is_array($settings->header_links) && count($settings->header_links) > 0)
                         @foreach($settings->header_links as $link)
+                            @php
+                                $cleanUrl = ltrim($link['url'], '/');
+                                $isActive = false;
+                                if ($cleanUrl === '') {
+                                    $isActive = request()->path() === '/' || request()->path() === app()->getLocale();
+                                } elseif ($cleanUrl !== '#') {
+                                    $isActive = request()->is($cleanUrl . '*') || request()->is(app()->getLocale() . '/' . $cleanUrl . '*');
+                                }
+                                $href = $link['url'] === '#' ? 'javascript:void(0)' : (str_starts_with($link['url'], 'http') ? $link['url'] : \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getLocalizedURL(app()->getLocale(), $link['url']));
+                            @endphp
                             @if(isset($link['is_dropdown']) && $link['is_dropdown'])
-                                <li class="has-child {{ request()->is(ltrim($link['url'], '/').'*') ? 'active' : '' }}">
-                                    <a href="{{ $link['url'] == '#' ? 'javascript:void(0)' : url($link['url']) }}">{{ app()->getLocale() == 'ar' ? ($link['label_ar'] ?? $link['label_en']) : ($link['label_en'] ?? $link['label_ar']) }}</a>
+                                <li class="has-child">
+                                    <a class="{{ $isActive ? 'active' : '' }}" href="{{ $href }}">{{ app()->getLocale() == 'ar' ? ($link['label_ar'] ?? $link['label_en']) : ($link['label_en'] ?? $link['label_ar']) }}</a>
                                     <i class="bi bi-chevron-down"></i>
                                     @if(isset($link['children']) && is_array($link['children']))
                                         <ul class="sub-menu">
                                             @foreach($link['children'] as $child)
-                                                <li><a href="{{ url($child['url']) }}">{{ app()->getLocale() == 'ar' ? ($child['label_ar'] ?? $child['label_en']) : ($child['label_en'] ?? $child['label_ar']) }}</a></li>
+                                                @php
+                                                    $childHref = $child['url'] === '#' ? 'javascript:void(0)' : (str_starts_with($child['url'], 'http') ? $child['url'] : \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getLocalizedURL(app()->getLocale(), $child['url']));
+                                                @endphp
+                                                <li><a href="{{ $childHref }}">{{ app()->getLocale() == 'ar' ? ($child['label_ar'] ?? $child['label_en']) : ($child['label_en'] ?? $child['label_ar']) }}</a></li>
                                             @endforeach
                                         </ul>
                                     @endif
                                 </li>
                             @else
-                                <li class="{{ request()->is(ltrim($link['url'], '/').'*') ? 'active' : '' }}">
-                                    <a href="{{ url($link['url']) }}">{{ app()->getLocale() == 'ar' ? ($link['label_ar'] ?? $link['label_en']) : ($link['label_en'] ?? $link['label_ar']) }}</a>
+                                <li>
+                                    <a class="{{ $isActive ? 'active' : '' }}" href="{{ $href }}">{{ app()->getLocale() == 'ar' ? ($link['label_ar'] ?? $link['label_en']) : ($link['label_en'] ?? $link['label_ar']) }}</a>
                                 </li>
                             @endif
                         @endforeach
                     @else
                         <!-- Default Fallback if no links are set -->
-                        <li class="{{ request()->routeIs('home') ? 'active' : '' }}"><a href="{{ route('home') }}">{{ app()->getLocale() == 'ar' ? 'الرئيسية' : 'Home' }}</a></li>
-                        <li class="{{ request()->routeIs('projects') ? 'active' : '' }}"><a href="{{ route('projects') }}">{{ app()->getLocale() == 'ar' ? 'المشاريع' : 'Projects' }}</a></li>
-                        <li class="{{ request()->routeIs('blogs') ? 'active' : '' }}"><a href="{{ route('blogs') }}">{{ app()->getLocale() == 'ar' ? 'المقالات' : 'Blogs' }}</a></li>
-                        <li class="{{ request()->routeIs('pricing') ? 'active' : '' }}"><a href="{{ route('pricing') }}">{{ app()->getLocale() == 'ar' ? 'الباقات' : 'Pricing' }}</a></li>
-                        <li class="{{ request()->routeIs('contact') ? 'active' : '' }}"><a href="{{ route('contact') }}">{{ app()->getLocale() == 'ar' ? 'تواصل معنا' : 'Contact Us' }}</a></li>
+                        <li><a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">{{ app()->getLocale() == 'ar' ? 'الرئيسية' : 'Home' }}</a></li>
+                        <li><a href="{{ route('projects') }}" class="{{ request()->routeIs('projects') ? 'active' : '' }}">{{ app()->getLocale() == 'ar' ? 'المشاريع' : 'Projects' }}</a></li>
+                        <li><a href="{{ route('blogs') }}" class="{{ request()->routeIs('blogs') ? 'active' : '' }}">{{ app()->getLocale() == 'ar' ? 'المقالات' : 'Blogs' }}</a></li>
+                        <li><a href="{{ route('pricing') }}" class="{{ request()->routeIs('pricing') ? 'active' : '' }}">{{ app()->getLocale() == 'ar' ? 'الباقات' : 'Pricing' }}</a></li>
+                        <li><a href="{{ route('contact') }}" class="{{ request()->routeIs('contact') ? 'active' : '' }}">{{ app()->getLocale() == 'ar' ? 'تواصل معنا' : 'Contact Us' }}</a></li>
                     @endif
                 </ul>
                 <div class="get-qoute d-flex justify-content-center d-lg-none d-block pt-50">

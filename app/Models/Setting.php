@@ -35,6 +35,9 @@ class Setting extends Model
         'home_packages_text',
         'home_partners_title',
         'home_partners_subtitle',
+        'footer_subscribe_subtitle',
+        'footer_subscribe_title',
+        'footer_subscribe_highlight',
     ];
 
     protected $casts = [

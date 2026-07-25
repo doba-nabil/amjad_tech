@@ -22,13 +22,7 @@
         <!-- Start project-area section -->
         <section class="project-area sec-mar">
             <div class="container">
-                <div class="title-wrap">
-                    <div class="sec-title">
-                        <span>{{ $settings->home_projects_title ?? "Case Study" }}</span>
-                        <h2>{{ __('dashboard.projects') ?? 'Projects' }}</h2>
-                        <p>{{ $settings->home_projects_text ?? "Curabitur sed facilisis erat. Vestibulum pharetra eros eget fringilla porttitor." }}</p>
-                    </div>
-                </div>
+
                 <div class="row">
                     <div class="col-12">
                         <ul class="isotope-menu">

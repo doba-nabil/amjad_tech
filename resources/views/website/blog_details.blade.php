@@ -133,8 +133,8 @@
                     <div class="col-lg-4">
                         <div class="sidebar-widget">
                             <div class="widget-search">
-                                <form action="{{ route('blogs') }}" method="get">
-                                    <input type="text" name="search" placeholder="Search Here" value="{{ request('search') }}">
+                                <form action="{{ route('blogs') }}" method="GET">
+                                    <input type="text" name="search" placeholder="{{ __('dashboard.search_here') ?? 'Search Here' }}" value="{{ request('search') }}">
                                     <button type="submit"><i class="bi bi-search"></i></button>
                                 </form>
                             </div>
@@ -148,7 +148,7 @@
                         
                         @if($categories->count() > 0)
                         <div class="sidebar-widget">
-                            <h4>Category</h4>
+                            <h4>{{ __('dashboard.category') ?? 'Category' }}</h4>
                             <ul class="category">
                                 @foreach($categories as $category)
                                 <li><a href="{{ route('category.blogs', $category->slug) }}">{{ $category->name }}<i class="bi bi-arrow-right"></i></a></li>
@@ -159,7 +159,7 @@
                         
                         @if($recent_blogs->count() > 0)
                         <div class="sidebar-widget">
-                            <h4>Newest Post</h4>
+                            <h4>{{ __('dashboard.newest_post') ?? 'Newest Post' }}</h4>
                             @foreach($recent_blogs as $recent)
                             <div class="recent-post">
                                 <div class="recent-thumb">
@@ -178,7 +178,7 @@
                         
                         @if($all_tags->count() > 0)
                         <div class="sidebar-widget">
-                            <h4>Post Tag</h4>
+                            <h4>{{ __('dashboard.tags') ?? 'Post Tag' }}</h4>
                             <ul class="tag-list">
                                 @foreach($all_tags as $tag)
                                 <li><a href="{{ route('blogs', ['tag' => $tag->slug]) }}">{{ $tag->name }}</a></li>

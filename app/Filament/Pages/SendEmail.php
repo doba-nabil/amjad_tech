@@ -26,9 +26,21 @@ class SendEmail extends Page implements HasForms, HasActions
     use InteractsWithActions;
 
     protected static ?string $navigationIcon = 'heroicon-o-envelope';
-    protected static ?string $navigationGroup = 'Communication';
-    protected static ?string $navigationLabel = 'Send Broadcast Email';
-    protected static ?string $title = 'Send Broadcast Email';
+    
+    public static function getNavigationGroup(): ?string
+    {
+        return __('dashboard.communication');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('dashboard.send_broadcast_email');
+    }
+
+    public function getTitle(): string| \Illuminate\Contracts\Support\Htmlable
+    {
+        return __('dashboard.send_broadcast_email');
+    }
 
     public ?array $data = [];
 

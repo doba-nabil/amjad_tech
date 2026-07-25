@@ -16,6 +16,16 @@ class FaqResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-question-mark-circle';
     public static function getNavigationGroup(): ?string { return __('dashboard.content'); }
 
+    public static function getModelLabel(): string
+    {
+        return __('dashboard.faqs');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('dashboard.faqs');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -25,24 +35,25 @@ class FaqResource extends Resource
                         Forms\Components\Tabs\Tab::make(__('dashboard.arabic'))
                             ->schema([
                                 Forms\Components\TextInput::make('question.ar')
-                                    ->label('Question (AR)')
+                                    ->label(__('dashboard.question') . ' (AR)')
                                     ->required(),
                                 Forms\Components\Textarea::make('answer.ar')
-                                    ->label('Answer (AR)')
+                                    ->label(__('dashboard.answer') . ' (AR)')
                                     ->required(),
                             ]),
                         Forms\Components\Tabs\Tab::make(__('dashboard.english'))
                             ->schema([
                                 Forms\Components\TextInput::make('question.en')
-                                    ->label('Question (EN)')
+                                    ->label(__('dashboard.question') . ' (EN)')
                                     ->required(),
                                 Forms\Components\Textarea::make('answer.en')
-                                    ->label('Answer (EN)')
+                                    ->label(__('dashboard.answer') . ' (EN)')
                                     ->required(),
                             ]),
-                    ])->columnSpanFull(),
+                    ])
+                    ->columnSpanFull(),
                 Forms\Components\Toggle::make('is_active')
-                    ->label('Is Active')
+                    ->label(__('dashboard.is_active'))
                     ->default(true),
             ]);
     }

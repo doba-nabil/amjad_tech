@@ -184,6 +184,15 @@ class GeneralSettings extends Page implements HasForms
                                         Forms\Components\Textarea::make('home_blog_text.ar')->label(__('dashboard.text_ar')),
                                         Forms\Components\Textarea::make('home_blog_text.en')->label(__('dashboard.text_en')),
                                     ])->columns(2),
+                                Forms\Components\Section::make(__('dashboard.subscribe_texts') ?? 'Subscribe Section Texts')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('footer_subscribe_subtitle.ar')->label(__('dashboard.footer_subscribe_subtitle') . ' (AR)')->placeholder('e.g. ابق على تواصل')->columnSpan(1),
+                                        Forms\Components\TextInput::make('footer_subscribe_subtitle.en')->label(__('dashboard.footer_subscribe_subtitle') . ' (EN)')->placeholder('e.g. Get In Touch')->columnSpan(1),
+                                        Forms\Components\TextInput::make('footer_subscribe_title.ar')->label(__('dashboard.footer_subscribe_title') . ' (AR)')->placeholder('e.g. اشترك في')->columnSpan(1),
+                                        Forms\Components\TextInput::make('footer_subscribe_title.en')->label(__('dashboard.footer_subscribe_title') . ' (EN)')->placeholder('e.g. Subscribe Our')->columnSpan(1),
+                                        Forms\Components\TextInput::make('footer_subscribe_highlight.ar')->label(__('dashboard.footer_subscribe_highlight') . ' (AR)')->placeholder('e.g. النشرة البريدية')->columnSpan(1),
+                                        Forms\Components\TextInput::make('footer_subscribe_highlight.en')->label(__('dashboard.footer_subscribe_highlight') . ' (EN)')->placeholder('e.g. Newsletter')->columnSpan(1),
+                                    ])->columns(2),
                             ]),
 
                         Forms\Components\Tabs\Tab::make(__('dashboard.navigation_menus') ?? 'Navigation Menus')

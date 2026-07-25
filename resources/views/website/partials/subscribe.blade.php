@@ -5,9 +5,9 @@
                     <div class="row align-items-center">
                         <div class="col-lg-6 wow animate fadeInLeft" data-wow-delay="200ms" data-wow-duration="1500ms">
                             <div class="subscribe-cnt">
-                                <span>Get In Touch</span>
-                                <h3>Subscribe Our</h3>
-                                <strong>Newsletter</strong>
+                                <span>{{ $settings->footer_subscribe_subtitle ?? 'Get In Touch' }}</span>
+                                <h3>{{ $settings->footer_subscribe_title ?? 'Subscribe Our' }}</h3>
+                                <strong>{{ $settings->footer_subscribe_highlight ?? 'Newsletter' }}</strong>
                             </div>
                         </div>
                         <div class="col-lg-6 wow animate fadeInRight" data-wow-delay="200ms" data-wow-duration="1500ms">
@@ -17,8 +17,8 @@
                                 @endif
                                 <form action="{{ route('subscribe') }}" method="post">
                                     @csrf
-                                    <input type="email" name="email" placeholder="Type Your Email" required>
-                                    <input type="submit" value="connect">
+                                    <input type="email" name="email" placeholder="{{ __('dashboard.type_your_email') ?? 'Type Your Email' }}" required>
+                                    <input type="submit" value="{{ __('dashboard.connect') ?? 'connect' }}">
                                 </form>
                                 @error('email')
                                     <div class="text-danger mt-2">{{ $message }}</div>

@@ -42,8 +42,8 @@
                                         <i class="fas fa-map-marker-alt"></i>
                                     </div>
                                     <div class="info">
-                                        <h3>Location</h3>
-                                        <p>{{ $settings->contact_address ?? '65a Mill St E, Acton, Ontario, L7J 1H3, Canada' }}</p>
+                                        <h3>{{ __('dashboard.location') ?? 'Location' }}</h3>
+                                        <p>{{ $settings->address ?? '65a Mill St E, Acton, Ontario, L7J 1H3, Canada' }}</p>
                                     </div>
                                 </div>
                                 <div class="single-info">
@@ -51,11 +51,13 @@
                                         <i class="fas fa-phone-alt"></i>
                                     </div>
                                     <div class="info">
-                                        <h3>Phone</h3>
-                                        @if(!empty($settings->phone_numbers) && isset($settings->phone_numbers[0]['phone']))
-                                            <a href="tel:{{ $settings->phone_numbers[0]['phone'] }}">{{ $settings->phone_numbers[0]['phone'] }}</a>
+                                        <h3>{{ __('dashboard.phone') ?? 'Phone' }}</h3>
+                                        @if(!empty($settings->phone_numbers) && is_array($settings->phone_numbers))
+                                            @foreach($settings->phone_numbers as $phone)
+                                                <a href="tel:{{ $phone['phone'] }}">{{ $phone['phone'] }}</a>
+                                            @endforeach
                                         @else
-                                            <a href="tel:{{ $settings->contact_phone ?? '0096541041383' }}">{{ $settings->contact_phone ?? '+965 41041383' }}</a>
+                                            <a href="tel:{{ $settings->phone ?? '+9000000000' }}">{{ $settings->phone ?? '+9000000000' }}</a>
                                         @endif
                                     </div>
                                 </div>
@@ -64,7 +66,7 @@
                                         <i class="far fa-envelope"></i>
                                     </div>
                                     <div class="info">
-                                        <h3>Email</h3>
+                                        <h3>{{ __('dashboard.email') ?? 'Email' }}</h3>
                                         @if(!empty($settings->emails) && isset($settings->emails[0]['email']))
                                             <a href="mailto:{{ $settings->emails[0]['email'] }}">{{ $settings->emails[0]['email'] }}</a>
                                         @else

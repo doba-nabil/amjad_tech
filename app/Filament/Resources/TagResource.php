@@ -17,6 +17,16 @@ class TagResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-tag';
     public static function getNavigationGroup(): ?string { return __('dashboard.content'); }
 
+    public static function getModelLabel(): string
+    {
+        return __('dashboard.tags');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('dashboard.tags');
+    }
+
     public static function form(Form $form): Form
     {
         return $form

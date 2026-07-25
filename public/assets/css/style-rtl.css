@@ -69,3 +69,46 @@ html[dir="rtl"] .verticale-social {
     left: auto;
     right: -50px;
 }
+
+html[dir="rtl"] .iti--allow-dropdown .iti__flag-container, 
+html[dir="rtl"] .iti--separate-dial-code .iti__flag-container {
+    right: auto;
+    left: 0;
+}
+
+html[dir="rtl"] .iti input,
+html[dir="rtl"] .iti input[type=text],
+html[dir="rtl"] .iti input[type=tel] {
+    padding-right: 15px !important;
+    padding-left: 90px !important;
+}
+
+html[dir="rtl"] .category li a i {
+    right: auto;
+    left: 0px;
+    transform: translateY(-50%) rotate(180deg);
+}
+
+html[dir="rtl"] .single-item .item-inner-cnt .view-btn {
+    text-align: left;
+}
+
+html[dir="rtl"] .company-since strong {
+    right: auto;
+    left: 50px;
+}
+
+html[dir="rtl"] .-partnerslider-navigator {
+    direction: ltr;
+}
+
+html[dir="rtl"] .breadcrumb-cnt i {
+    transform: rotate(180deg);
+    display: inline-block;
+}
+
+html[dir="rtl"] body, 
+html[dir="rtl"] h1, html[dir="rtl"] h2, html[dir="rtl"] h3, html[dir="rtl"] h4, html[dir="rtl"] h5, html[dir="rtl"] h6, 
+html[dir="rtl"] p, html[dir="rtl"] a, html[dir="rtl"] span, html[dir="rtl"] li, html[dir="rtl"] input, html[dir="rtl"] button {
+    font-family: 'Cairo', sans-serif !important;
+}
