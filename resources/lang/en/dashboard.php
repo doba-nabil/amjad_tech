@@ -126,6 +126,28 @@ return [
     
     // Pages & Banners
     'page' => 'Page',
+    'all' => 'All',
+    'view_details' => 'View Details',
+    'sent_successfully' => 'Sent successfully!',
+    'already_subscribed' => 'You are already subscribed to this package.',
+    'subscribed_successfully' => 'Successfully subscribed to the newsletter!',
+
+    'all_rights_reserved' => 'All rights reserved.',
+
+    // Emails
+    'hello' => 'Hello',
+    'contact_received_subject' => 'Thank you for contacting us',
+    'contact_received_msg' => 'Thank you for getting in touch with us! We have successfully received your inquiry and our team will get back to you as soon as possible.',
+    'your_message' => 'Your Message:',
+    'best_regards' => 'Best Regards,',
+    'payment_success_subject' => 'Payment Successful',
+    'payment_success_msg' => 'Thank you for your purchase! Your payment has been successfully processed.',
+    'invoice_details' => 'Invoice Details',
+    'transaction_id' => 'Transaction ID',
+    'package' => 'Package',
+    'amount' => 'Amount',
+    'date' => 'Date',
+
     'pages' => 'Pages',
     'page_details' => 'Page Details',
     'content_ar' => 'Content (Arabic)',
@@ -192,4 +214,38 @@ return [
     'contact_and_address' => 'Contact & Address',
     'text_ar' => 'Text (Arabic)',
     'text_en' => 'Text (English)',
+
+    // Checkout Translations
+    'checkout' => 'Checkout',
+    'subscribe_to' => 'Subscribe To',
+    'name' => 'Full Name',
+    'email' => 'Email Address',
+    'phone' => 'Phone Number',
+    'country' => 'Country',
+    'select_country' => 'Select Country',
+    'total' => 'Total Amount',
+    'payment_method' => 'Payment Method',
+    'proceed_to_payment' => 'Proceed to Payment',
+    'processing' => 'Processing...',
+    
+    // General Settings Translations
+    'contact_settings' => 'Contact Settings',
+    'payment_methods' => 'Payment Methods',
+    'payment_settings' => 'Payment Settings',
+    'setting_key' => 'Setting Key (e.g. myfatoorah_live_mode)',
+    'setting_value' => 'Setting Value',
+    'latitude' => 'Latitude (Lat)',
+    'longitude' => 'Longitude (Lng)',
+    'contact_banner' => 'Contact Banner',
+    'contact_image' => 'Contact Image',
+    
+    // Payment Success/Error Translations
+    'payment_success' => 'Payment Successful',
+    'thank_you' => 'Thank You!',
+    'payment_success_message' => 'Your payment was successful and your subscription is now active.',
+    'back_to_home' => 'Back to Home',
+    'payment_failed' => 'Payment Failed',
+    'payment_failed_message' => 'An error occurred during the payment process. Please try again.',
+    'try_again' => 'Try Again',
+    'faqs' => 'FAQs',
 ];

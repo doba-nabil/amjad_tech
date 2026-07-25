@@ -174,4 +174,17 @@ return [
     'column_2' => 'Column 2 (Quick Links)',
     'about_us' => 'About Us',
     'pricing' => 'Pricing',
+    
+    // Checkout Translations
+    'checkout' => 'Checkout',
+    'subscribe_to' => 'Subscribe To',
+    'name' => 'Full Name',
+    'email' => 'Email Address',
+    'phone' => 'Phone Number',
+    'country' => 'Country',
+    'select_country' => 'Select Country',
+    'total' => 'Total Amount',
+    'payment_method' => 'Payment Method',
+    'proceed_to_payment' => 'Proceed to Payment',
+    'processing' => 'Processing...',
 ];

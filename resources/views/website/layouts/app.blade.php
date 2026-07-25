@@ -35,6 +35,8 @@
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="{{ isset($settings->favicon) ? Storage::url($settings->favicon) : asset('favicon.ico') }}">
+    <!-- intl-tel-input CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"/>
 </head>
 
 <body>
@@ -56,6 +58,7 @@
 @yield('content')
 </main>
 
+@include('website.partials.subscribe')
 @include('website.layouts.footer')
 
 
@@ -88,6 +91,10 @@
     <script src="{{ asset('assets/') }}/js/wow.min.js"></script>
     <!-- Custom JS -->
     <script src="{{ asset('assets/') }}/js/custom.js"></script>
+    <script src="{{ asset('assets/') }}/js/ajax-forms.js"></script>
+    <!-- intl-tel-input JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+    @yield('scripts')
 
 </body>
 

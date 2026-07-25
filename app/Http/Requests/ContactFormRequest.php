@@ -24,8 +24,20 @@ class ContactFormRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
-            'phone' => 'nullable|string|max:20',
+            'phone' => 'nullable|string|phone:AUTO',
             'message' => 'required|string',
         ];
+    }
+
+    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
+    {
+        if ($this->ajax() || $this->wantsJson()) {
+            throw new \Illuminate\Validation\ValidationException($validator, response()->json([
+                'message' => 'The given data was invalid.',
+                'errors' => $validator->errors(),
+            ], 422));
+        }
+
+        parent::failedValidation($validator);
     }
 }

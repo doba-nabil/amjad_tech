@@ -65,6 +65,7 @@ class GeneralSettings extends Page implements HasForms
                                     Forms\Components\Textarea::make('footer_text.en')->label(__('dashboard.english')),
                                 ])->columns(2),
                                 Forms\Components\Section::make(__('dashboard.logos_and_banners'))->schema([
+                                    Forms\Components\FileUpload::make('favicon')->label(__('dashboard.favicon') ?? 'Favicon')->image()->directory('settings')->preserveFilenames(),
                                     Forms\Components\FileUpload::make('logo')->label(__('dashboard.logo'))->image()->directory('settings')->preserveFilenames(),
                                     Forms\Components\FileUpload::make('footer_logo')->label(__('dashboard.footer_logo'))->image()->directory('settings')->preserveFilenames(),
                                     Forms\Components\FileUpload::make('blogs_banner')->label(__('dashboard.blogs_banner') ?? 'Blogs Banner')->image()->directory('settings/banners'),
@@ -145,8 +146,13 @@ class GeneralSettings extends Page implements HasForms
 
                         Forms\Components\Tabs\Tab::make(__('dashboard.navigation_menus') ?? 'Navigation Menus')
                             ->schema([
-                                Forms\Components\TextInput::make('footer_column_1_title')->label(__('dashboard.footer_column_1_title'))->placeholder('e.g. Our Services')->columnSpan(1),
-                                Forms\Components\TextInput::make('footer_column_2_title')->label(__('dashboard.footer_column_2_title'))->placeholder('e.g. Quick Links')->columnSpan(1),
+                                Forms\Components\Grid::make(2)
+                                    ->schema([
+                                        Forms\Components\TextInput::make('footer_column_1_title.ar')->label(__('dashboard.footer_column_1_title') . ' (AR)')->placeholder('e.g. خدماتنا')->columnSpan(1),
+                                        Forms\Components\TextInput::make('footer_column_1_title.en')->label(__('dashboard.footer_column_1_title') . ' (EN)')->placeholder('e.g. Our Services')->columnSpan(1),
+                                        Forms\Components\TextInput::make('footer_column_2_title.ar')->label(__('dashboard.footer_column_2_title') . ' (AR)')->placeholder('e.g. روابط سريعة')->columnSpan(1),
+                                        Forms\Components\TextInput::make('footer_column_2_title.en')->label(__('dashboard.footer_column_2_title') . ' (EN)')->placeholder('e.g. Quick Links')->columnSpan(1),
+                                    ]),
                                 Forms\Components\Repeater::make('header_links')
                                     ->label(__('dashboard.header_links'))
                                     ->addActionLabel(__('dashboard.add_to_header'))
@@ -178,6 +184,23 @@ class GeneralSettings extends Page implements HasForms
                                         Forms\Components\TextInput::make('label_en')->label(__('dashboard.label_en'))->required(),
                                         Forms\Components\TextInput::make('url')->label(__('dashboard.url_simple'))->required(),
                                     ])->columns(4)->collapsible()->columnSpanFull(),
+                            ]),
+                        
+                        Forms\Components\Tabs\Tab::make(__('dashboard.contact_settings') ?? 'Contact Settings')
+                            ->schema([
+                                Forms\Components\TextInput::make('contact_lat')->label(__('dashboard.latitude') ?? 'Latitude (Lat)')->numeric(),
+                                Forms\Components\TextInput::make('contact_lng')->label(__('dashboard.longitude') ?? 'Longitude (Lng)')->numeric(),
+                                Forms\Components\FileUpload::make('contact_banner')->label(__('dashboard.contact_banner') ?? 'Contact Banner')->directory('settings'),
+                                Forms\Components\FileUpload::make('contact_image')->label(__('dashboard.contact_image') ?? 'Contact Image')->directory('settings'),
+                            ])->columns(2),
+                        
+                        Forms\Components\Tabs\Tab::make(__('dashboard.payment_methods') ?? 'Payment Methods')
+                            ->schema([
+                                Forms\Components\KeyValue::make('payment_settings')
+                                    ->label(__('dashboard.payment_settings') ?? 'Payment Settings')
+                                    ->keyLabel(__('dashboard.setting_key') ?? 'Setting Key')
+                                    ->valueLabel(__('dashboard.setting_value') ?? 'Setting Value')
+                                    ->columnSpanFull(),
                             ]),
                     ])->columnSpanFull()
             ])

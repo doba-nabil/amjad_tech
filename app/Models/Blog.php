@@ -33,6 +33,11 @@ class Blog extends Model
         return $this->hasMany(BlogComment::class);
     }
 
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
     public function getSlugOptions() : SlugOptions
     {
         return SlugOptions::create()

@@ -127,6 +127,7 @@ return [
     'uploaded' => 'فشل رفع :attribute.',
     'url' => 'يجب أن يكون :attribute رابطًا صحيحًا.',
     'uuid' => 'يجب أن يكون :attribute معرّف UUID صالحًا.',
+    'phone' => 'رقم الهاتف غير صالح.',
 
     'attributes' => [
         'name' => 'الاسم',

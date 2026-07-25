@@ -25,8 +25,15 @@ class BlogResource extends Resource
                 Forms\Components\Select::make('category_id')
                     ->label(__('dashboard.category_id'))
                     ->relationship('category', 'name')
-                    ->required()
-                    ->columnSpanFull(),
+                    ->required(),
+                Forms\Components\Select::make('tags')
+                    ->label('Tags')
+                    ->relationship('tags', 'name')
+                    ->multiple()
+                    ->preload(),
+                Forms\Components\Toggle::make('enable_comments')
+                    ->label('Enable Comments')
+                    ->default(true),
                 Forms\Components\Tabs::make('Translations')
                     ->tabs([
                         Forms\Components\Tabs\Tab::make(__('dashboard.arabic'))
@@ -81,6 +88,12 @@ class BlogResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
             ]);
     }
 

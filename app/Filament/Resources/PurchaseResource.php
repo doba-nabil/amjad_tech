@@ -26,6 +26,10 @@ class PurchaseResource extends Resource
                     ->label(__('dashboard.name'))
                     ->required()
                     ->maxLength(255),
+                Forms\Components\TextInput::make('email')
+                    ->label(__('dashboard.email'))
+                    ->email()
+                    ->maxLength(255),
                 Forms\Components\TextInput::make('phone')
                     ->label(__('dashboard.phone'))
                     ->required()
@@ -34,6 +38,18 @@ class PurchaseResource extends Resource
                     ->label(__('dashboard.package'))
                     ->relationship('package', 'name')
                     ->required(),
+                Forms\Components\Select::make('country_id')
+                    ->label(__('dashboard.country'))
+                    ->relationship('country', 'name'),
+                Forms\Components\TextInput::make('amount')
+                    ->label(__('dashboard.total'))
+                    ->numeric(),
+                Forms\Components\TextInput::make('payment_method')
+                    ->label(__('dashboard.payment_method'))
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('transaction_id')
+                    ->label('Transaction ID')
+                    ->maxLength(255),
                 Forms\Components\Select::make('status')
                     ->label(__('dashboard.status'))
                     ->options([
@@ -56,8 +72,12 @@ class PurchaseResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')->label(__('dashboard.name'))->searchable(),
+                Tables\Columns\TextColumn::make('email')->label(__('dashboard.email'))->searchable(),
                 Tables\Columns\TextColumn::make('phone')->label(__('dashboard.phone'))->searchable(),
                 Tables\Columns\TextColumn::make('package.name')->label(__('dashboard.package')),
+                Tables\Columns\TextColumn::make('country.name')->label(__('dashboard.country')),
+                Tables\Columns\TextColumn::make('amount')->label(__('dashboard.total')),
+                Tables\Columns\TextColumn::make('payment_method')->label(__('dashboard.payment_method')),
                 Tables\Columns\TextColumn::make('status')->label(__('dashboard.status'))->badge(),
                 Tables\Columns\TextColumn::make('purchase_date')->label(__('dashboard.purchase_date'))->date()->sortable(),
                 Tables\Columns\TextColumn::make('expiration_date')->label(__('dashboard.expiration_date'))->date()->sortable(),

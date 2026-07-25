@@ -46,5 +46,6 @@ class Setting extends Model
         'show_hero_social' => 'boolean',
         'show_about_section' => 'boolean',
         'show_packages_section' => 'boolean',
+        'payment_settings' => 'array',
     ];
 }

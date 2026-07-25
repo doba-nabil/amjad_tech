@@ -16,7 +16,17 @@ class Project extends Model implements HasMedia
 
     public $translatable = [
         'name',
-        'description'
+        'description',
+        'client_needs',
+        'working_process',
+        'check_and_launch'
+    ];
+
+    protected $casts = [
+        'client_needs' => 'array',
+        'working_process' => 'array',
+        'check_and_launch' => 'array',
+        'project_date' => 'date'
     ];
 
     public function category()

@@ -79,20 +79,18 @@
                         <p>{{ $settings->home_services_text ?? "Curabitur sed facilisis erat. Vestibulum pharetra eros eget fringilla porttitor." }}</p>
                     </div>
                 </div>
+                
                 <div class="swiper services-slider">
                     <div class="swiper-wrapper">
 @foreach($services as $service)
                         <div class="swiper-slide wow animate fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
                             <div class="single-service">
-                                <span>{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
+                                <span class="service-num">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
                                 <div class="icon">
                                     <img src="{{ isset($service->image) ? Storage::url($service->image) : asset('assets/img/icons/service-icon-1.png') }}" alt="">
                                 </div>
                                 <h4>{{ $service->title }}</h4>
-                                <p>{{ Str::limit(strip_tags($service->content), 80) }}</p>
-                                <div class="read-btn">
-                                    <a href="{{ route('contact') }}"><i class="bi bi-arrow-right"></i></a>
-                                </div>
+                                <p>{{ Str::limit(strip_tags($service->description), 150) }}</p>
                             </div>
                         </div>
 @endforeach
@@ -151,50 +149,19 @@
                     </div>
                 </div>
                 <div class="row g-4">
-                    <div class="col-md-6 col-lg-3 wow animate fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
+                    @foreach($features as $feature)
+                    <div class="col-md-6 col-lg-3 wow animate fadeInUp" data-wow-delay="{{ 200 * $loop->iteration }}ms" data-wow-duration="1500ms">
                         <div class="single-feature">
                             <div class="feature-inner">
                                 <div class="icon">
-                                    <img src="{{ asset('assets/') }}/img/icons/feature-icon-1.png" alt="">
+                                    <img src="{{ isset($feature->image) ? Storage::url($feature->image) : asset('assets/img/icons/feature-icon-' . $loop->iteration . '.png') }}" alt="">
                                 </div>
-                                <span class="counter">150</span><sup>+</sup>
-                                <h4>Project Completed</h4>
+                                <span class="counter">{{ $feature->counter }}</span><sup>+</sup>
+                                <h4>{{ $feature->title }}</h4>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-3 wow animate fadeInUp" data-wow-delay="400ms" data-wow-duration="1500ms">
-                        <div class="single-feature">
-                            <div class="feature-inner">
-                                <div class="icon">
-                                    <img src="{{ asset('assets/') }}/img/icons/feature-icon-2.png" alt="">
-                                </div>
-                                <span class="counter">250</span><sup>+</sup>
-                                <h4>Satisfied Clients</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3 wow animate fadeInUp" data-wow-delay="600ms" data-wow-duration="1500ms">
-                        <div class="single-feature">
-                            <div class="feature-inner">
-                                <div class="icon">
-                                    <img src="{{ asset('assets/') }}/img/icons/feature-icon-3.png" alt="">
-                                </div>
-                                <span class="counter">50</span><sup>+</sup>
-                                <h4>Expert Teams</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3 wow animate fadeInUp" data-wow-delay="800ms" data-wow-duration="1500ms">
-                        <div class="single-feature">
-                            <div class="feature-inner">
-                                <div class="icon">
-                                    <img src="{{ asset('assets/') }}/img/icons/feature-icon-4.png" alt="">
-                                </div>
-                                <span class="counter">28</span><sup>+</sup>
-                                <h4>Win Awards</h4>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </section>
@@ -214,25 +181,24 @@
                 <div class="row">
                     <div class="col-12">
                         <ul class="isotope-menu">
-                            <li class="active" data-filter="*">All</li>
-                            <li data-filter=".ui">UI/UX</li>
-                            <li data-filter=".web">Web Design</li>
-                            <li data-filter=".developing">Developing</li>
-                            <li data-filter=".graphic">Graphic Design</li>
+                            <li class="active" data-filter="*">{{ __('dashboard.all') ?? 'All' }}</li>
+                            @foreach($projectCategories as $category)
+                                <li data-filter=".cat-{{ $category->id }}">{{ $category->name }}</li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
                 <div class="row g-4 project-items">
                     @foreach($projects as $project)
-                    <div class="col-md-6 col-lg-4 single-item graphic ui">
+                    <div class="col-md-6 col-lg-4 single-item cat-{{ $project->category_id }}">
                         <div class="item-img">
-                            <a href="{{ url('/project/' . $project->id) }}"><img src="{{ isset($project->main_image) ? Storage::url($project->main_image) : asset('assets/img/project/project-1.jpg') }}" alt=""></a>
+                            <a href="{{ route('project.details', $project->slug) }}"><img src="{{ isset($project->main_image) ? Storage::url($project->main_image) : asset('assets/img/project/project-1.jpg') }}" alt=""></a>
                         </div>
                         <div class="item-inner-cnt">
-                            <span>{{ $project->category->name ?? 'Project' }}</span>
-                            <h4>{{ $project->name }}</h4>
+                            <span style="color: #000;">{{ $project->category->name ?? 'Project' }}</span>
+                            <h4 style="color: #000;">{{ $project->name }}</h4>
                             <div class="view-btn">
-                                <a href="{{ url('/project/' . $project->id) }}">view details</a>
+                                <a href="{{ route('project.details', $project->slug) }}" style="color: #000;">{{ __('dashboard.view_details') ?? 'View Details' }}</a>
                             </div>
                         </div>
                     </div>
@@ -260,31 +226,13 @@
                     <div class="col-lg-9">
                         <div class="swiper partner-slider">
                             <div class="swiper-wrapper">
+                                @foreach($partners as $partner)
                                 <div class="swiper-slide">
                                     <div class="single-partner">
-                                        <img src="{{ asset('assets/') }}/img/partner/partner-1.png" alt="">
+                                        <img src="{{ Storage::url($partner->image) }}" alt="{{ $partner->name ?? 'Partner' }}">
                                     </div>
                                 </div>
-                                <div class="swiper-slide">
-                                    <div class="single-partner">
-                                        <img src="{{ asset('assets/') }}/img/partner/partner-2.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="single-partner">
-                                        <img src="{{ asset('assets/') }}/img/partner/partner-3.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="single-partner">
-                                        <img src="{{ asset('assets/') }}/img/partner/partner-4.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="single-partner">
-                                        <img src="{{ asset('assets/') }}/img/partner/partner-5.png" alt="">
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -294,7 +242,7 @@
         <!-- End our-partner section -->
 
         <!-- Start priceing-plan section -->
-        @if($settings->show_packages_section && $packages->isNotEmpty())
+        @if($settings->show_packages_section && ($monthlyPackages->isNotEmpty() || $yearlyPackages->isNotEmpty()))
         <section class="priceing-plan sec-mar">
             <div class="container">
                 <div class="title-wrap">
@@ -304,44 +252,42 @@
                         <p>{{ $settings->home_packages_text ?? "Curabitur sed facilisis erat. Vestibulum pharetra eros eget fringilla porttitor." }}</p>
                     </div>
                 </div>
-                <div class="tab-content" id="pills-tabContent">
-                    <div class="tab-pane fade active show" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                        <div class="row g-4">
-                            @foreach($packages as $package)
-                            <div class="col-md-6 col-lg-4 wow animate fadeInUp" data-wow-delay="{{ 200 * $loop->iteration }}ms" data-wow-duration="1500ms">
-                                <div class="price-box">
-                                    <h3>{{ $package->name }}</h3>
-                                    <span>{{ $package->sub_name ?? 'Package' }}</span>
-                                    <strong>{{ $package->prices->first()?->price ?? 0 }}<sub>/Per Month</sub></strong>
-                                    <ul class="item-list">
-                                        @foreach($package->features ?? [] as $feature)
-                                        <li><i class="bi bi-check"></i>{{ $feature }}</li>
-                                        @endforeach
-                                    </ul>
-                                    <div class="price-btn">
-                                        <div class="line-1"></div>
-                                        <div class="line-2"></div>
-                                        <a href="{{ route('contact') }}">Pay Now</a>
-                                    </div>
-                                </div>
-                            </div>
+
+                @if($pricingCountries->count() > 1)
+                <div class="row justify-content-center mb-4">
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <select id="country-select" class="form-select form-select-lg">
+                            @foreach($pricingCountries as $country)
+                                <option value="{{ $country->id }}">{{ $country->name }}</option>
                             @endforeach
+                        </select>
+                    </div>
+                </div>
+                @endif
+
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-8 col-lg-6">
+                        <div class="price-table-tab">
+                            <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="pills-monthly-tab" data-bs-toggle="pill" data-bs-target="#pills-monthly" type="button" role="tab" aria-controls="pills-monthly" aria-selected="true">Pay Monthly</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="pills-yearly-tab" data-bs-toggle="pill" data-bs-target="#pills-yearly" type="button" role="tab" aria-controls="pills-yearly" aria-selected="false">Pay Yearly</button>
+                                </li>
+                            </ul>
                         </div>
                     </div>
+                </div>
+
+                <div class="tab-content" id="pills-tabContent">
+                    @include('website.partials.packages', ['monthlyPackages' => $monthlyPackages, 'yearlyPackages' => $yearlyPackages])
                 </div>
             </div>
         </section>
         @endif
 
         <!-- End priceing-plan section -->
-
-        <!-- Start testimonial-area section -->
-        
-        <!-- End testimonial-area section -->
-
-        <!-- Start our-team section -->
-        
-        <!-- End our-team section -->
 
         <!-- Start blog-area section -->
         @if($settings->show_blogs_section && $blogs->isNotEmpty())
@@ -359,17 +305,17 @@
                     <div class="col-md-6 col-lg-4 wow animate fadeInUp" data-wow-delay="{{ 200 * $loop->iteration }}ms" data-wow-duration="1500ms">
                         <div class="single-blog">
                             <div class="blog-thumb">
-                                <a href="{{ url('/blog/' . $blog->slug) }}"><img src="{{ isset($blog->image) ? Storage::url($blog->image) : asset('assets/img/blog/blog-1.jpg') }}" alt=""></a>
+                                <a href="{{ route('blog.details', $blog->slug) }}"><img src="{{ isset($blog->image) ? Storage::url($blog->image) : asset('assets/img/blog/blog-1.jpg') }}" alt=""></a>
                                 <div class="tag">
-                                    <a href="#">{{ $blog->category->name ?? 'Blog' }}</a>
+                                    <a href="{{ isset($blog->category) ? route('category.blogs', $blog->category->slug) : '#' }}">{{ $blog->category->name ?? 'Blog' }}</a>
                                 </div>
                             </div>
                             <div class="blog-inner">
                                 <div class="author-date">
-                                    <a href="#">By, {{ $blog->author_name ?? 'Admin' }}</a>
-                                    <a href="#">{{ $blog->published_at ? $blog->published_at->format('d.m.Y') : $blog->created_at->format('d.m.Y') }}</a>
+                                    <a href="{{ route('blog.details', $blog->slug) }}">By, {{ $blog->author_name ?? '' }}</a>
+                                    <a href="{{ route('blog.details', $blog->slug) }}">{{ $blog->published_at ? $blog->published_at->format('d.m.Y') : $blog->created_at->format('d.m.Y') }}</a>
                                 </div>
-                                <h4><a href="{{ url('/blog/' . $blog->slug) }}">{{ $blog->main_title }}</a></h4>
+                                <h4><a href="{{ route('blog.details', $blog->slug) }}">{{ $blog->main_title }}</a></h4>
                             </div>
                         </div>
                     </div>
@@ -380,32 +326,46 @@
 @endif
         <!-- End blog-area section -->
 
-        <!-- Start subscribe-newsletter section -->
-        <section class="subscribe-newsletter sec-mar-top">
-            <div class="container">
-                <div class="news-letter-content">
-                    <div class="row align-items-center">
-                        <div class="col-lg-6 wow animate fadeInLeft" data-wow-delay="200ms" data-wow-duration="1500ms">
-                            <div class="subscribe-cnt">
-                                <span>Get In Touch</span>
-                                <h3>Subscribe Our</h3>
-                                <strong>Newsletter</strong>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 wow animate fadeInRight" data-wow-delay="200ms" data-wow-duration="1500ms">
-                            <div class="subscribe-form">
-                                <form action="#" method="post">
-                                    <input type="email" name="email" placeholder="Type Your Email">
-                                    <input type="submit" value="connect">
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- End subscribe-newsletter section -->
 
         <!-- Start footer section -->
         
+@endsection
+
+@section('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const countrySelect = document.getElementById('country-select');
+        const tabContent = document.getElementById('pills-tabContent');
+        
+        if (countrySelect && tabContent) {
+            function fetchPackages(countryId) {
+                tabContent.style.opacity = '0.5';
+                
+                fetch(`{{ route('packages.render') }}?country_id=${countryId}`, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Accept': 'text/html'
+                    }
+                })
+                .then(response => response.text())
+                .then(html => {
+                    tabContent.innerHTML = html;
+                    tabContent.style.opacity = '1';
+                })
+                .catch(error => {
+                    console.error('Error fetching packages:', error);
+                    tabContent.style.opacity = '1';
+                });
+            }
+
+            countrySelect.addEventListener('change', function() {
+                fetchPackages(this.value);
+            });
+
+            if (countrySelect.value) {
+                fetchPackages(countrySelect.value);
+            }
+        }
+    });
+</script>
 @endsection

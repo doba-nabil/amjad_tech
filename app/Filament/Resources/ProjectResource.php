@@ -27,6 +27,19 @@ class ProjectResource extends Resource
                     ->relationship('category', 'name')
                     ->required()
                     ->columnSpanFull(),
+                Forms\Components\Section::make('Client Details')
+                    ->schema([
+                        Forms\Components\TextInput::make('client_name')
+                            ->label('Client Name'),
+                        Forms\Components\TextInput::make('company_name')
+                            ->label('Company Name'),
+                        Forms\Components\TextInput::make('location')
+                            ->label('Location'),
+                        Forms\Components\TextInput::make('duration')
+                            ->label('Duration'),
+                        Forms\Components\DatePicker::make('project_date')
+                            ->label('Project Date'),
+                    ])->columns(2),
                 Forms\Components\Tabs::make('Translations')
                     ->tabs([
                         Forms\Components\Tabs\Tab::make(__('dashboard.arabic'))
@@ -36,6 +49,12 @@ class ProjectResource extends Resource
                                     ->required(),
                                 Forms\Components\RichEditor::make('description.ar')
                                     ->label(__('dashboard.description_ar')),
+                                Forms\Components\RichEditor::make('client_needs.ar')
+                                    ->label('Client Needs (AR)'),
+                                Forms\Components\RichEditor::make('working_process.ar')
+                                    ->label('Working Process (AR)'),
+                                Forms\Components\RichEditor::make('check_and_launch.ar')
+                                    ->label('Check & Launch (AR)'),
                             ]),
                         Forms\Components\Tabs\Tab::make(__('dashboard.english'))
                             ->schema([
@@ -44,6 +63,12 @@ class ProjectResource extends Resource
                                     ->required(),
                                 Forms\Components\RichEditor::make('description.en')
                                     ->label(__('dashboard.description_en')),
+                                Forms\Components\RichEditor::make('client_needs.en')
+                                    ->label('Client Needs (EN)'),
+                                Forms\Components\RichEditor::make('working_process.en')
+                                    ->label('Working Process (EN)'),
+                                Forms\Components\RichEditor::make('check_and_launch.en')
+                                    ->label('Check & Launch (EN)'),
                             ]),
                     ])->columnSpanFull(),
                 Forms\Components\FileUpload::make('main_image')
@@ -83,6 +108,12 @@ class ProjectResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
             ]);
     }
 

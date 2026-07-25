@@ -13,4 +13,9 @@ class Country extends Model
     public $translatable = [
         'name'
     ];
+
+    public function packagePrices()
+    {
+        return $this->hasMany(PackagePrice::class);
+    }
 }

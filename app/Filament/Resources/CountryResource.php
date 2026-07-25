@@ -58,6 +58,8 @@ class CountryResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make()
+                    ->hidden(fn (Country $record) => strtoupper($record->currency_code) === 'KWD'),
             ]);
     }
 

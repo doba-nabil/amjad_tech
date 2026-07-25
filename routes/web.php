@@ -19,10 +19,21 @@ Route::group([
     Route::get('/projects/{slug}', [WebsiteController::class, 'projectDetails'])->name('project.details');
     Route::get('/blogs', [WebsiteController::class, 'blogs'])->name('blogs');
     Route::get('/blogs/{slug}', [WebsiteController::class, 'blogDetails'])->name('blog.details');
+    Route::post('/blogs/{slug}/comment', [WebsiteController::class, 'postComment'])->name('blog.comment');
     Route::get('/pricing', [WebsiteController::class, 'pricing'])->name('pricing');
+    Route::get('/packages/render', [WebsiteController::class, 'renderPackages'])->name('packages.render');
     Route::get('/contact', [WebsiteController::class, 'contact'])->name('contact');
-    Route::post('/contact', [WebsiteController::class, 'submitContact'])->name('contact.submit');
+    Route::post('/contact', [WebsiteController::class, 'contactSubmit'])->name('contact.submit');
+Route::post('/subscribe', [WebsiteController::class, 'subscribe'])->name('subscribe');
+    Route::get('/category/{slug}', [WebsiteController::class, 'categoryBlogs'])->name('category.blogs');
     Route::get('/p/{slug}', [WebsiteController::class, 'page'])->name('page');
+    Route::get('/faq', [WebsiteController::class, 'faq'])->name('faq');
+
+    // Checkout Routes
+    Route::get('/checkout/{slug}', [\App\Http\Controllers\CheckoutController::class, 'index'])->name('checkout');
+    Route::post('/checkout/process', [\App\Http\Controllers\CheckoutController::class, 'process'])->name('checkout.process');
+    Route::get('/checkout/callback/myfatoorah/{transaction_id}', [\App\Http\Controllers\CheckoutController::class, 'myfatoorahCallback'])->name('checkout.myfatoorah.callback');
+    Route::get('/checkout/callback/bookeey/{transaction_id}', [\App\Http\Controllers\CheckoutController::class, 'bookeeyCallback'])->name('checkout.bookeey.callback');
 });
 
 // Sitemap Generation
@@ -46,3 +57,4 @@ Route::get('/sitemap.xml', function () {
     $sitemap->writeToFile(public_path('sitemap.xml'));
     return response()->file(public_path('sitemap.xml'));
 });
+

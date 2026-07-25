@@ -174,4 +174,17 @@ return [
     'column_2' => 'العمود 2 (روابط سريعة)',
     'about_us' => 'من نحن',
     'pricing' => 'الأسعار',
+    
+    // Checkout Translations
+    'checkout' => 'إتمام الدفع',
+    'subscribe_to' => 'الاشتراك في',
+    'name' => 'الاسم الكامل',
+    'email' => 'البريد الإلكتروني',
+    'phone' => 'رقم الجوال',
+    'country' => 'الدولة',
+    'select_country' => 'اختر الدولة',
+    'total' => 'الإجمالي',
+    'payment_method' => 'طريقة الدفع',
+    'proceed_to_payment' => 'متابعة الدفع',
+    'processing' => 'جاري المعالجة...',
 ];
