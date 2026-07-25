@@ -50,6 +50,48 @@ class CheckoutController extends Controller
         }
     }
 
+    public function resume($id)
+    {
+        $purchase = \App\Models\Purchase::findOrFail($id);
+
+        $verifiedEmail = session('verified_email');
+        if (!$verifiedEmail || $purchase->email !== $verifiedEmail) {
+            abort(403, 'Unauthorized access to this subscription.');
+        }
+
+        if ($purchase->status === 'pending') {
+            try {
+                $redirectUrl = $this->checkoutService->getGatewayUrl($purchase);
+                return redirect($redirectUrl);
+            } catch (Exception $e) {
+                return back()->with('error', $e->getMessage());
+            }
+        } elseif ($purchase->status === 'expired') {
+            // Create a new purchase record for renewal
+            $newPurchase = \App\Models\Purchase::create([
+                'name' => $purchase->name,
+                'email' => $purchase->email,
+                'phone' => $purchase->phone,
+                'package_id' => $purchase->package_id,
+                'country_id' => $purchase->country_id,
+                'amount' => $purchase->amount,
+                'status' => 'pending',
+                'payment_method' => $purchase->payment_method,
+                'transaction_id' => (string) \Illuminate\Support\Str::uuid(),
+                'purchase_date' => now()->toDateString(),
+            ]);
+
+            try {
+                $redirectUrl = $this->checkoutService->getGatewayUrl($newPurchase);
+                return redirect($redirectUrl);
+            } catch (Exception $e) {
+                return back()->with('error', $e->getMessage());
+            }
+        }
+
+        return back()->with('error', 'Invalid operation for this subscription.');
+    }
+
     public function myfatoorahCallback(Request $request, $transactionId)
     {
         $paymentId = $request->query('paymentId');

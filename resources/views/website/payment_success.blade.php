@@ -11,7 +11,7 @@
     <div class="line_item"></div>
 </div>
 
-@include('website.partials.breadcrumb', ['title' => __('dashboard.payment_success') ?? 'Payment Successful'])
+@include('website.partials.breadcrumb', ['title' => __('dashboard.payment_success') ?? 'Payment Successful', 'banner' => $settings->other_pages_banner ?? null])
 
 <section class="checkout-area sec-mar">
     <div class="container">

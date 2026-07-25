@@ -38,7 +38,7 @@ class CheckoutService
         return $this->getGatewayUrl($purchase);
     }
 
-    protected function getGatewayUrl(Purchase $purchase)
+    public function getGatewayUrl(Purchase $purchase)
     {
         if ($purchase->payment_method === 'myfatoorah') {
             return app(\App\Services\Gateways\MyFatoorahService::class)->getInvoiceUrl($purchase);
@@ -53,10 +53,22 @@ class CheckoutService
     
     public function handleCallback($transactionId, $status)
     {
-        $purchase = Purchase::where('transaction_id', $transactionId)->firstOrFail();
+        $purchase = Purchase::with('package')->where('transaction_id', $transactionId)->firstOrFail();
         
         if ($status === 'success') {
-            $purchase->update(['status' => 'active']);
+            $expirationDate = null;
+            if ($purchase->package) {
+                if ($purchase->package->type === 'monthly') {
+                    $expirationDate = now()->addMonth()->toDateString();
+                } elseif ($purchase->package->type === 'yearly') {
+                    $expirationDate = now()->addYear()->toDateString();
+                }
+            }
+
+            $purchase->update([
+                'status' => 'active',
+                'expiration_date' => $expirationDate
+            ]);
             
             try {
                 \Illuminate\Support\Facades\Mail::to($purchase->email)->send(new \App\Mail\PaymentSuccessMail($purchase));

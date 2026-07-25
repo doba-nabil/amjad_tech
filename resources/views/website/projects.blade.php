@@ -14,7 +14,10 @@
         </div>
         <!-- End line animation section -->
 
-        @include('website.partials.breadcrumb', ['title' => __('dashboard.projects') ?? 'Projects'])
+        @include('website.partials.breadcrumb', [
+            'title' => __('dashboard.projects') ?? 'Projects',
+            'banner' => $settings->projects_banner ?? null,
+        ])
 
         <!-- Start project-area section -->
         <section class="project-area sec-mar">

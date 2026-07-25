@@ -1,5 +1,8 @@
 @extends('website.layouts.app')
 
+@section('title', __('dashboard.faq') ?? 'FAQ')
+@section('meta_description', __('dashboard.faq_meta_desc') ?? 'Frequently Asked Questions.')
+
 @section('content')
 <!-- Start line animation section -->
          <div class="line_wrap">
@@ -11,7 +14,7 @@
          </div>
          <!-- End line animation section -->
 
-         @include('website.partials.breadcrumb', ['title' => __('dashboard.faqs') ?? 'FAQs'])
+         @include('website.partials.breadcrumb', ['title' => __('dashboard.faqs') ?? 'FAQs', 'banner' => $settings->other_pages_banner ?? null])
 
          <!-- Start faqs-area section -->
          <section class="faqs-area sec-mar-top">

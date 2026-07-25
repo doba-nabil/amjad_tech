@@ -33,11 +33,14 @@ class Setting extends Model
         'home_packages_title',
         'home_packages_subtitle',
         'home_packages_text',
+        'home_partners_title',
+        'home_partners_subtitle',
     ];
 
     protected $casts = [
         'social_media' => 'array',
         'phone_numbers' => 'array',
+        'emails' => 'array',
         'header_links' => 'array',
         'footer_links' => 'array',
         'show_services_section' => 'boolean',
@@ -47,5 +50,7 @@ class Setting extends Model
         'show_about_section' => 'boolean',
         'show_packages_section' => 'boolean',
         'payment_settings' => 'array',
+        'company_since_cards' => 'array',
+        'footer_bottom_links' => 'array',
     ];
 }

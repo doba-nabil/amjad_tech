@@ -70,11 +70,13 @@ class GeneralSettings extends Page implements HasForms
                                     Forms\Components\FileUpload::make('footer_logo')->label(__('dashboard.footer_logo'))->image()->directory('settings')->preserveFilenames(),
                                     Forms\Components\FileUpload::make('blogs_banner')->label(__('dashboard.blogs_banner') ?? 'Blogs Banner')->image()->directory('settings/banners'),
                                     Forms\Components\FileUpload::make('projects_banner')->label(__('dashboard.projects_banner') ?? 'Projects Banner')->image()->directory('settings/banners'),
+                                    Forms\Components\FileUpload::make('other_pages_banner')->label(__('dashboard.other_pages_banner') ?? 'Other Pages Banner')->image()->directory('settings/banners')->columnSpanFull(),
                                 ])->columns(2),
                                 Forms\Components\Section::make(__('dashboard.contact_and_address'))->schema([
                                     Forms\Components\Textarea::make('address.ar')->label(__('dashboard.address_ar')),
                                     Forms\Components\Textarea::make('address.en')->label(__('dashboard.address_en')),
                                     Forms\Components\Repeater::make('phone_numbers')->label(__('dashboard.phone_numbers'))->schema([ Forms\Components\TextInput::make('phone')->label(__('dashboard.phone'))->required() ])->columnSpanFull(),
+                                    Forms\Components\Repeater::make('emails')->label(__('dashboard.emails') ?? 'Emails')->schema([ Forms\Components\TextInput::make('email')->label(__('dashboard.email') ?? 'Email')->email()->required() ])->columnSpanFull(),
                                     Forms\Components\KeyValue::make('social_media')->label(__('dashboard.social_media'))->keyLabel(__('dashboard.platform'))->valueLabel(__('dashboard.url'))->columnSpanFull(),
                                 ])->columns(2),
                             ]),
@@ -123,6 +125,39 @@ class GeneralSettings extends Page implements HasForms
                                         Forms\Components\Textarea::make('home_about_text.ar')->label(__('dashboard.text_ar')),
                                         Forms\Components\Textarea::make('home_about_text.en')->label(__('dashboard.text_en')),
                                         Forms\Components\FileUpload::make('home_about_image')->label(__('dashboard.about_image') ?? 'About Image')->directory('settings')->columnSpanFull(),
+                                        Forms\Components\Repeater::make('company_since_cards')
+                                            ->label(__('dashboard.company_since_cards') ?? 'Company Since Cards')
+                                            ->schema([
+                                                Forms\Components\FileUpload::make('logo')
+                                                    ->label(__('dashboard.logo') ?? 'Card Logo')
+                                                    ->image()
+                                                    ->directory('settings/about-cards')
+                                                    ->columnSpanFull(),
+                                                Forms\Components\TextInput::make('rank')
+                                                    ->label(__('dashboard.rank') ?? 'Rank / Badge (e.g. #1)')
+                                                    ->placeholder('#1')
+                                                    ->maxLength(20),
+                                                Forms\Components\TextInput::make('title_ar')
+                                                    ->label(__('dashboard.title_ar') ?? 'Title (AR)')
+                                                    ->required()
+                                                    ->placeholder('أفضل وكالة تقنية إبداعية'),
+                                                Forms\Components\TextInput::make('title_en')
+                                                    ->label(__('dashboard.title_en') ?? 'Title (EN)')
+                                                    ->required()
+                                                    ->placeholder('Best Creative IT Agency And Solutions'),
+                                                Forms\Components\TextInput::make('highlight_ar')
+                                                    ->label(__('dashboard.highlight_ar') ?? 'Highlighted Text (AR)')
+                                                    ->placeholder('منذ 2005')
+                                                    ->helperText(__('dashboard.company_since_highlight_hint') ?? 'This text will be highlighted in color at the end of the title.'),
+                                                Forms\Components\TextInput::make('highlight_en')
+                                                    ->label(__('dashboard.highlight_en') ?? 'Highlighted Text (EN)')
+                                                    ->placeholder('Since 2005.'),
+                                            ])
+                                            ->columns(2)
+                                            ->addActionLabel(__('dashboard.add_card') ?? 'Add Card')
+                                            ->columnSpanFull()
+                                            ->reorderableWithButtons()
+                                            ->collapsible(),
                                     ])->columns(2),
                                 Forms\Components\Section::make(__('dashboard.home_packages_texts_ar') ?? 'Packages Section Texts')
                                     ->schema([
@@ -132,6 +167,13 @@ class GeneralSettings extends Page implements HasForms
                                         Forms\Components\TextInput::make('home_packages_subtitle.en')->label(__('dashboard.sub_title_en')),
                                         Forms\Components\Textarea::make('home_packages_text.ar')->label(__('dashboard.text_ar')),
                                         Forms\Components\Textarea::make('home_packages_text.en')->label(__('dashboard.text_en')),
+                                    ])->columns(2),
+                                Forms\Components\Section::make(__('dashboard.home_partners_texts') ?? 'Partners Section Texts')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('home_partners_title.ar')->label(__('dashboard.title_ar')),
+                                        Forms\Components\TextInput::make('home_partners_title.en')->label(__('dashboard.title_en')),
+                                        Forms\Components\TextInput::make('home_partners_subtitle.ar')->label(__('dashboard.sub_title_ar')),
+                                        Forms\Components\TextInput::make('home_partners_subtitle.en')->label(__('dashboard.sub_title_en')),
                                     ])->columns(2),
                                 Forms\Components\Section::make(__('dashboard.home_blog_texts_ar'))
                                     ->schema([
@@ -184,6 +226,28 @@ class GeneralSettings extends Page implements HasForms
                                         Forms\Components\TextInput::make('label_en')->label(__('dashboard.label_en'))->required(),
                                         Forms\Components\TextInput::make('url')->label(__('dashboard.url_simple'))->required(),
                                     ])->columns(4)->collapsible()->columnSpanFull(),
+
+                                Forms\Components\Repeater::make('footer_bottom_links')
+                                    ->label(__('dashboard.footer_bottom_links') ?? 'Footer Bottom Links')
+                                    ->addActionLabel(__('dashboard.add_bottom_link') ?? 'Add Bottom Link')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('label_ar')
+                                            ->label(__('dashboard.label_ar'))
+                                            ->required()
+                                            ->placeholder('سياسة الخصوصية'),
+                                        Forms\Components\TextInput::make('label_en')
+                                            ->label(__('dashboard.label_en'))
+                                            ->required()
+                                            ->placeholder('Privacy Policy'),
+                                        Forms\Components\TextInput::make('url')
+                                            ->label(__('dashboard.url_simple'))
+                                            ->required()
+                                            ->placeholder('/p/privacy-policy'),
+                                    ])
+                                    ->columns(3)
+                                    ->collapsible()
+                                    ->reorderableWithButtons()
+                                    ->columnSpanFull(),
                             ]),
                         
                         Forms\Components\Tabs\Tab::make(__('dashboard.contact_settings') ?? 'Contact Settings')

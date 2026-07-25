@@ -76,7 +76,11 @@
                                         <i class="far fa-envelope"></i>
                                     </div>
                                     <div class="email">
-                                        <a href="mailto:{{ $settings->email ?? '' }}">{{ $settings->email ?? '' }}</a>
+                                        @if(!empty($settings->emails) && isset($settings->emails[0]['email']))
+                                            <a href="mailto:{{ $settings->emails[0]['email'] }}">{{ $settings->emails[0]['email'] }}</a>
+                                        @else
+                                            <a href="mailto:info@kartaa.com">info@kartaa.com</a>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="address">
@@ -92,13 +96,23 @@
                     <div class="row align-items-center">
                         <div class="col-12 col-md-4 col-lg-4 col-xl-5">
                             <div class="copy-txt">
-                                <span>Copyright {{ date('Y') }} <b>{{ $settings->site_name ?? 'Crea soft' }}</b> | Developed By {{ $settings->site_name ?? 'Crea soft' }}</span>
+                                <span>{{ __('dashboard.copyright') ?? 'Copyright' }} {{ date('Y') }} <b>{{ $settings->site_name ?? 'Crea soft' }}</b> | {{ __('dashboard.developed_by') ?? 'Developed By' }} {{ $settings->site_name ?? 'Crea soft' }}</span>
                             </div>
                         </div>
                         <div class="col-12 col-md-8 col-lg-8 col-xl-7">
                             <ul class="footer-bottom-menu">
-                                <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="#">Terms of Use</a></li>
+                                @if(!empty($settings->footer_bottom_links))
+                                    @foreach($settings->footer_bottom_links as $link)
+                                        <li>
+                                            <a href="{{ $link['url'] ?? '#' }}">
+                                                {{ app()->getLocale() === 'ar' ? ($link['label_ar'] ?? '') : ($link['label_en'] ?? '') }}
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                @else
+                                    <li><a href="#">{{ __('dashboard.privacy_policy') ?? 'Privacy Policy' }}</a></li>
+                                    <li><a href="#">{{ __('dashboard.terms_of_use') ?? 'Terms of Use' }}</a></li>
+                                @endif
                             </ul>
                         </div>
                     </div>

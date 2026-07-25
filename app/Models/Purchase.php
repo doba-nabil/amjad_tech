@@ -16,4 +16,9 @@ class Purchase extends Model
     {
         return $this->belongsTo(Package::class);
     }
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
 }

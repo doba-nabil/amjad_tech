@@ -29,6 +29,13 @@ Route::post('/subscribe', [WebsiteController::class, 'subscribe'])->name('subscr
     Route::get('/p/{slug}', [WebsiteController::class, 'page'])->name('page');
     Route::get('/faq', [WebsiteController::class, 'faq'])->name('faq');
 
+    // Subscription Tracking Routes
+    Route::get('/my-subscriptions', [WebsiteController::class, 'mySubscriptions'])->name('my.subscriptions');
+    Route::post('/my-subscriptions/send-otp', [WebsiteController::class, 'sendOtp'])->name('my.subscriptions.send_otp');
+    Route::post('/my-subscriptions/verify-otp', [WebsiteController::class, 'verifyOtp'])->name('my.subscriptions.verify_otp');
+    Route::get('/my-subscriptions/track', [WebsiteController::class, 'trackSubscriptions'])->name('my.subscriptions.track');
+    Route::get('/my-subscriptions/resume/{id}', [\App\Http\Controllers\CheckoutController::class, 'resume'])->name('my.subscriptions.resume');
+
     // Checkout Routes
     Route::get('/checkout/{slug}', [\App\Http\Controllers\CheckoutController::class, 'index'])->name('checkout');
     Route::post('/checkout/process', [\App\Http\Controllers\CheckoutController::class, 'process'])->name('checkout.process');

@@ -77,7 +77,9 @@ class WebsiteController extends Controller
             });
         }
         
+        $tagModel = null;
         if ($request->has('tag') && $request->tag != '') {
+            $tagModel = \App\Models\Tag::where('slug', $request->tag)->first();
             $blogs->whereHas('tags', function ($q) use ($request) {
                 $q->where('slug', $request->tag);
             });
@@ -85,7 +87,7 @@ class WebsiteController extends Controller
         $blogs = $blogs->latest()->paginate(9);
         $blogCategories = Category::whereIn('type', ['blog', 'both'])->get();
         $recentBlogs = Blog::latest()->take(3)->get();
-        return view('website.blogs', compact('blogs', 'blogCategories', 'recentBlogs'));
+        return view('website.blogs', compact('blogs', 'blogCategories', 'recentBlogs', 'tagModel'));
     }
 
     public function categoryBlogs($slug)
@@ -188,5 +190,75 @@ class WebsiteController extends Controller
     {
         $faqs = \App\Models\Faq::where('is_active', true)->get();
         return view('website.faq', compact('faqs'));
+    }
+
+    public function mySubscriptions()
+    {
+        return view('website.my_subscriptions');
+    }
+
+    public function sendOtp(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+
+        $email = trim($request->email);
+        $otp = rand(100000, 999999);
+
+        // Store OTP in Cache for 10 minutes
+        \Illuminate\Support\Facades\Cache::put('otp_' . $email, $otp, now()->addMinutes(10));
+
+        // Send OTP email
+        try {
+            \Illuminate\Support\Facades\Mail::to($email)->send(new \App\Mail\OtpMail($otp));
+        } catch (\Exception $e) {
+            \Log::error('Failed to send OTP email: ' . $e->getMessage());
+            return back()->with('error', __('dashboard.failed_to_send_otp') ?? 'Failed to send OTP email.')->withInput();
+        }
+
+        session(['otp_email' => $email]);
+        return redirect()->route('my.subscriptions')->with('show_otp_form', true);
+    }
+
+    public function verifyOtp(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'otp' => 'required|numeric',
+        ]);
+
+        $email = trim($request->email);
+        $otp = trim($request->otp);
+
+        $cachedOtp = \Illuminate\Support\Facades\Cache::get('otp_' . $email);
+
+        if ($cachedOtp && $cachedOtp == $otp) {
+            // OTP is valid
+            \Illuminate\Support\Facades\Cache::forget('otp_' . $email);
+            session(['verified_email' => $email]);
+            return redirect()->route('my.subscriptions.track');
+        }
+
+        return redirect()->route('my.subscriptions')->with('show_otp_form', true)->with('error', __('dashboard.invalid_otp') ?? 'Invalid or expired OTP.');
+    }
+
+    public function trackSubscriptions(Request $request)
+    {
+        $verifiedEmail = session('verified_email');
+
+        if (!$verifiedEmail) {
+            return redirect()->route('my.subscriptions');
+        }
+
+        $purchases = \App\Models\Purchase::with('package')
+            ->where('email', $verifiedEmail)
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+        return view('website.my_subscriptions', [
+            'purchases' => $purchases,
+            'identifier' => $verifiedEmail,
+        ]);
     }
 }

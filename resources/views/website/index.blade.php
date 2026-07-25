@@ -1,5 +1,8 @@
 @extends('website.layouts.app')
 
+@section('title', __('dashboard.home') ?? 'Home')
+@section('meta_description', __('dashboard.home_meta_desc') ?? 'Welcome to our Tech Company, providing the best services for you.')
+
 @section('content')
 
 
@@ -215,8 +218,8 @@
                 <div class="row align-items-center">
                     <div class="col-lg-3">
                         <div class="sec-title white layout2">
-                            <span>Satisfied Client</span>
-                            <h2>Our Partner</h2>
+                            <span>{{ $settings->home_partners_subtitle ?? 'Satisfied Client' }}</span>
+                            <h2>{{ $settings->home_partners_title ?? 'Our Partner' }}</h2>
                             <div class="-partnerslider-navigator">
                                 <div class="swiper-button-prev-c"><i class="bi bi-chevron-left"></i></div>
                                 <div class="swiper-button-next-c"><i class="bi bi-chevron-right"></i></div>
@@ -270,10 +273,10 @@
                         <div class="price-table-tab">
                             <ul class="nav nav-pills" id="pills-tab" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" id="pills-monthly-tab" data-bs-toggle="pill" data-bs-target="#pills-monthly" type="button" role="tab" aria-controls="pills-monthly" aria-selected="true">Pay Monthly</button>
+                                    <button class="nav-link active" id="pills-monthly-tab" data-bs-toggle="pill" data-bs-target="#pills-monthly" type="button" role="tab" aria-controls="pills-monthly" aria-selected="true">{{ __('dashboard.pay_monthly') ?? 'Pay Monthly' }}</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="pills-yearly-tab" data-bs-toggle="pill" data-bs-target="#pills-yearly" type="button" role="tab" aria-controls="pills-yearly" aria-selected="false">Pay Yearly</button>
+                                    <button class="nav-link" id="pills-yearly-tab" data-bs-toggle="pill" data-bs-target="#pills-yearly" type="button" role="tab" aria-controls="pills-yearly" aria-selected="false">{{ __('dashboard.pay_yearly') ?? 'Pay Yearly' }}</button>
                                 </li>
                             </ul>
                         </div>
@@ -302,15 +305,15 @@
                 </div>
                 <div class="row gy-4">
                     @foreach($blogs as $blog)
-                    <div class="col-md-6 col-lg-4 wow animate fadeInUp" data-wow-delay="{{ 200 * $loop->iteration }}ms" data-wow-duration="1500ms">
-                        <div class="single-blog">
+                    <div class="col-md-6 col-lg-4 d-flex wow animate fadeInUp" data-wow-delay="{{ 200 * $loop->iteration }}ms" data-wow-duration="1500ms">
+                        <div class="single-blog w-100 d-flex flex-column">
                             <div class="blog-thumb">
                                 <a href="{{ route('blog.details', $blog->slug) }}"><img src="{{ isset($blog->image) ? Storage::url($blog->image) : asset('assets/img/blog/blog-1.jpg') }}" alt=""></a>
                                 <div class="tag">
                                     <a href="{{ isset($blog->category) ? route('category.blogs', $blog->category->slug) : '#' }}">{{ $blog->category->name ?? 'Blog' }}</a>
                                 </div>
                             </div>
-                            <div class="blog-inner">
+                            <div class="blog-inner flex-grow-1">
                                 <div class="author-date">
                                     <a href="{{ route('blog.details', $blog->slug) }}">By, {{ $blog->author_name ?? '' }}</a>
                                     <a href="{{ route('blog.details', $blog->slug) }}">{{ $blog->published_at ? $blog->published_at->format('d.m.Y') : $blog->created_at->format('d.m.Y') }}</a>

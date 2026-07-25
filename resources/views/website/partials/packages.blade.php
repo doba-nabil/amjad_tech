@@ -9,11 +9,11 @@
                 <div class="package-prices" data-package-id="{{ $package->id }}">
                     @foreach($package->prices as $price)
                         <strong class="country-price" data-country-id="{{ $price->country_id }}">
-                            {{ $price->price }}<sub>/Per Month</sub>
+                            {{ $price->price }}<sub>{{ __('dashboard.per_month') ?? '/Per Month' }}</sub>
                         </strong>
                     @endforeach
                     @if($package->prices->isEmpty())
-                        <strong>-<sub>/Per Month</sub></strong>
+                        <strong>-<sub>{{ __('dashboard.per_month') ?? '/Per Month' }}</sub></strong>
                     @endif
                 </div>
 
@@ -25,7 +25,7 @@
                 <div class="price-btn">
                     <div class="line-1"></div>
                     <div class="line-2"></div>
-                    <a href="{{ route('checkout', $package->slug) }}?country_id={{ $selectedCountryId }}">Pay Now</a>
+                    <a href="{{ route('checkout', $package->slug) }}?country_id={{ $selectedCountryId }}">{{ __('dashboard.pay_now') ?? 'Pay Now' }}</a>
                 </div>
             </div>
         </div>
@@ -44,11 +44,11 @@
                 <div class="package-prices" data-package-id="{{ $package->id }}">
                     @foreach($package->prices as $price)
                         <strong class="country-price" data-country-id="{{ $price->country_id }}">
-                            {{ $price->price }}<sub>/Per Year</sub>
+                            {{ $price->price }}<sub>{{ __('dashboard.per_year') ?? '/Per Year' }}</sub>
                         </strong>
                     @endforeach
                     @if($package->prices->isEmpty())
-                        <strong>-<sub>/Per Year</sub></strong>
+                        <strong>-<sub>{{ __('dashboard.per_year') ?? '/Per Year' }}</sub></strong>
                     @endif
                 </div>
 
@@ -60,7 +60,7 @@
                 <div class="price-btn">
                     <div class="line-1"></div>
                     <div class="line-2"></div>
-                    <a href="{{ route('checkout', $package->slug) }}?country_id={{ $selectedCountryId }}">Pay Now</a>
+                    <a href="{{ route('checkout', $package->slug) }}?country_id={{ $selectedCountryId }}">{{ __('dashboard.pay_now') ?? 'Pay Now' }}</a>
                 </div>
             </div>
         </div>

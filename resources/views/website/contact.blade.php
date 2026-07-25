@@ -1,7 +1,7 @@
 @extends('website.layouts.app')
 
-@section('title', __('dashboard.contact') ?? 'Contact Us')
-@section('meta_description', __('dashboard.contact_desc') ?? 'Get in touch with us for any inquiries or support.')
+@section('title', __('dashboard.contact_us') ?? 'Contact Us')
+@section('meta_description', __('dashboard.contact_meta_desc') ?? 'Get in touch with us for any inquiries or support.')
 
 @section('content')
 <!-- Start line animation section -->
@@ -14,7 +14,10 @@
         </div>
         <!-- End line animation section -->
 
-        @include('website.partials.breadcrumb', ['title' => __('dashboard.contact') ?? 'Contact Us'])
+        @include('website.partials.breadcrumb', [
+            'title' => __('dashboard.contact') ?? 'Contact Us',
+            'banner' => $settings->contact_banner ?? null
+        ])
 
         <!-- Start contact-area section -->
         <section class="contact-area sec-mar">
@@ -23,8 +26,8 @@
                     <div class="col-md-6 col-lg-5">
                         <div class="contact-left">
                             <div class="sec-title layout2">
-                                <span>Get in touch</span>
-                                <h2>Contact us if you have more questions.</h2>
+                                <span>{{ __('dashboard.get_in_touch') ?? 'Get in touch' }}</span>
+                                <h2>{{ __('dashboard.contact_more_questions') ?? 'Contact us if you have more questions.' }}</h2>
                             </div>
                             <ul class="social-media-icons d-flex mt-4" style="gap: 15px; list-style: none; padding-left: 0;">
                                 @if(isset($settings->social_media) && is_array($settings->social_media) && count($settings->social_media) > 0)
@@ -49,7 +52,11 @@
                                     </div>
                                     <div class="info">
                                         <h3>Phone</h3>
-                                        <a href="tel:{{ $settings->contact_phone ?? '0096541041383' }}">{{ $settings->contact_phone ?? '+965 41041383' }}</a>
+                                        @if(!empty($settings->phone_numbers) && isset($settings->phone_numbers[0]['phone']))
+                                            <a href="tel:{{ $settings->phone_numbers[0]['phone'] }}">{{ $settings->phone_numbers[0]['phone'] }}</a>
+                                        @else
+                                            <a href="tel:{{ $settings->contact_phone ?? '0096541041383' }}">{{ $settings->contact_phone ?? '+965 41041383' }}</a>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="single-info">
@@ -58,7 +65,11 @@
                                     </div>
                                     <div class="info">
                                         <h3>Email</h3>
-                                        <a href="mailto:{{ $settings->contact_email ?? 'info@hipsera.com' }}">{{ $settings->contact_email ?? 'info@hipsera.com' }}</a>
+                                        @if(!empty($settings->emails) && isset($settings->emails[0]['email']))
+                                            <a href="mailto:{{ $settings->emails[0]['email'] }}">{{ $settings->emails[0]['email'] }}</a>
+                                        @else
+                                            <a href="mailto:{{ $settings->contact_email ?? 'info@kartaa.com' }}">{{ $settings->contact_email ?? 'info@kartaa.com' }}</a>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -80,7 +91,7 @@
                     <div class="row">
                         <div class="col-md-6 col-lg-7">
                             <div class="contact-form wow animate fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
-                                <h3>Have Any Questions</h3>
+                                <h3>{{ __('dashboard.have_any_questions') ?? 'Have Any Questions' }}</h3>
                                 @if(session('success'))
                                     <div class="alert alert-success">{{ session('success') }}</div>
                                 @endif
@@ -88,28 +99,28 @@
                                     @csrf
                                     <div class="row">
                                         <div class="col-12">
-                                            <input type="text" name="name" placeholder="Enter your name" required>
+                                            <input type="text" name="name" placeholder="{{ __('dashboard.enter_your_name') ?? 'Enter your name' }}" required>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="email" name="email" placeholder="Enter your email" required>
+                                            <input type="email" name="email" placeholder="{{ __('dashboard.enter_your_email') ?? 'Enter your email' }}" required>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="text" id="phone_input_display" placeholder="Enter your phone" required>
+                                            <input type="text" id="phone_input_display" placeholder="{{ __('dashboard.enter_your_phone') ?? 'Enter your phone' }}" required>
                                         </div>
                                         <div class="col-12">
-                                            <input type="text" name="subject" placeholder="Subject" required>
+                                            <input type="text" name="subject" placeholder="{{ __('dashboard.subject') ?? 'Subject' }}" required>
                                         </div>
                                         <div class="col-12">
-                                            <textarea name="message" cols="30" rows="10" placeholder="Your message" required></textarea>
-                                            <input type="submit" value="Send Message">
+                                            <textarea name="message" cols="30" rows="10" placeholder="{{ __('dashboard.message_placeholder') ?? 'Your message' }}" required></textarea>
+                                            <input type="submit" value="{{ __('dashboard.send_message') ?? 'Send Message' }}">
                                         </div>
                                     </div>
                                 </form>
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-5 wow animate fadeInUp" data-wow-delay="300ms" data-wow-duration="1500ms">
-                            <div class="call-banner">
-                                <img src="{{ asset('assets/') }}/img/call-center.png" alt="">
+                            <div class="call-banner h-100">
+                                <img class="h-100 w-100 object-fit-cover" src="{{ !empty($settings->contact_image) ? Storage::url($settings->contact_image) : asset('assets/img/call-center.png') }}" alt="{{ __('dashboard.contact') ?? 'Contact' }}">
                             </div>
                         </div>
                     </div>

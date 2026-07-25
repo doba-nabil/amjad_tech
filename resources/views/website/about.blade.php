@@ -1,5 +1,8 @@
 @extends('website.layouts.app')
 
+@section('title', __('dashboard.about_us') ?? 'About Us')
+@section('meta_description', __('dashboard.about_meta_desc') ?? 'Learn more about our company, our mission, and our values.')
+
 @section('content')
 <!-- Start line animation section -->
         <div class="line_wrap">
@@ -11,7 +14,7 @@
         </div>
         <!-- End line animation section -->
 
-        @include('website.partials.breadcrumb', ['title' => __('About')])
+        @include('website.partials.breadcrumb', ['title' => __('About'), 'banner' => $settings->other_pages_banner ?? null])
 
         <!-- Start why-choose section -->
         <section class="why-choose sec-mar wow animate fadeIn" data-wow-delay="200ms" data-wow-duration="1500ms">

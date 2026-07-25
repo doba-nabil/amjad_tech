@@ -14,7 +14,10 @@
         </div>
         <!-- End line animation section -->
 
-        @include('website.partials.breadcrumb', ['title' => $project->name])
+        @include('website.partials.breadcrumb', [
+            'title' => $project->name,
+            'banner' => $settings->projects_banner ?? null,
+        ])
 
         <!-- Start project-details section -->
         <section class="project-details sec-mar-top">
@@ -100,7 +103,11 @@
                                     </div>
                                     <div class="cnt">
                                         <h5>Phone</h5>
-                                        <a href="tel:{{ $settings->phone ?? '05661111985' }}">{{ $settings->phone ?? '+880 566 1111 985' }}</a>
+                                        @if(!empty($settings->phone_numbers) && isset($settings->phone_numbers[0]['phone']))
+                                            <a href="tel:{{ $settings->phone_numbers[0]['phone'] }}">{{ $settings->phone_numbers[0]['phone'] }}</a>
+                                        @else
+                                            <a href="tel:05661111985">+880 566 1111 985</a>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="cmpy-info">
@@ -109,7 +116,11 @@
                                     </div>
                                     <div class="cnt">
                                         <h5>Email</h5>
-                                        <a href="mailto:{{ $settings->email ?? 'info@example.com' }}">{{ $settings->email ?? 'info@example.com' }}</a>
+                                        @if(!empty($settings->emails) && isset($settings->emails[0]['email']))
+                                            <a href="mailto:{{ $settings->emails[0]['email'] }}">{{ $settings->emails[0]['email'] }}</a>
+                                        @else
+                                            <a href="mailto:info@example.com">info@example.com</a>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

@@ -1,0 +1,71 @@
+/* RTL Overrides */
+body[dir="rtl"], html[dir="rtl"] {
+    text-align: right;
+}
+
+/* Swiper RTL fixes */
+html[dir="rtl"] .swiper-button-next-c, 
+html[dir="rtl"] .swiper-button-prev-c {
+    transform: rotate(0);
+}
+
+html[dir="rtl"] .swiper-button-next, 
+html[dir="rtl"] .swiper-button-prev {
+    transform: rotate(0);
+}
+
+html[dir="rtl"] .main-nav .sub-menu {
+    left: auto;
+    right: 0;
+}
+
+html[dir="rtl"] .main-nav ul li a i {
+    margin-left: 0;
+    margin-right: 5px;
+}
+
+/* Add any custom RTL overrides below if elements look misaligned in Arabic */
+
+html[dir="rtl"] .our-partner .sec-title {
+    border-right: none !important;
+    border-left: 1px solid rgb(254, 97, 2);
+}
+
+html[dir="rtl"] .sec-title.layout2 {
+    text-align: right !important;
+}
+
+html[dir="rtl"] .footer-menu li a:before {
+    left: auto;
+    right: -20px;
+}
+
+html[dir="rtl"] .footer-menu li a:hover {
+    padding-left: 0;
+    padding-right: 15px;
+}
+
+html[dir="rtl"] .footer-menu li a:hover:before {
+    left: auto;
+    right: 0;
+}
+html[dir="rtl"] .footer-bottom .footer-bottom-menu {
+    text-align: left !important;
+}
+
+html[dir="rtl"] .footer-bottom .footer-bottom-menu li a:before {
+    border-right: none;
+    border-left: 1px solid #fff;
+    right: auto;
+    left: 0;
+}
+
+html[dir="rtl"] .social-media-icons li {
+    padding-right: 0;
+    padding-left: 30px;
+}
+
+html[dir="rtl"] .verticale-social {
+    left: auto;
+    right: -50px;
+}

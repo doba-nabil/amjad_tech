@@ -41,6 +41,11 @@ class TagResource extends Resource
                 Forms\Components\TextInput::make('slug')
                     ->required()
                     ->unique(ignoreRecord: true),
+                Forms\Components\FileUpload::make('banner')
+                    ->label(__('dashboard.banner') ?? 'Banner')
+                    ->image()
+                    ->directory('tags/banners')
+                    ->columnSpanFull(),
             ]);
     }
 

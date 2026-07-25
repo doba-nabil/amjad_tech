@@ -1,6 +1,7 @@
 @extends('website.layouts.app')
 
 @section('title', __('dashboard.checkout') ?? 'Checkout')
+@section('meta_description', __('dashboard.checkout_meta_desc') ?? 'Complete your subscription securely.')
 
 @section('content')
 <!-- Start line animation section -->
@@ -13,7 +14,7 @@
 </div>
 <!-- End line animation section -->
 
-@include('website.partials.breadcrumb', ['title' => __('dashboard.checkout') ?? 'Checkout'])
+@include('website.partials.breadcrumb', ['title' => __('dashboard.checkout') ?? 'Checkout', 'banner' => $settings->other_pages_banner ?? null])
 
 <!-- Start checkout section -->
 <section class="checkout-area sec-mar">

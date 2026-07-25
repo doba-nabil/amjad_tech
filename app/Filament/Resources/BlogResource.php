@@ -74,6 +74,11 @@ class BlogResource extends Resource
                     ->image()
                     ->directory('blogs')
                     ->columnSpanFull(),
+                Forms\Components\FileUpload::make('banner')
+                    ->label(__('dashboard.blog_details_banner') ?? 'Details Banner')
+                    ->image()
+                    ->directory('blogs/banners')
+                    ->columnSpanFull(),
             ]);
     }
 

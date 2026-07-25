@@ -1,5 +1,8 @@
 @extends('website.layouts.app')
 
+@section('title', __('dashboard.packages') ?? 'Pricing')
+@section('meta_description', __('dashboard.pricing_meta_desc') ?? 'Check out our pricing packages and choose the best plan for you.')
+
 @section('content')
 <!-- Start line animation section -->
          <div class="line_wrap">
@@ -11,7 +14,7 @@
          </div>
          <!-- End line animation section -->
 
-         @include('website.partials.breadcrumb', ['title' => __('dashboard.packages') ?? 'Pricing'])
+         @include('website.partials.breadcrumb', ['title' => __('dashboard.packages') ?? 'Pricing', 'banner' => $settings->other_pages_banner ?? null])
 
          <!-- Start priceing-plan section -->
         <section class="priceing-plan sec-mar">
@@ -41,10 +44,10 @@
                         <div class="price-table-tab">
                             <ul class="nav nav-pills" id="pills-tab" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" id="pills-monthly-tab" data-bs-toggle="pill" data-bs-target="#pills-monthly" type="button" role="tab" aria-controls="pills-monthly" aria-selected="true">Pay Monthly</button>
+                                    <button class="nav-link active" id="pills-monthly-tab" data-bs-toggle="pill" data-bs-target="#pills-monthly" type="button" role="tab" aria-controls="pills-monthly" aria-selected="true">{{ __('dashboard.pay_monthly') ?? 'Pay Monthly' }}</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="pills-yearly-tab" data-bs-toggle="pill" data-bs-target="#pills-yearly" type="button" role="tab" aria-controls="pills-yearly" aria-selected="false">Pay Yearly</button>
+                                    <button class="nav-link" id="pills-yearly-tab" data-bs-toggle="pill" data-bs-target="#pills-yearly" type="button" role="tab" aria-controls="pills-yearly" aria-selected="false">{{ __('dashboard.pay_yearly') ?? 'Pay Yearly' }}</button>
                                 </li>
                             </ul>
                         </div>

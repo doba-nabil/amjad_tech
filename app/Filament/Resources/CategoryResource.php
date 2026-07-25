@@ -59,9 +59,10 @@ class CategoryResource extends Resource
                     ->image()
                     ->directory('categories'),
                 Forms\Components\FileUpload::make('banner')
-                    ->label(__('dashboard.banner'))
+                    ->label(__('dashboard.banner') ?? 'Banner')
                     ->image()
-                    ->directory('categories'),
+                    ->directory('categories/banners')
+                    ->columnSpanFull(),
             ]);
     }
 

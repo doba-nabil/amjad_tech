@@ -1,7 +1,7 @@
 @extends('website.layouts.app')
 
-@section('title', __('dashboard.blogs') ?? 'Blogs')
-@section('meta_description', __('dashboard.blogs_desc') ?? 'Read our latest insights and articles.')
+@section('title', __('dashboard.blogs') ?? 'Our Blogs')
+@section('meta_description', __('dashboard.blogs_meta_desc') ?? 'Read our latest blogs and articles.')
 
 @section('content')
 <!-- Start line animation section -->
@@ -14,7 +14,18 @@
         </div>
         <!-- End line animation section -->
 
-        @include('website.partials.breadcrumb', ['title' => __('dashboard.blogs') ?? 'Blogs'])
+        @php
+            $currentBanner = $settings->blogs_banner ?? null;
+            if (isset($category) && $category->banner) {
+                $currentBanner = $category->banner;
+            } elseif (isset($tagModel) && $tagModel->banner) {
+                $currentBanner = $tagModel->banner;
+            }
+        @endphp
+        @include('website.partials.breadcrumb', [
+            'title' => isset($category) ? $category->name : (isset($tagModel) ? __('dashboard.tag') . ': ' . $tagModel->name : (__('dashboard.blogs') ?? 'Blogs')),
+            'banner' => $currentBanner,
+        ])
 
         <!-- Start blog-grid section -->
         <section class="blog-grid sec-mar-top">
@@ -69,15 +80,15 @@
                         <div class="blog-item-grid">
                             <div class="row g-4">
                                 @foreach($blogs as $blog)
-                                <div class="col-md-6">
-                                    <div class="single-blog">
+                                <div class="col-md-6 d-flex">
+                                    <div class="single-blog w-100 d-flex flex-column">
                                         <div class="blog-thumb">
                                             <a href="{{ route('blog.details', $blog->slug) }}"><img src="{{ isset($blog->image) ? Storage::url($blog->image) : asset('assets/img/blog/blog-1.jpg') }}" alt="{{ $blog->main_title }}"></a>
                                             <div class="tag">
                                                 <a href="{{ isset($blog->category) ? route('category.blogs', $blog->category->slug) : '#' }}">{{ $blog->category->name ?? 'Blog' }}</a>
                                             </div>
                                         </div>
-                                        <div class="blog-inner">
+                                        <div class="blog-inner flex-grow-1">
                                             <div class="author-date">
                                                 <a href="#">By, {{ $blog->author_name ?? 'Admin' }}</a>
                                                 <a href="#">{{ $blog->published_at ? $blog->published_at->format('d.m.Y') : $blog->created_at->format('d.m.Y') }}</a>

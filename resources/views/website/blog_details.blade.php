@@ -2,6 +2,9 @@
 
 @section('title', $blog->main_title)
 @section('meta_description', Str::limit(strip_tags($blog->content), 150))
+@if($blog->image)
+    @section('meta_image', Storage::url($blog->image))
+@endif
 
 @section('content')
 <!-- Start line animation section -->
@@ -14,7 +17,10 @@
         </div>
         <!-- End line animation section -->
 
-        @include('website.partials.breadcrumb', ['title' => $blog->main_title])
+        @include('website.partials.breadcrumb', [
+            'title' => $blog->main_title,
+            'banner' => $blog->banner ?? $settings->blogs_banner ?? null,
+        ])
 
         <!-- Start blog-details-area section -->
         <section class="blog-details-area sec-mar-top">
@@ -47,12 +53,32 @@
                                     @endforeach
                                 </div>
                                 <div class="share-blog">
-                                    <span>Share On:</span>
+                                    <span>{{ __('dashboard.share_on') ?? 'Share On:' }}</span>
+                                    @php
+                                        $shareUrl  = urlencode(url()->current());
+                                        $shareTitle = urlencode($blog->main_title);
+                                    @endphp
                                     <ul class="social-share-blog">
-                                        <li><a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a></li>
-                                        <li><a href="https://www.twitter.com/"><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href="https://www.pinterest.com/"><i class="fab fa-pinterest-p"></i></a></li>
-                                        <li><a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a></li>
+                                        <li>
+                                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ $shareUrl }}" target="_blank" rel="noopener">
+                                                <i class="fab fa-facebook-f"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://twitter.com/intent/tweet?url={{ $shareUrl }}&text={{ $shareTitle }}" target="_blank" rel="noopener">
+                                                <i class="fab fa-twitter"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ $shareUrl }}&title={{ $shareTitle }}" target="_blank" rel="noopener">
+                                                <i class="fab fa-linkedin-in"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://wa.me/?text={{ $shareTitle }}%20{{ $shareUrl }}" target="_blank" rel="noopener">
+                                                <i class="fab fa-whatsapp"></i>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -167,7 +193,10 @@
                                 <h3>{{ $settings->contact_title ?? 'Any Project' }} <span>Call Now.</span>
                                     <img class="angle" src="{{ asset('assets/img/arrow-angle.png') }}" alt="">
                                 </h3>
-                                <a href="tel:{{ $settings->phone ?? '11231231234' }}">{{ $settings->phone ?? '+1-123-123-1234' }}</a>
+                                @php
+                                    $bannerPhone = (!empty($settings->phone_numbers) && isset($settings->phone_numbers[0]['phone'])) ? $settings->phone_numbers[0]['phone'] : ($settings->phone ?? '+1-123-123-1234');
+                                @endphp
+                                <a href="tel:{{ $bannerPhone }}">{{ $bannerPhone }}</a>
                             </div>
                         </div>
                     </div>

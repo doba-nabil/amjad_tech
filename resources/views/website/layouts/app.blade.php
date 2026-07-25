@@ -1,13 +1,18 @@
 <!doctype html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
 
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    @if(app()->getLocale() == 'ar')
+    <!-- Bootstrap RTL CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    @else
     <!-- Bootstrap CSS -->
     <link href="{{ asset('assets/') }}/css/bootstrap.min.css" rel="stylesheet">
+    @endif
     <!-- Bootstrap Icon CSS -->
     <link href="{{ asset('assets/') }}/css/bootstrap-icons.css" rel="stylesheet">
     <!-- Fontawesome all CSS -->
@@ -22,13 +27,17 @@
     <link rel="stylesheet" href="{{ asset('assets/') }}/css/animate.min.css">
     <!--  Style CSS  -->
     <link rel="stylesheet" href="{{ asset('assets/') }}/css/style.css">
+    @if(app()->getLocale() == 'ar')
+    <!-- RTL Style CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/css/style-rtl.css') }}">
+    @endif
         <!-- Title & SEO Meta -->
-    <title>@yield('title', $settings->meta_title ?? $settings->site_name ?? 'Creasoft')</title>
+    <title>@yield('title', $settings->meta_title ?? $settings->site_name ?? 'KARTAA')</title>
     <meta name="description" content="@yield('meta_description', $settings->meta_description ?? '')">
     <meta name="keywords" content="@yield('meta_keywords', '')">
 
     <!-- Open Graph (Social Media) -->
-    <meta property="og:title" content="@yield('title', $settings->meta_title ?? $settings->site_name ?? 'Creasoft')">
+    <meta property="og:title" content="@yield('title', $settings->meta_title ?? $settings->site_name ?? 'KARTAA')">
     <meta property="og:description" content="@yield('meta_description', $settings->meta_description ?? '')">
     <meta property="og:image" content="@yield('meta_image', isset($settings->logo) ? Storage::url($settings->logo) : asset('assets/img/logo.svg'))">
     <meta property="og:type" content="website">

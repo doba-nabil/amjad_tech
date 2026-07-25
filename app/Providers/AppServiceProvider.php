@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use BezhanSalleh\FilamentLanguageSwitch\LanguageSwitch;
 use Filament\Forms\Components\Field;
+use Illuminate\Support\Facades\File;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -38,6 +40,24 @@ class AppServiceProvider extends ServiceProvider
             $switch
                 ->locales(['ar','en']);
         });
+         $storagePath = storage_path('app/public');
+    $publicPath = public_path('storage');
+
+    if (!File::exists($publicPath)) {
+        File::makeDirectory($publicPath, 0755, true);
+    }
+
+    $files = File::allFiles($storagePath);
+    foreach ($files as $file) {
+        $target = $publicPath . '/' . $file->getRelativePathname();
+        $targetDir = dirname($target);
+        if (!File::exists($targetDir)) {
+            File::makeDirectory($targetDir, 0755, true);
+        }
+        if (!File::exists($target)) {
+            File::copy($file->getRealPath(), $target);
+        }
+    }
 
         // Disabled global real-time validation to improve performance on large forms like Settings
         // Field::configureUsing(function (Field $field) {
