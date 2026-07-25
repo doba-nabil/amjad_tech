@@ -122,7 +122,7 @@
                         </div>
                         <div class="col-md-6 col-lg-5 wow animate fadeInUp" data-wow-delay="300ms" data-wow-duration="1500ms">
                             <div class="call-banner h-100">
-                                <img class="h-100 w-100 object-fit-cover" src="{{ !empty($settings->contact_image) ? Storage::url($settings->contact_image) : asset('assets/img/call-center.png') }}" alt="{{ __('dashboard.contact') ?? 'Contact' }}">
+                                <img loading="lazy" class="h-100 w-100 object-fit-cover" src="{{ !empty($settings->contact_image) ? Storage::url($settings->contact_image) : asset('assets/img/call-center.png') }}" alt="{{ __('dashboard.contact') ?? 'Contact' }}">
                             </div>
                         </div>
                     </div>

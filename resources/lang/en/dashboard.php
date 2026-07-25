@@ -333,4 +333,6 @@ return [
     'location' => 'Location',
     'phone' => 'Phone',
     'email' => 'Email',
+    'home_meta_title' => 'Creative IT Agency & Software Development',
+    'home_meta_desc' => 'We are a creative tech company & IT agency providing the best software development services, project management, and tech solutions for your business.',
 ];

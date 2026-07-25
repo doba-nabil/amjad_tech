@@ -70,7 +70,7 @@
                                 <div class="col-md-6 d-flex">
                                     <div class="single-blog w-100 d-flex flex-column">
                                         <div class="blog-thumb">
-                                            <a href="{{ route('blog.details', $blog->slug) }}"><img src="{{ isset($blog->image) ? Storage::url($blog->image) : asset('assets/img/blog/blog-1.jpg') }}" alt="{{ $blog->main_title }}"></a>
+                                            <a href="{{ route('blog.details', $blog->slug) }}"><img loading="lazy" src="{{ isset($blog->image) ? Storage::url($blog->image) : asset('assets/img/blog/blog-1.jpg') }}" alt="{{ $blog->main_title }}"></a>
                                             <div class="tag">
                                                 <a href="{{ isset($blog->category) ? route('category.blogs', $blog->category->slug) : '#' }}">{{ $blog->category->name ?? 'Blog' }}</a>
                                             </div>

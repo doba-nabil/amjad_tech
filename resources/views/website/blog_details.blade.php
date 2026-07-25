@@ -37,7 +37,7 @@
                                 <a href="#">{{ $blog->published_at ? $blog->published_at->format('d.m.Y') : $blog->created_at->format('d.m.Y') }}</a>
                             </div>
                             <div class="details-thumb">
-                                <img src="{{ isset($blog->image) ? Storage::url($blog->image) : asset('assets/img/blog/blog-thumb.jpg') }}" alt="{{ $blog->main_title }}">
+                                <img loading="lazy" src="{{ isset($blog->image) ? Storage::url($blog->image) : asset('assets/img/blog/blog-thumb.jpg') }}" alt="{{ $blog->main_title }}">
                             </div>
                             
                             <div class="blog-content mt-4">
@@ -164,7 +164,7 @@
                             <div class="recent-post">
                                 <div class="recent-thumb">
                                     <a href="{{ route('blog.details', $recent->slug) }}">
-                                        <img src="{{ isset($recent->image) ? Storage::url($recent->image) : asset('assets/img/blog/blog-tiny-1.jpg') }}" alt="{{ $recent->main_title }}">
+                                        <img loading="lazy" src="{{ isset($recent->image) ? Storage::url($recent->image) : asset('assets/img/blog/blog-tiny-1.jpg') }}" alt="{{ $recent->main_title }}">
                                     </a>
                                 </div>
                                 <div class="recent-post-cnt">
@@ -188,10 +188,10 @@
                         @endif
                         
                         <div class="sidebar-banner">
-                            <img src="{{ asset('assets/img/widget-banner-bg.jpg') }}" alt="">
+                            <img loading="lazy" src="{{ asset('assets/img/widget-banner-bg.jpg') }}" alt="{{ $settings->site_name ?? 'Kartaa' }}">
                             <div class="banner-inner">
                                 <h3>{{ $settings->contact_title ?? 'Any Project' }} <span>Call Now.</span>
-                                    <img class="angle" src="{{ asset('assets/img/arrow-angle.png') }}" alt="">
+                                    <img loading="lazy" class="angle" src="{{ asset('assets/img/arrow-angle.png') }}" alt="{{ $settings->site_name ?? 'Kartaa' }}">
                                 </h3>
                                 @php
                                     $bannerPhone = (!empty($settings->phone_numbers) && isset($settings->phone_numbers[0]['phone'])) ? $settings->phone_numbers[0]['phone'] : ($settings->phone ?? '+1-123-123-1234');

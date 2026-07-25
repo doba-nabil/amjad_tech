@@ -26,7 +26,7 @@
                     <div class="col-lg-8">
                         <div class="project-details-content">
                             <div class="project-thumb">
-                                <img src="{{ isset($project->main_image) ? Storage::url($project->main_image) : asset('assets/img/project/thumbnail-project.jpg') }}" alt="{{ $project->name }}">
+                                <img loading="lazy" src="{{ isset($project->main_image) ? Storage::url($project->main_image) : asset('assets/img/project/thumbnail-project.jpg') }}" alt="{{ $project->name }}">
                                 <div class="tag">
                                     <a href="{{ route('projects') }}">{{ $project->category->name ?? 'Project' }}</a>
                                 </div>

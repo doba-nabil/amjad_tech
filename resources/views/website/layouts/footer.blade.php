@@ -5,7 +5,7 @@
                         <div class="col-md-3 col-lg-3 col-xl-3">
                             <div class="footer-widget">
                                 <div class="footer-logo">
-                                    <a href="{{ route('home') }}"><img src="{{ isset($settings->footer_logo) ? Storage::url($settings->footer_logo) : (isset($settings->logo) ? Storage::url($settings->logo) : asset("assets/img/logo.svg")) }}" alt="logo" style="filter: brightness(0) invert(1);"></a>
+                                    <a href="{{ route('home') }}"><img loading="lazy" src="{{ isset($settings->footer_logo) ? Storage::url($settings->footer_logo) : (isset($settings->logo) ? Storage::url($settings->logo) : asset("assets/img/logo.svg")) }}" alt="logo" style="filter: brightness(0) invert(1);"></a>
                                 </div>
                                 <p>{{ $settings->footer_text ?? '' }}</p>
                                                                 <ul class="social-media-icons">

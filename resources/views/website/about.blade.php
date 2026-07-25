@@ -23,11 +23,11 @@
                     <div class="col-lg-6">
                         <div class="why-choose-left">
                             <div class="choose-banner1">
-                                <img src="{{ asset('assets/') }}/img/why-1.jpg" alt="">
+                                <img loading="lazy" src="{{ asset('assets/') }}/img/why-1.jpg" alt="{{ $settings->site_name ?? 'Kartaa' }}">
                             </div>
                             <div class="choose-banner2">
-                                <img src="{{ asset('assets/') }}/img/why-2.jpg" alt="">
-                                <img src="{{ asset('assets/') }}/img/why-3.jpg" alt="">
+                                <img loading="lazy" src="{{ asset('assets/') }}/img/why-2.jpg" alt="{{ $settings->site_name ?? 'Kartaa' }}">
+                                <img loading="lazy" src="{{ asset('assets/') }}/img/why-3.jpg" alt="{{ $settings->site_name ?? 'Kartaa' }}">
                             </div>
                             <div class="years">
                                 <h5>20+</h5>
@@ -97,7 +97,7 @@ We treat every project as a partnership, delivering personalized solutions that 
                             <p>Seven Media X is a creative and technology-driven company established in 2019, with a presence in both Canada and the Middle East. With over 150 successful stories, 90+ happy customers, and more than 120 delivered apps and websites, Hipsera is a trusted name in the digital space. The company specializes in branding, mobile application and website design and development, as well as media production—offering end-to-end solutions that elevate brand experiences. Seven Media X also leads in the blockchain space, providing Web3 development and crypto marketing services, making it a go-to partner for forward-thinking businesses looking to innovate and grow.</p>
                             <div class="company-since">
                                 <div class="company-logo">
-                                    <img src="{{ asset('assets/') }}/img/logo-dark.svg" alt="">
+                                    <img loading="lazy" src="{{ asset('assets/') }}/img/logo-dark.svg" alt="{{ $settings->site_name ?? 'Kartaa' }}">
                                 </div>
                                 <strong>#1</strong>
                                 <h4>Best Creative IT Agency And Solutions <span>Since 2020.</span></h4>
@@ -107,10 +107,10 @@ We treat every project as a partnership, delivering personalized solutions that 
                     <div class="col-lg-6 or-1">
                         <div class="about-right">
                             <div class="banner-1">
-                                <img src="{{ asset('assets/') }}/img/about-baner-1.jpg" alt="">
+                                <img loading="lazy" src="{{ asset('assets/') }}/img/about-baner-1.jpg" alt="{{ $settings->site_name ?? 'Kartaa' }}">
                             </div>
                             <div class="banner-2">
-                                <img src="{{ asset('assets/') }}/img/about-baner-2.jpg" alt="">
+                                <img loading="lazy" src="{{ asset('assets/') }}/img/about-baner-2.jpg" alt="{{ $settings->site_name ?? 'Kartaa' }}">
                                 <div class="banner2-inner">
                                     <div class="play">
                                         <a class="video-popup" href="http://www.youtube.com/watch?v=0O2aH4XLbto"><i class="fas fa-play"></i></a>
@@ -139,7 +139,7 @@ We treat every project as a partnership, delivering personalized solutions that 
                         <div class="single-feature">
                             <div class="feature-inner">
                                 <div class="icon">
-                                    <img src="{{ asset('assets/') }}/img/icons/feature-icon-1.png" alt="">
+                                    <img loading="lazy" src="{{ asset('assets/') }}/img/icons/feature-icon-1.png" alt="{{ $settings->site_name ?? 'Kartaa' }}">
                                 </div>
                                 <span class="counter">150</span><sup>+</sup>
                                 <h4>Project Completed</h4>
@@ -150,7 +150,7 @@ We treat every project as a partnership, delivering personalized solutions that 
                         <div class="single-feature">
                             <div class="feature-inner">
                                 <div class="icon">
-                                    <img src="{{ asset('assets/') }}/img/icons/feature-icon-2.png" alt="">
+                                    <img loading="lazy" src="{{ asset('assets/') }}/img/icons/feature-icon-2.png" alt="{{ $settings->site_name ?? 'Kartaa' }}">
                                 </div>
                                 <span class="counter">250</span><sup>+</sup>
                                 <h4>Satisfied Clients</h4>
@@ -161,7 +161,7 @@ We treat every project as a partnership, delivering personalized solutions that 
                         <div class="single-feature">
                             <div class="feature-inner">
                                 <div class="icon">
-                                    <img src="{{ asset('assets/') }}/img/icons/feature-icon-3.png" alt="">
+                                    <img loading="lazy" src="{{ asset('assets/') }}/img/icons/feature-icon-3.png" alt="{{ $settings->site_name ?? 'Kartaa' }}">
                                 </div>
                                 <span class="counter">50</span><sup>+</sup>
                                 <h4>Expert Teams</h4>
@@ -172,7 +172,7 @@ We treat every project as a partnership, delivering personalized solutions that 
                         <div class="single-feature">
                             <div class="feature-inner">
                                 <div class="icon">
-                                    <img src="{{ asset('assets/') }}/img/icons/feature-icon-4.png" alt="">
+                                    <img loading="lazy" src="{{ asset('assets/') }}/img/icons/feature-icon-4.png" alt="{{ $settings->site_name ?? 'Kartaa' }}">
                                 </div>
                                 <span class="counter">28</span><sup>+</sup>
                                 <h4>Win Awards</h4>
@@ -199,7 +199,7 @@ We treat every project as a partnership, delivering personalized solutions that 
                             <div class="inner"></div>
                         </div>
                         <div class="history-thumb">
-                            <img src="{{ asset('assets/') }}/img/timeline-1.jpg" alt="">
+                            <img loading="lazy" src="{{ asset('assets/') }}/img/timeline-1.jpg" alt="{{ $settings->site_name ?? 'Kartaa' }}">
                         </div>
                     </div>
                     <div class="history wow animate fadeInRight" data-wow-delay="200ms" data-wow-duration="1500ms">
@@ -235,7 +235,7 @@ We treat every project as a partnership, delivering personalized solutions that 
                             <div class="inner"></div>
                         </div>
                         <div class="history-thumb">
-                            <img src="{{ asset('assets/') }}/img/timeline-2.jpg" alt="">
+                            <img loading="lazy" src="{{ asset('assets/') }}/img/timeline-2.jpg" alt="{{ $settings->site_name ?? 'Kartaa' }}">
                         </div>
                     </div>
                 </div>
@@ -245,7 +245,7 @@ We treat every project as a partnership, delivering personalized solutions that 
                             <div class="inner"></div>
                         </div>
                         <div class="history-thumb">
-                            <img src="{{ asset('assets/') }}/img/timeline-3.jpg" alt="">
+                            <img loading="lazy" src="{{ asset('assets/') }}/img/timeline-3.jpg" alt="{{ $settings->site_name ?? 'Kartaa' }}">
                         </div>
                     </div>
                     <div class="history wow animate fadeInRight" data-wow-delay="400ms" data-wow-duration="1500ms">
@@ -281,7 +281,7 @@ We treat every project as a partnership, delivering personalized solutions that 
                             <div class="inner"></div>
                         </div>
                         <div class="history-thumb">
-                            <img src="{{ asset('assets/') }}/img/timeline-4.jpg" alt="">
+                            <img loading="lazy" src="{{ asset('assets/') }}/img/timeline-4.jpg" alt="{{ $settings->site_name ?? 'Kartaa' }}">
                         </div>
                     </div>
                 </div>
@@ -317,7 +317,7 @@ We treat every project as a partnership, delivering personalized solutions that 
                                 </div>
                                 <p>Integer purus odio, placerat nec rhoncus in, ullamcorper nec dolor. ani aptent taciti sociosqu ad litora torquent per conubia nostra, per sonic himenaeos. Praesent nec neque at dolor venenatis consectetur europ Donec lacinia placerat felis non aliquam.</p>
                                 <div class="reviewer">
-                                    <img src="{{ asset('assets/') }}/img/reivewer.jpg" alt="">
+                                    <img loading="lazy" src="{{ asset('assets/') }}/img/reivewer.jpg" alt="{{ $settings->site_name ?? 'Kartaa' }}">
                                 </div>
                             </div>
                         </div>
@@ -337,7 +337,7 @@ We treat every project as a partnership, delivering personalized solutions that 
                                 </div>
                                 <p>Integer purus odio, placerat nec rhoncus in, ullamcorper nec dolor. ani aptent taciti sociosqu ad litora torquent per conubia nostra, per sonic himenaeos. Praesent nec neque at dolor venenatis consectetur europ Donec lacinia placerat felis non aliquam.</p>
                                 <div class="reviewer">
-                                    <img src="{{ asset('assets/') }}/img/reivewer-1.jpg" alt="">
+                                    <img loading="lazy" src="{{ asset('assets/') }}/img/reivewer-1.jpg" alt="{{ $settings->site_name ?? 'Kartaa' }}">
                                 </div>
                             </div>
                         </div>
@@ -357,7 +357,7 @@ We treat every project as a partnership, delivering personalized solutions that 
                                 </div>
                                 <p>Integer purus odio, placerat nec rhoncus in, ullamcorper nec dolor. ani aptent taciti sociosqu ad litora torquent per conubia nostra, per sonic himenaeos. Praesent nec neque at dolor venenatis consectetur europ Donec lacinia placerat felis non aliquam.</p>
                                 <div class="reviewer">
-                                    <img src="{{ asset('assets/') }}/img/reivewer.jpg" alt="">
+                                    <img loading="lazy" src="{{ asset('assets/') }}/img/reivewer.jpg" alt="{{ $settings->site_name ?? 'Kartaa' }}">
                                 </div>
                             </div>
                         </div>
@@ -377,7 +377,7 @@ We treat every project as a partnership, delivering personalized solutions that 
                                 </div>
                                 <p>Integer purus odio, placerat nec rhoncus in, ullamcorper nec dolor. ani aptent taciti sociosqu ad litora torquent per conubia nostra, per sonic himenaeos. Praesent nec neque at dolor venenatis consectetur europ Donec lacinia placerat felis non aliquam.</p>
                                 <div class="reviewer">
-                                    <img src="{{ asset('assets/') }}/img/reivewer-1.jpg" alt="">
+                                    <img loading="lazy" src="{{ asset('assets/') }}/img/reivewer-1.jpg" alt="{{ $settings->site_name ?? 'Kartaa' }}">
                                 </div>
                             </div>
                         </div>
@@ -397,7 +397,7 @@ We treat every project as a partnership, delivering personalized solutions that 
                                 </div>
                                 <p>Integer purus odio, placerat nec rhoncus in, ullamcorper nec dolor. ani aptent taciti sociosqu ad litora torquent per conubia nostra, per sonic himenaeos. Praesent nec neque at dolor venenatis consectetur europ Donec lacinia placerat felis non aliquam.</p>
                                 <div class="reviewer">
-                                    <img src="{{ asset('assets/') }}/img/reivewer.jpg" alt="">
+                                    <img loading="lazy" src="{{ asset('assets/') }}/img/reivewer.jpg" alt="{{ $settings->site_name ?? 'Kartaa' }}">
                                 </div>
                             </div>
                         </div>
@@ -425,7 +425,7 @@ We treat every project as a partnership, delivering personalized solutions that 
                         <div class="swiper-slide wow animate fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
                             <div class="single-team">
                                 <div class="member-img">
-                                    <img src="{{ asset('assets/') }}/img/team/team-1.jpg" alt="">
+                                    <img loading="lazy" src="{{ asset('assets/') }}/img/team/team-1.jpg" alt="{{ $settings->site_name ?? 'Kartaa' }}">
                                     <svg width="185" height="299" viewBox="0 0 167 269" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M4.25412 0.814453C1.68125 2.62384 0 5.61553 0 8.99991V269H167C167 269 47 269 66.5 112.171C75.5581 39.3209 20.2679 8.22409 4.25412 0.814453Z" fill="#191A1C" />
                                     </svg>
@@ -445,7 +445,7 @@ We treat every project as a partnership, delivering personalized solutions that 
                         <div class="swiper-slide wow animate fadeInUp" data-wow-delay="400ms" data-wow-duration="1500ms">
                             <div class="single-team">
                                 <div class="member-img">
-                                    <img src="{{ asset('assets/') }}/img/team/team-2.jpg" alt="">
+                                    <img loading="lazy" src="{{ asset('assets/') }}/img/team/team-2.jpg" alt="{{ $settings->site_name ?? 'Kartaa' }}">
                                     <svg width="185" height="299" viewBox="0 0 167 269" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M4.25412 0.814453C1.68125 2.62384 0 5.61553 0 8.99991V269H167C167 269 47 269 66.5 112.171C75.5581 39.3209 20.2679 8.22409 4.25412 0.814453Z" fill="#191A1C" />
                                     </svg>
@@ -465,7 +465,7 @@ We treat every project as a partnership, delivering personalized solutions that 
                         <div class="swiper-slide wow animate fadeInUp" data-wow-delay="600ms" data-wow-duration="1500ms">
                             <div class="single-team">
                                 <div class="member-img">
-                                    <img src="{{ asset('assets/') }}/img/team/team-3.jpg" alt="">
+                                    <img loading="lazy" src="{{ asset('assets/') }}/img/team/team-3.jpg" alt="{{ $settings->site_name ?? 'Kartaa' }}">
                                     <svg width="185" height="299" viewBox="0 0 167 269" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M4.25412 0.814453C1.68125 2.62384 0 5.61553 0 8.99991V269H167C167 269 47 269 66.5 112.171C75.5581 39.3209 20.2679 8.22409 4.25412 0.814453Z" fill="#191A1C" />
                                     </svg>
@@ -503,7 +503,7 @@ We treat every project as a partnership, delivering personalized solutions that 
                     <div class="col-md-6 col-lg-4 wow animate fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
                         <div class="single-blog">
                             <div class="blog-thumb">
-                                <a href="blog-details.html"><img src="{{ asset('assets/') }}/img/blog/blog-1.jpg" alt=""></a>
+                                <a href="blog-details.html"><img loading="lazy" src="{{ asset('assets/') }}/img/blog/blog-1.jpg" alt="{{ $settings->site_name ?? 'Kartaa' }}"></a>
                                 <div class="tag">
                                     <a href="blog-details.html">UI/UX</a>
                                 </div>
@@ -520,7 +520,7 @@ We treat every project as a partnership, delivering personalized solutions that 
                     <div class="col-md-6 col-lg-4 wow animate fadeInUp" data-wow-delay="400ms" data-wow-duration="1500ms">
                         <div class="single-blog">
                             <div class="blog-thumb">
-                                <a href="blog-details.html"><img src="{{ asset('assets/') }}/img/blog/blog-2.jpg" alt=""></a>
+                                <a href="blog-details.html"><img loading="lazy" src="{{ asset('assets/') }}/img/blog/blog-2.jpg" alt="{{ $settings->site_name ?? 'Kartaa' }}"></a>
                                 <div class="tag">
                                     <a href="blog-details.html">Software</a>
                                 </div>
@@ -537,7 +537,7 @@ We treat every project as a partnership, delivering personalized solutions that 
                     <div class="col-md-6 col-lg-4 wow animate fadeInUp" data-wow-delay="600ms" data-wow-duration="1500ms">
                         <div class="single-blog">
                             <div class="blog-thumb">
-                                <a href="blog-details.html"><img src="{{ asset('assets/') }}/img/blog/blog-3.jpg" alt=""></a>
+                                <a href="blog-details.html"><img loading="lazy" src="{{ asset('assets/') }}/img/blog/blog-3.jpg" alt="{{ $settings->site_name ?? 'Kartaa' }}"></a>
                                 <div class="tag">
                                     <a href="blog-details.html">Dashbord</a>
                                 </div>

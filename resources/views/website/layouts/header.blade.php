@@ -1,13 +1,13 @@
 <header class="header-area position_top">
         <div class="site-logo">
             <div class="logo">
-                <a href="{{ route('home') }}"><img src="{{ isset($settings->logo) ? Storage::url($settings->logo) : asset("assets/img/logo.svg") }}" alt="logo" style='filter: brightness(0) invert(1);'></a>
+                <a href="{{ route('home') }}"><img loading="lazy" src="{{ isset($settings->logo) ? Storage::url($settings->logo) : asset("assets/img/logo.svg") }}" alt="logo" style='filter: brightness(0) invert(1);'></a>
             </div>
         </div>
         <div class="main-menu">
             <nav class="main-nav">
                 <div class="mobile-menu-logo">
-                    <a href="{{ route('home') }}"><img src="{{ isset($settings->logo) ? Storage::url($settings->logo) : asset('assets/img/logo-dark.svg') }}" alt="logo"></a>
+                    <a href="{{ route('home') }}"><img loading="lazy" src="{{ isset($settings->logo) ? Storage::url($settings->logo) : asset('assets/img/logo-dark.svg') }}" alt="logo"></a>
                     <div class="remove">
                         <i class="bi bi-plus-lg"></i>
                     </div>

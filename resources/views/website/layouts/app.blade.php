@@ -36,19 +36,40 @@
     <!-- RTL Style CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/style-rtl.css') }}">
     @endif
-        <!-- Title & SEO Meta -->
+    <!-- Title & SEO Meta -->
     <title>@yield('title', $settings->meta_title ?? $settings->site_name ?? 'KARTAA')</title>
     <meta name="description" content="@yield('meta_description', $settings->meta_description ?? '')">
     <meta name="keywords" content="@yield('meta_keywords', '')">
+    <link rel="canonical" href="{{ url()->current() }}">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="{{ url('/sitemap.xml') }}">
 
     <!-- Open Graph (Social Media) -->
     <meta property="og:title" content="@yield('title', $settings->meta_title ?? $settings->site_name ?? 'KARTAA')">
     <meta property="og:description" content="@yield('meta_description', $settings->meta_description ?? '')">
     <meta property="og:image" content="@yield('meta_image', isset($settings->logo) ? Storage::url($settings->logo) : asset('assets/img/logo.svg'))">
     <meta property="og:type" content="website">
+    <meta property="og:updated_time" content="{{ now()->toIso8601String() }}">
 
-    <!-- Favicon -->
+    <!-- Favicon & Apple Touch Icon -->
     <link rel="icon" type="image/png" href="{{ isset($settings->favicon) ? Storage::url($settings->favicon) : asset('favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ isset($settings->favicon) ? Storage::url($settings->favicon) : asset('favicon.ico') }}">
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+      "@@context": "https://schema.org",
+      "@@type": "Organization",
+      "name": "{{ $settings->site_name ?? 'KARTAA' }}",
+      "url": "{{ url('/') }}",
+      "logo": "{{ isset($settings->logo) ? url(Storage::url($settings->logo)) : asset('assets/img/logo.svg') }}",
+      "description": "{{ $settings->meta_description ?? '' }}",
+      "contactPoint": {
+        "@@type": "ContactPoint",
+        "telephone": "{{ $settings->phone ?? '' }}",
+        "contactType": "customer service"
+      }
+    }
+    </script>
     <!-- intl-tel-input CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"/>
 </head>

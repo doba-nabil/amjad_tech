@@ -1,6 +1,6 @@
 @extends('website.layouts.app')
 
-@section('title', __('dashboard.home') ?? 'Home')
+@section('title', __('dashboard.home_meta_title') ?? 'Home - Tech Company')
 @section('meta_description', __('dashboard.home_meta_desc') ?? 'Welcome to our Tech Company, providing the best services for you.')
 
 @section('content')
@@ -25,7 +25,7 @@
                 <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); z-index: 2;"></div>
             @else
                 <div class="ken-burns-slideshow" style="z-index: 1;">
-                    <img src="{{ asset('assets/') }}/img/hero-banner.jpg" alt="image">
+                    <img loading="lazy" src="{{ asset('assets/') }}/img/hero-banner.jpg" alt="image">
                 </div>
             @endif
             @if($settings->show_hero_social ?? true)
@@ -90,7 +90,7 @@
                             <div class="single-service">
                                 <span class="service-num">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
                                 <div class="icon">
-                                    <img src="{{ isset($service->image) ? Storage::url($service->image) : asset('assets/img/icons/service-icon-1.png') }}" alt="">
+                                    <img loading="lazy" src="{{ isset($service->image) ? Storage::url($service->image) : asset('assets/img/icons/service-icon-1.png') }}" alt="{{ $settings->site_name ?? 'Kartaa' }}">
                                 </div>
                                 <h4>{{ $service->title }}</h4>
                                 <p>{{ Str::limit(strip_tags($service->description), 150) }}</p>
@@ -121,7 +121,7 @@
                             <h3>{{ $settings->home_about_text ?? "We do design, code & develop Software finally launch." }}</h3>
                             <div class="company-since">
                                 <div class="company-logo">
-                                    <img src="{{ asset('assets/') }}/img/logo-dark.svg" alt="">
+                                    <img loading="lazy" src="{{ asset('assets/') }}/img/logo-dark.svg" alt="{{ $settings->site_name ?? 'Kartaa' }}">
                                 </div>
                                 <strong>#1</strong>
                                 <h4>Best Creative IT Agency And Solutions <span>Since 2005.</span></h4>
@@ -131,7 +131,7 @@
                     <div class="col-lg-6 or-1 wow animate fadeIn" data-wow-delay="200ms" data-wow-duration="1500ms">
                         <div class="about-right">
                             <div class="banner-1">
-                                <img src="{{ isset($settings->home_about_image) ? Storage::url($settings->home_about_image) : asset('assets/img/about-baner-1.jpg') }}" alt="">
+                                <img loading="lazy" src="{{ isset($settings->home_about_image) ? Storage::url($settings->home_about_image) : asset('assets/img/about-baner-1.jpg') }}" alt="{{ $settings->site_name ?? 'Kartaa' }}">
                             </div>
                         </div>
                     </div>
@@ -157,7 +157,7 @@
                         <div class="single-feature">
                             <div class="feature-inner">
                                 <div class="icon">
-                                    <img src="{{ isset($feature->image) ? Storage::url($feature->image) : asset('assets/img/icons/feature-icon-' . $loop->iteration . '.png') }}" alt="">
+                                    <img loading="lazy" src="{{ isset($feature->image) ? Storage::url($feature->image) : asset('assets/img/icons/feature-icon-' . $loop->iteration . '.png') }}" alt="{{ $settings->site_name ?? 'Kartaa' }}">
                                 </div>
                                 <span class="counter">{{ $feature->counter }}</span><sup>+</sup>
                                 <h4>{{ $feature->title }}</h4>
@@ -195,13 +195,13 @@
                     @foreach($projects as $project)
                     <div class="col-md-6 col-lg-4 single-item cat-{{ $project->category_id }}">
                         <div class="item-img">
-                            <a href="{{ route('project.details', $project->slug) }}"><img src="{{ isset($project->main_image) ? Storage::url($project->main_image) : asset('assets/img/project/project-1.jpg') }}" alt=""></a>
+                            <a href="{{ route('project.details', $project->slug) }}"><img loading="lazy" src="{{ isset($project->main_image) ? Storage::url($project->main_image) : asset('assets/img/project/project-1.jpg') }}" alt="{{ $settings->site_name ?? 'Kartaa' }}"></a>
                         </div>
                         <div class="item-inner-cnt">
                             <span style="color: #000;">{{ $project->category->name ?? 'Project' }}</span>
                             <h4 style="color: #000;">{{ $project->name }}</h4>
                             <div class="view-btn">
-                                <a href="{{ route('project.details', $project->slug) }}" style="color: #000;">{{ __('dashboard.view_details') ?? 'View Details' }}</a>
+                                <a aria-label="View details for {{ $project->name ?? 'project' }}" href="{{ route('project.details', $project->slug) }}" style="color: #000;">{{ __('dashboard.view_details') ?? 'View Details' }}</a>
                             </div>
                         </div>
                     </div>
@@ -232,7 +232,7 @@
                                 @foreach($partners as $partner)
                                 <div class="swiper-slide">
                                     <div class="single-partner">
-                                        <img src="{{ Storage::url($partner->image) }}" alt="{{ $partner->name ?? 'Partner' }}">
+                                        <img loading="lazy" src="{{ Storage::url($partner->image) }}" alt="{{ $partner->name ?? 'Partner' }}">
                                     </div>
                                 </div>
                                 @endforeach
@@ -308,7 +308,7 @@
                     <div class="col-md-6 col-lg-4 d-flex wow animate fadeInUp" data-wow-delay="{{ 200 * $loop->iteration }}ms" data-wow-duration="1500ms">
                         <div class="single-blog w-100 d-flex flex-column">
                             <div class="blog-thumb">
-                                <a href="{{ route('blog.details', $blog->slug) }}"><img src="{{ isset($blog->image) ? Storage::url($blog->image) : asset('assets/img/blog/blog-1.jpg') }}" alt=""></a>
+                                <a href="{{ route('blog.details', $blog->slug) }}"><img loading="lazy" src="{{ isset($blog->image) ? Storage::url($blog->image) : asset('assets/img/blog/blog-1.jpg') }}" alt="{{ $settings->site_name ?? 'Kartaa' }}"></a>
                                 <div class="tag">
                                     <a href="{{ isset($blog->category) ? route('category.blogs', $blog->category->slug) : '#' }}">{{ $blog->category->name ?? 'Blog' }}</a>
                                 </div>

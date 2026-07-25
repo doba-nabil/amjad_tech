@@ -47,21 +47,20 @@ Route::post('/subscribe', [WebsiteController::class, 'subscribe'])->name('subscr
 Route::get('/sitemap.xml', function () {
     $sitemap = Sitemap::create();
 
-    $sitemap->add(Url::create('/')->setPriority(1.0));
-    $sitemap->add(Url::create('/projects')->setPriority(0.8));
-    $sitemap->add(Url::create('/blogs')->setPriority(0.8));
-    $sitemap->add(Url::create('/pricing')->setPriority(0.7));
-    $sitemap->add(Url::create('/contact')->setPriority(0.7));
+    $sitemap->add(Url::create('/')->setPriority(1.0)->setLastModificationDate(now()));
+    $sitemap->add(Url::create('/projects')->setPriority(0.8)->setLastModificationDate(now()));
+    $sitemap->add(Url::create('/blogs')->setPriority(0.8)->setLastModificationDate(now()));
+    $sitemap->add(Url::create('/pricing')->setPriority(0.7)->setLastModificationDate(now()));
+    $sitemap->add(Url::create('/contact')->setPriority(0.7)->setLastModificationDate(now()));
 
-    foreach (Project::all() as $project) {
-        $sitemap->add(Url::create("/projects/{$project->slug}")->setPriority(0.6));
+    foreach (App\Models\Project::all() as $project) {
+        $sitemap->add(Url::create("/projects/{$project->slug}")->setPriority(0.6)->setLastModificationDate($project->updated_at));
     }
     
-    foreach (Blog::all() as $blog) {
-        $sitemap->add(Url::create("/blogs/{$blog->slug}")->setPriority(0.6));
+    foreach (App\Models\Blog::all() as $blog) {
+        $sitemap->add(Url::create("/blogs/{$blog->slug}")->setPriority(0.6)->setLastModificationDate($blog->updated_at));
     }
 
     $sitemap->writeToFile(public_path('sitemap.xml'));
     return response()->file(public_path('sitemap.xml'));
 });
-

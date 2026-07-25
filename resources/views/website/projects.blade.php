@@ -37,7 +37,7 @@
                     @foreach($projects as $project)
                     <div class="col-md-6 col-lg-4 single-item cat-{{ $project->category_id }}">
                         <div class="item-img">
-                            <a href="{{ route('project.details', $project->slug) }}"><img src="{{ isset($project->main_image) ? Storage::url($project->main_image) : asset('assets/img/project/project-1.jpg') }}" alt="{{ $project->name }}"></a>
+                            <a href="{{ route('project.details', $project->slug) }}"><img loading="lazy" src="{{ isset($project->main_image) ? Storage::url($project->main_image) : asset('assets/img/project/project-1.jpg') }}" alt="{{ $project->name }}"></a>
                         </div>
                         <div class="item-inner-cnt">
                             <span style="color: #000;">{{ $project->category->name ?? 'Project' }}</span>
