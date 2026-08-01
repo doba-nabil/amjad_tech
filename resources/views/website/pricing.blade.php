@@ -43,12 +43,16 @@
                     <div class="col-12 col-md-8 col-lg-6">
                         <div class="price-table-tab">
                             <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                                @if($monthlyPackages->isNotEmpty())
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link active" id="pills-monthly-tab" data-bs-toggle="pill" data-bs-target="#pills-monthly" type="button" role="tab" aria-controls="pills-monthly" aria-selected="true">{{ __('dashboard.pay_monthly') ?? 'Pay Monthly' }}</button>
                                 </li>
+                                @endif
+                                @if($yearlyPackages->isNotEmpty())
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="pills-yearly-tab" data-bs-toggle="pill" data-bs-target="#pills-yearly" type="button" role="tab" aria-controls="pills-yearly" aria-selected="false">{{ __('dashboard.pay_yearly') ?? 'Pay Yearly' }}</button>
+                                    <button class="nav-link {{ $monthlyPackages->isEmpty() ? 'active' : '' }}" id="pills-yearly-tab" data-bs-toggle="pill" data-bs-target="#pills-yearly" type="button" role="tab" aria-controls="pills-yearly" aria-selected="{{ $monthlyPackages->isEmpty() ? 'true' : 'false' }}">{{ __('dashboard.pay_yearly') ?? 'Pay Yearly' }}</button>
                                 </li>
+                                @endif
                             </ul>
                         </div>
                     </div>
