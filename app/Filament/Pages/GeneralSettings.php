@@ -107,7 +107,7 @@ class GeneralSettings extends Page implements HasForms
                                         Forms\Components\Textarea::make('home_services_text.ar')->label(__('dashboard.text_ar')),
                                         Forms\Components\Textarea::make('home_services_text.en')->label(__('dashboard.text_en')),
                                     ])->columns(2),
-                                Forms\Components\Section::make(__('dashboard.home_projects_texts_ar'))
+                                Forms\Components\Section::make(__('dashboard.home_projects_texts_ar') ?? 'Projects Section Texts')
                                     ->schema([
                                         Forms\Components\TextInput::make('home_projects_title.ar')->label(__('dashboard.title_ar')),
                                         Forms\Components\TextInput::make('home_projects_title.en')->label(__('dashboard.title_en')),
@@ -115,6 +115,15 @@ class GeneralSettings extends Page implements HasForms
                                         Forms\Components\TextInput::make('home_projects_subtitle.en')->label(__('dashboard.sub_title_en')),
                                         Forms\Components\Textarea::make('home_projects_text.ar')->label(__('dashboard.text_ar')),
                                         Forms\Components\Textarea::make('home_projects_text.en')->label(__('dashboard.text_en')),
+                                    ])->columns(2),
+                                Forms\Components\Section::make(__('dashboard.home_features_texts') ?? 'Features Section Texts')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('home_features_title.ar')->label(__('dashboard.title_ar')),
+                                        Forms\Components\TextInput::make('home_features_title.en')->label(__('dashboard.title_en')),
+                                        Forms\Components\TextInput::make('home_features_subtitle.ar')->label(__('dashboard.sub_title_ar')),
+                                        Forms\Components\TextInput::make('home_features_subtitle.en')->label(__('dashboard.sub_title_en')),
+                                        Forms\Components\Textarea::make('home_features_text.ar')->label(__('dashboard.text_ar')),
+                                        Forms\Components\Textarea::make('home_features_text.en')->label(__('dashboard.text_en')),
                                     ])->columns(2),
                                 Forms\Components\Section::make(__('dashboard.home_about_texts_ar') ?? 'About Section Texts')
                                     ->schema([

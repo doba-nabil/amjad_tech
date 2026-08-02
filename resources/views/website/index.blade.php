@@ -77,9 +77,9 @@
             <div class="container">
                 <div class="title-wrap wow animate fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
                     <div class="sec-title">
-                        <span>{{ $settings->home_services_title ?? "Our Solutions" }}</span>
-                        <h2>{{ $settings->home_services_subtitle ?? "Services" }}</h2>
-                        <p>{{ $settings->home_services_text ?? "Curabitur sed facilisis erat. Vestibulum pharetra eros eget fringilla porttitor." }}</p>
+                        @if(!empty($settings->home_services_title))<span>{{ $settings->home_services_title }}</span>@endif
+                        @if(!empty($settings->home_services_subtitle))<h2>{{ $settings->home_services_subtitle }}</h2>@endif
+                        @if(!empty($settings->home_services_text))<p>{{ $settings->home_services_text }}</p>@endif
                     </div>
                 </div>
                 
@@ -114,11 +114,11 @@
                 <div class="row">
                     <div class="col-lg-6 or-2 wow animate fadeIn" data-wow-delay="200ms" data-wow-duration="1500ms">
                         <div class="sec-title layout2">
-                            <span>{{ $settings->home_about_title ?? "Get To Know" }}</span>
-                            <h2>{{ $settings->home_about_subtitle ?? "About Us" }}</h2>
+                            @if(!empty($settings->home_about_title))<span>{{ $settings->home_about_title }}</span>@endif
+                            @if(!empty($settings->home_about_subtitle))<h2>{{ $settings->home_about_subtitle }}</h2>@endif
                         </div>
                         <div class="about-left">
-                            <h3>{{ $settings->home_about_text ?? "We do design, code & develop Software finally launch." }}</h3>
+                            @if(!empty($settings->home_about_text))<h3>{{ $settings->home_about_text }}</h3>@endif
                             <div class="company-since">
                                 <div class="company-logo">
                                     <img loading="lazy" src="{{ asset('assets/') }}/img/logo-dark.svg" alt="{{ $settings->site_name ?? 'Kartaa' }}">
@@ -146,9 +146,9 @@
             <div class="container">
                 <div class="title-wrap  wow animate fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
                     <div class="sec-title white">
-                        <span>Care Study</span>
-                        <h2>Features</h2>
-                        <p>Curabitur sed facilisis erat. Vestibulum pharetra eros eget fringilla porttitor. on Duis a orci nunc. Suspendisse ac convallis sapien, quis commodo libero.</p>
+                        @if(!empty($settings->home_features_title))<span>{{ $settings->home_features_title }}</span>@endif
+                        @if(!empty($settings->home_features_subtitle))<h2>{{ $settings->home_features_subtitle }}</h2>@endif
+                        @if(!empty($settings->home_features_text))<p>{{ $settings->home_features_text }}</p>@endif
                     </div>
                 </div>
                 <div class="row g-4">
@@ -176,9 +176,9 @@
             <div class="container">
                 <div class="title-wrap">
                     <div class="sec-title">
-                        <span>{{ $settings->home_projects_title ?? "Project" }}</span>
-                        <h2>{{ $settings->home_projects_subtitle ?? "Look at my work" }}</h2>
-                        <p>{{ $settings->home_projects_text ?? "Curabitur sed facilisis erat. Vestibulum pharetra eros eget fringilla porttitor." }}</p>
+                        @if(!empty($settings->home_projects_title))<span>{{ $settings->home_projects_title }}</span>@endif
+                        @if(!empty($settings->home_projects_subtitle))<h2>{{ $settings->home_projects_subtitle }}</h2>@endif
+                        @if(!empty($settings->home_projects_text))<p>{{ $settings->home_projects_text }}</p>@endif
                     </div>
                 </div>
                 <div class="row">
@@ -218,8 +218,8 @@
                 <div class="row align-items-center">
                     <div class="col-lg-3">
                         <div class="sec-title white layout2">
-                            <span>{{ $settings->home_partners_subtitle ?? 'Satisfied Client' }}</span>
-                            <h2>{{ $settings->home_partners_title ?? 'Our Partner' }}</h2>
+                            @if(!empty($settings->home_partners_subtitle))<span>{{ $settings->home_partners_subtitle }}</span>@endif
+                            @if(!empty($settings->home_partners_title))<h2>{{ $settings->home_partners_title }}</h2>@endif
                             <div class="-partnerslider-navigator">
                                 <div class="swiper-button-prev-c"><i class="bi bi-chevron-left"></i></div>
                                 <div class="swiper-button-next-c"><i class="bi bi-chevron-right"></i></div>
@@ -250,9 +250,9 @@
             <div class="container">
                 <div class="title-wrap">
                     <div class="sec-title">
-                        <span>{{ $settings->home_packages_title ?? "Getting Start" }}</span>
-                        <h2>{{ $settings->home_packages_subtitle ?? "Pricing Plan" }}</h2>
-                        <p>{{ $settings->home_packages_text ?? "Curabitur sed facilisis erat. Vestibulum pharetra eros eget fringilla porttitor." }}</p>
+                        @if(!empty($settings->home_packages_title))<span>{{ $settings->home_packages_title }}</span>@endif
+                        @if(!empty($settings->home_packages_subtitle))<h2>{{ $settings->home_packages_subtitle }}</h2>@endif
+                        @if(!empty($settings->home_packages_text))<p>{{ $settings->home_packages_text }}</p>@endif
                     </div>
                 </div>
 
@@ -302,9 +302,9 @@
             <div class="container">
                 <div class="title-wrap -6 wow animate fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
                     <div class="sec-title">
-                        <span>{{ $settings->home_blog_title ?? "All Blog" }}</span>
-                        <h2>{{ $settings->home_blog_subtitle ?? "Latest Post" }}</h2>
-                        <p>{{ $settings->home_blog_text ?? "Curabitur sed facilisis erat. Vestibulum pharetra eros eget fringilla porttitor." }}</p>
+                        @if(!empty($settings->home_blog_title))<span>{{ $settings->home_blog_title }}</span>@endif
+                        @if(!empty($settings->home_blog_subtitle))<h2>{{ $settings->home_blog_subtitle }}</h2>@endif
+                        @if(!empty($settings->home_blog_text))<p>{{ $settings->home_blog_text }}</p>@endif
                     </div>
                 </div>
                 <div class="row gy-4">

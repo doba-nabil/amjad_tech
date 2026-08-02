@@ -21,9 +21,9 @@
             <div class="container">
                 <div class="title-wrap">
                     <div class="sec-title">
-                        <span>{{ $settings->home_packages_title ?? "Getting Start" }}</span>
-                        <h2>{{ $settings->home_packages_subtitle ?? "Pricing Plan" }}</h2>
-                        <p>{{ $settings->home_packages_text ?? "Curabitur sed facilisis erat. Vestibulum pharetra eros eget." }}</p>
+                        @if(!empty($settings->home_packages_title))<span>{{ $settings->home_packages_title }}</span>@endif
+                        @if(!empty($settings->home_packages_subtitle))<h2>{{ $settings->home_packages_subtitle }}</h2>@endif
+                        @if(!empty($settings->home_packages_text))<p>{{ $settings->home_packages_text }}</p>@endif
                     </div>
                 </div>
 

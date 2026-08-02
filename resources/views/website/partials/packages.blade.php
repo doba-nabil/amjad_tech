@@ -20,7 +20,7 @@
                     <div class="package-prices" data-package-id="{{ $package->id }}">
                         @foreach($package->prices as $price)
                             <strong class="country-price" data-country-id="{{ $price->country_id }}">
-                                {{ $price->price }}<sub>{{ __('dashboard.per_month') ?? '/Per Month' }}</sub>
+                                {{ (float) $price->price }} {{ $price->country->currency_code ?? '' }}<sub>{{ __('dashboard.per_month') ?? '/Per Month' }}</sub>
                             </strong>
                         @endforeach
                         @if($package->prices->isEmpty())
@@ -57,7 +57,7 @@
                     <div class="package-prices" data-package-id="{{ $package->id }}">
                         @foreach($package->prices as $price)
                             <strong class="country-price" data-country-id="{{ $price->country_id }}">
-                                {{ $price->price }}<sub>{{ __('dashboard.per_year') ?? '/Per Year' }}</sub>
+                                {{ (float) $price->price }} {{ $price->country->currency_code ?? '' }}<sub>{{ __('dashboard.per_year') ?? '/Per Year' }}</sub>
                             </strong>
                         @endforeach
                         @if($package->prices->isEmpty())
